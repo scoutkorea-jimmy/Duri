@@ -49,9 +49,8 @@
 - **서체**: Pretendard (CDN). 오프라인 배포 시 로컬 폰트로 교체 권장.
 - **컬러**: `assets/styles.css` 상단 `:root` 의 CSS 변수로 일괄 관리.
   - 핵심 토큰: `--brand`, `--brand-deep`, `--brand-soft`, `--brand-tint`, `--accent`
-- **팔레트 전환**: `<html data-palette="leaf | forest | sage">` 속성으로 전체 컬러가 바뀝니다.
-  메인의 "디자인 옵션" 패널에서 고른 값은 `localStorage("duri-design")` 에 저장되어 전 페이지에 적용됩니다.
-  → 최종 팔레트를 확정하면 각 페이지 `<html lang="ko">` 에 `data-palette="..."` 를 박아두면 됩니다.
+- **팔레트**: 현재 **leaf 팔레트 · split 히어로로 고정**되어 있습니다. (구 "디자인 옵션" 토글은 제거됨)
+- **게시판/로그인**: 공지사항 게시판 글 작성은 관리자 로그인(임시 계정 `admin`/`admin`) 후 가능하며, 데이터는 브라우저 `localStorage` 에 저장됩니다. 자세한 내용은 [GUIDE.md](GUIDE.md) 참고.
 
 ## 헤더 / 푸터 수정
 

@@ -390,3 +390,53 @@ p{margin:0}
   .tl-year .yr{position:static}
   .container{padding:0 20px}
 }
+
+/* ============================================================
+   account control (header) + login / write modals + board
+   ============================================================ */
+.acct{display:flex;align-items:center;gap:10px;flex:none}
+.acct .acct-name{display:inline-flex;align-items:center;gap:7px;font-weight:800;font-size:14.5px;color:var(--brand-deep);
+  background:var(--brand-soft);padding:8px 14px;border-radius:999px}
+.acct .acct-name svg{width:16px;height:16px}
+.btn-login{display:inline-flex;align-items:center;gap:7px;padding:11px 18px;border-radius:999px;border:1.5px solid var(--line-strong);
+  background:#fff;font-family:inherit;font-weight:700;font-size:14.5px;color:var(--brand-deep);cursor:pointer;transition:.18s}
+.btn-login:hover{border-color:var(--brand);background:var(--brand-soft)}
+.btn-login svg{width:16px;height:16px}
+@media (max-width:520px){ .acct .acct-name span,.btn-login span{display:none} .acct .acct-name,.btn-login{padding:9px 11px} }
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;padding:24px}
+.modal.open{display:flex}
+.modal-backdrop{position:absolute;inset:0;background:rgba(16,49,33,.5);backdrop-filter:blur(3px);animation:mfade .2s var(--ease)}
+.modal-card{position:relative;z-index:2;background:#fff;border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);
+  width:100%;max-width:460px;max-height:88vh;overflow:auto;padding:36px 34px;animation:mpop .24s var(--ease)}
+.modal-card.lg{max-width:620px}
+@keyframes mpop{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+.modal-card .m-close{position:absolute;top:16px;right:16px;width:38px;height:38px;border:none;border-radius:11px;background:var(--brand-tint);
+  color:var(--brand-deep);cursor:pointer;display:grid;place-items:center;transition:.16s}
+.modal-card .m-close:hover{background:var(--brand-soft)}
+.modal-card .m-close svg{width:20px;height:20px}
+.modal-card h3.m-title{font-size:24px;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin:0 0 6px}
+.modal-card .m-sub{color:var(--muted);font-size:15px;margin:0 0 26px}
+.modal-card .form-err{display:none;background:#fdeceb;color:#c0392b;border-radius:10px;padding:11px 14px;font-size:14px;font-weight:600;margin-bottom:16px}
+.modal-card .form-err.show{display:block}
+.modal-card .hint{font-size:13px;color:var(--muted);margin-top:-8px;margin-bottom:18px}
+.modal-actions{display:flex;gap:10px;margin-top:8px}
+.modal-actions .btn{flex:1;justify-content:center}
+
+/* write button + board extras */
+.btn-write{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;border:none;
+  background:var(--brand);color:#fff;font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;transition:.18s;
+  box-shadow:0 6px 18px rgba(42,129,89,.28)}
+.btn-write:hover{background:var(--brand-deep);transform:translateY(-2px)}
+.btn-write svg{width:17px;height:17px}
+.board-row{cursor:pointer}
+.tag-pill.press{background:#e7e0f4;color:#5b3fa0}
+.board-empty{padding:56px 14px;text-align:center;color:var(--muted);font-weight:600;border-bottom:1px solid var(--line)}
+.tab,.pager button{font-family:inherit}
+
+/* post detail */
+.post-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:14.5px;margin:6px 0 22px;
+  padding-bottom:22px;border-bottom:1px solid var(--line)}
+.post-body{white-space:pre-wrap;line-height:1.85;color:var(--body);font-size:16px;min-height:80px}
+.post-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:28px;padding-top:22px;border-top:1px solid var(--line)}

@@ -30,7 +30,7 @@
     <div class="crumb"><a href="index.html">홈</a> <span>›</span> 두리손잡고 소식 <span>›</span> 공지사항</div>
     <h1>두리손잡고 공지사항</h1>
     <p>모두가 함께하는 두리손잡고의 소식입니다.</p>
-    <div class="pills"><span class="chip">공지사항</span><span class="chip">사진갤러리</span></div>
+    <div class="pills"><a class="chip" href="notice.html">공지사항</a><a class="chip" href="gallery.html">사진갤러리</a></div>
   </div>
 </section>
 
@@ -44,7 +44,7 @@
       <p class="muted">소중한 두리손잡고 가족들에게 중요한 정보와 소식을 전달하는 공간입니다. 두리손잡고의 주요 일정, 활동 소식, 사회적인 변화에 대한 내용이 업로드됩니다.</p>
     </div>
 
-    <div class="tabs reveal">
+    <div class="tabs reveal" id="tabs">
       <button class="tab active">전체</button>
       <button class="tab">공지사항</button>
       <button class="tab">새소식</button>
@@ -52,33 +52,27 @@
     </div>
 
     <div class="toolbar reveal">
-      <p class="muted" style="font-size:15px">총 <b style="color:var(--brand-deep)">24</b>건의 게시물</p>
-      <div class="search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        <input type="text" placeholder="제목으로 검색">
+      <p class="muted" style="font-size:15px">총 <b id="postCount" style="color:var(--brand-deep)">0</b>건의 게시물</p>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" id="searchInput" placeholder="제목으로 검색">
+        </div>
+        <button class="btn-write" id="writeBtn" style="display:none">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          글쓰기
+        </button>
       </div>
     </div>
 
-    <div class="board reveal">
-      <a class="board-row is-notice"><span class="no"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3zM11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span><span class="ti"><span class="tag-pill notice">공지</span>2025년 사회복지현장실습생 모집 안내</span><span class="dt">2025.05.12</span></a>
-      <a class="board-row is-notice"><span class="no"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3zM11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span><span class="ti"><span class="tag-pill notice">공지</span>두리손잡고 점보롤 · 페이퍼타올 신규 입고 안내</span><span class="dt">2025.04.28</span></a>
-      <a class="board-row"><span class="no">22</span><span class="ti"><span class="tag-pill news">새소식</span>CHALLENGE 체육교실 봄학기 활동 후기</span><span class="dt">2025.04.15</span></a>
-      <a class="board-row"><span class="no">21</span><span class="ti"><span class="tag-pill notice">공지</span>2025년 상반기 자원봉사자 모집 안내</span><span class="dt">2025.03.30</span></a>
-      <a class="board-row"><span class="no">20</span><span class="ti"><span class="tag-pill news">새소식</span>중증장애인생산품 생산시설 지정 기념 소식</span><span class="dt">2025.03.11</span></a>
-      <a class="board-row"><span class="no">19</span><span class="ti"><span class="tag-pill notice">공지</span>두리손잡고 후원의 밤 행사 안내</span><span class="dt">2025.02.20</span></a>
-      <a class="board-row"><span class="no">18</span><span class="ti"><span class="tag-pill news">새소식</span>두리손잡고 가족 나들이 · 숲체험 활동 안내</span><span class="dt">2025.02.05</span></a>
-      <a class="board-row"><span class="no">17</span><span class="ti"><span class="tag-pill notice">공지</span>2025년 설 연휴 운영 안내</span><span class="dt">2025.01.22</span></a>
-      <a class="board-row"><span class="no">16</span><span class="ti"><span class="tag-pill news">새소식</span>경기도 장애인복지시설 재활프로그램 진행 결과</span><span class="dt">2025.01.08</span></a>
-      <a class="board-row"><span class="no">15</span><span class="ti"><span class="tag-pill notice">공지</span>기부금영수증 발급 안내</span><span class="dt">2024.12.18</span></a>
-    </div>
+    <div class="board reveal" id="board"></div>
 
-    <div class="pager reveal">
-      <button>‹</button><button class="active">1</button><button>2</button><button>3</button><button>›</button>
-    </div>
-    <p class="center muted reveal" style="margin-top:24px;font-size:14px">※ 게시물은 예시이며, 실제 운영 시 콘텐츠로 교체됩니다.</p>
+    <div class="pager reveal" id="pager"></div>
+    <p class="center muted reveal" style="margin-top:24px;font-size:14px">※ 글쓰기는 관리자 로그인 후 이용할 수 있습니다. (우측 상단 ‘로그인’ · 임시 계정 admin / admin)</p>
   </div>
 </section>
 
 <script src="assets/site.js"></script>
+<script src="assets/board.js"></script>
 </body>
 </html>

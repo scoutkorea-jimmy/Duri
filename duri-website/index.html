@@ -1,15 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko" data-hero="split" data-palette="leaf">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>두리손잡고 — 당신의 가능성, 우리가 함께합니다</title>
 <link rel="stylesheet" href="assets/styles.css">
 <style>
-/* ============ palettes (toggleable) ============ */
-html[data-palette="forest"]{--brand:#1f6242;--brand-deep:#103127;--brand-soft:#d8e7de;--brand-tint:#eef5f1;--accent:#e0913a}
-html[data-palette="sage"]{--brand:#5d9077;--brand-deep:#3f6b53;--brand-soft:#e6efe8;--brand-tint:#f3f8f4;--accent:#e7b25c}
-
 /* ============ hero ============ */
 .hero{position:relative;overflow:hidden;background:var(--brand-tint)}
 .hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
@@ -45,13 +41,6 @@ html[data-palette="sage"]{--brand:#5d9077;--brand-deep:#3f6b53;--brand-soft:#e6e
 .fc-1{left:-32px;top:18%;animation:bob 6s ease-in-out infinite}
 .fc-2{right:-26px;bottom:16%;animation:bob 6s ease-in-out infinite;animation-delay:-3s}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-
-/* centered hero variant */
-html[data-hero="center"] .hero-inner{grid-template-columns:1fr;text-align:center;justify-items:center;min-height:78vh}
-html[data-hero="center"] .hero-visual{display:none}
-html[data-hero="center"] .hero .lead{max-width:600px;margin-left:auto;margin-right:auto}
-html[data-hero="center"] .hero .eyebrow,html[data-hero="center"] .hero .btn-row{justify-content:center}
-html[data-hero="center"] .hero-meta{justify-content:center}
 
 /* ============ news strip ============ */
 .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
@@ -95,22 +84,6 @@ html[data-hero="center"] .hero-meta{justify-content:center}
 .cta-tile .ic svg{width:26px;height:26px;color:#fff}
 .cta-tile h3{color:#fff;font-size:19px;margin-bottom:8px}
 .cta-tile p{color:rgba(255,255,255,.85);font-size:15px;line-height:1.6}
-
-/* ============ design switcher ============ */
-.switcher{position:fixed;right:24px;bottom:24px;z-index:200;font-family:inherit}
-.sw-toggle{display:flex;align-items:center;gap:9px;padding:13px 20px;border-radius:999px;background:var(--ink);color:#fff;border:none;cursor:pointer;font-weight:700;font-size:15px;box-shadow:var(--shadow-lg)}
-.sw-toggle svg{width:18px;height:18px}
-.sw-panel{position:absolute;right:0;bottom:60px;width:280px;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-lg);padding:22px;opacity:0;visibility:hidden;transform:translateY(10px);transition:.25s var(--ease)}
-.switcher.open .sw-panel{opacity:1;visibility:visible;transform:none}
-.sw-panel h4{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
-.sw-panel h4:not(:first-child){margin-top:22px}
-.sw-row{display:flex;gap:8px}
-.sw-opt{flex:1;padding:10px 8px;border-radius:12px;border:1.5px solid var(--line);background:#fff;cursor:pointer;font-weight:700;font-size:13.5px;color:var(--body);transition:.18s}
-.sw-opt[aria-pressed="true"]{border-color:var(--brand);background:var(--brand-soft);color:var(--brand-deep)}
-.sw-swatch{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;cursor:pointer;padding:6px;border-radius:12px;border:1.5px solid transparent;transition:.18s}
-.sw-swatch[aria-pressed="true"]{border-color:var(--brand)}
-.sw-dot{width:34px;height:34px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.6)}
-.sw-swatch span{font-size:12px;font-weight:700;color:var(--body)}
 
 @media (max-width:880px){
   .hero-inner{grid-template-columns:1fr;text-align:center;justify-items:center;min-height:auto;padding:64px 0 72px}
@@ -303,53 +276,6 @@ html[data-hero="center"] .hero-meta{justify-content:center}
   </div>
 </section>
 
-<!-- ===================== DESIGN SWITCHER ===================== -->
-<div class="switcher" id="switcher">
-  <div class="sw-panel">
-    <h4>히어로 레이아웃</h4>
-    <div class="sw-row" data-group="hero">
-      <button class="sw-opt" data-val="split">분할형</button>
-      <button class="sw-opt" data-val="center">중앙형</button>
-    </div>
-    <h4>컬러 팔레트</h4>
-    <div class="sw-row" data-group="palette">
-      <button class="sw-swatch" data-val="leaf"><span class="sw-dot" style="background:linear-gradient(135deg,#37a06d,#1f6242)"></span><span>리프</span></button>
-      <button class="sw-swatch" data-val="forest"><span class="sw-dot" style="background:linear-gradient(135deg,#1f6242,#103127)"></span><span>포레스트</span></button>
-      <button class="sw-swatch" data-val="sage"><span class="sw-dot" style="background:linear-gradient(135deg,#5d9077,#3f6b53)"></span><span>세이지</span></button>
-    </div>
-  </div>
-  <button class="sw-toggle" id="swToggle">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="10.5" r="2.5"/><circle cx="8.5" cy="7.5" r="2.5"/><circle cx="6.5" cy="12.5" r="2.5"/><path d="M12 2a10 10 0 1 0 0 20 1.25 1.25 0 0 0 1-2 1.25 1.25 0 0 1 1-2h1.5a4.5 4.5 0 0 0 4.5-4.5C21 6.5 16.97 2 12 2Z"/></svg>
-    디자인 옵션
-  </button>
-</div>
-
 <script src="assets/site.js"></script>
-<script>
-(function(){
-  const html = document.documentElement;
-  const KEY = "duri-design";
-  const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
-  if(saved.hero) html.dataset.hero = saved.hero;
-  if(saved.palette) html.dataset.palette = saved.palette;
-
-  function sync(){
-    document.querySelectorAll('[data-group="hero"] .sw-opt').forEach(b=>b.setAttribute("aria-pressed", b.dataset.val===html.dataset.hero));
-    document.querySelectorAll('[data-group="palette"] .sw-swatch').forEach(b=>b.setAttribute("aria-pressed", b.dataset.val===html.dataset.palette));
-  }
-  document.querySelectorAll('[data-group="hero"] .sw-opt').forEach(b=>b.addEventListener("click",()=>{
-    html.dataset.hero=b.dataset.val; persist(); sync();
-  }));
-  document.querySelectorAll('[data-group="palette"] .sw-swatch').forEach(b=>b.addEventListener("click",()=>{
-    html.dataset.palette=b.dataset.val; persist(); sync();
-  }));
-  function persist(){ localStorage.setItem(KEY, JSON.stringify({hero:html.dataset.hero,palette:html.dataset.palette})); }
-  sync();
-
-  const sw = document.getElementById("switcher");
-  document.getElementById("swToggle").addEventListener("click",()=>sw.classList.toggle("open"));
-  document.addEventListener("click",e=>{ if(!sw.contains(e.target)) sw.classList.remove("open"); });
-})();
-</script>
 </body>
 </html>
