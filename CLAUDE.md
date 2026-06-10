@@ -16,5 +16,6 @@
 - **경로는 상대경로만** (GitHub Pages가 `/Duri/` 하위로 서빙).
 - **배포**: `main` 푸시 → GitHub Actions → https://scoutkorea-jimmy.github.io/Duri/
 - 기능 변경 후에는 로컬 서버(`python3 -m http.server 5599 --directory duri-website`)로 검증 후 커밋·푸시.
+- **표준 작업 흐름(사용자 요구)**: 작업이 끝나면 **별도 지시가 없어도 항상 `main`에 커밋·푸시하고 배포까지 완료**하세요. 배포 성공과 라이브 URL 반영을 확인합니다.
 
 > 위 요약과 GUIDE.md가 충돌하면 GUIDE.md가 우선입니다.
