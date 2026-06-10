@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두리손잡고 — 마켓</title>
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.soon-band{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--green-700),var(--green-500));border-radius:var(--radius-xl);padding:50px 56px;color:#fff;display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
+.soon-band::after{content:"";position:absolute;inset:0;opacity:.4;background:radial-gradient(45% 60% at 90% 15%,rgba(255,255,255,.2),transparent 60%),radial-gradient(40% 60% at 5% 95%,rgba(16,49,33,.5),transparent 60%)}
+.soon-band>*{position:relative;z-index:2}
+.soon-band h2{color:#fff;font-size:clamp(24px,2.6vw,32px)}
+.shop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.shop{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column;transition:.25s var(--ease)}
+.shop:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px);border-color:var(--green-200)}
+.shop .pic{position:relative;aspect-ratio:1/1}
+.shop .pic .ribbon{position:absolute;top:16px;right:16px;z-index:2;background:rgba(16,49,33,.55);color:#fff;font-size:12px;font-weight:700;padding:6px 13px;border-radius:999px;backdrop-filter:blur(4px)}
+.shop .info{padding:24px;display:flex;flex-direction:column;flex:1}
+.shop .info .badge{align-self:flex-start;margin-bottom:12px}
+.shop .info h3{font-size:19px;margin-bottom:6px}
+.shop .info p{color:var(--muted);font-size:14.5px;margin-bottom:auto}
+.shop .price{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
+.shop .price .v{font-weight:800;color:var(--ink);font-size:17px}
+.shop .price .v small{color:var(--muted);font-weight:600;font-size:13px}
+.steps-inline{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.si{flex:1;min-width:180px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px}
+.si .n{width:30px;height:30px;border-radius:9px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px;margin-bottom:12px}
+.si h4{font-size:15px;margin-bottom:4px}
+.si p{font-size:13.5px;color:var(--muted);line-height:1.55}
+@media (max-width:880px){.shop-grid{grid-template-columns:1fr}.soon-band{padding:36px 28px}}
+</style>
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="crumb"><a href="index.html">홈</a> <span>›</span> 두리손잡고 마켓</div>
+    <h1>두리손잡고 마켓</h1>
+    <p>근로자들이 손수 만든 친환경 인증 제품을 만나보세요. 구매가 곧 장애인의 자립으로 이어집니다.</p>
+    <div class="pills"><span class="chip">점보롤 화장지</span><span class="chip">페이퍼타올</span><span class="chip">각티슈</span></div>
+  </div>
+</section>
+
+<section class="section section--paper">
+  <div class="container">
+    <div class="soon-band reveal">
+      <div>
+        <span class="eyebrow" style="color:rgba(255,255,255,.9)"><span style="background:#fff"></span>OPENING SOON</span>
+        <h2 style="margin-top:14px">온라인 마켓을 준비하고 있습니다</h2>
+        <p class="lead" style="color:rgba(255,255,255,.9);margin-top:12px;max-width:560px">통신판매업 신고와 안전결제 시스템 구축 후 정식 오픈 예정입니다. 구매를 원하시면 아래로 문의해 주세요.</p>
+      </div>
+      <a class="btn btn-white btn-lg" href="#inquiry">구매 문의하기</a>
+    </div>
+
+    <div class="section-head reveal" style="margin-top:64px">
+      <span class="eyebrow">PRODUCTS</span>
+      <h2 class="h2" style="margin-top:14px">두리손잡고 제품</h2>
+    </div>
+    <div class="shop-grid">
+      <div class="shop reveal">
+        <div class="pic media"><span class="ribbon">입점 예정</span><span class="media-tag">점보롤 화장지</span></div>
+        <div class="info">
+          <span class="badge">친환경 인증</span>
+          <h3>두리손잡고 점보롤</h3>
+          <p>근로자들이 함께 만드는 친환경 인증 점보롤 화장지</p>
+          <div class="price"><span class="v">구매 문의<small> · 대량 주문 가능</small></span><a class="link" href="#inquiry">문의 ›</a></div>
+        </div>
+      </div>
+      <div class="shop reveal" data-delay=".06s">
+        <div class="pic media media-2"><span class="ribbon">입점 예정</span><span class="media-tag">페이퍼타올</span></div>
+        <div class="info">
+          <span class="badge">위생 · 흡수력</span>
+          <h3>두리손잡고 페이퍼타올</h3>
+          <p>흡수력이 뛰어나고 위생적인 친환경 페이퍼타올</p>
+          <div class="price"><span class="v">구매 문의<small> · 대량 주문 가능</small></span><a class="link" href="#inquiry">문의 ›</a></div>
+        </div>
+      </div>
+      <div class="shop reveal" data-delay=".12s">
+        <div class="pic media media-3"><span class="ribbon">입점 예정</span><span class="media-tag">각티슈</span></div>
+        <div class="info">
+          <span class="badge badge--amber">생활용품</span>
+          <h3>두리손잡고 각티슈</h3>
+          <p>가정과 사업장 어디에나 알맞은 각티슈 화장지</p>
+          <div class="price"><span class="v">구매 문의<small> · 대량 주문 가능</small></span><a class="link" href="#inquiry">문의 ›</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 구매 문의 -->
+<section class="section section--tint" id="inquiry">
+  <div class="container">
+    <div class="grid grid-2" style="align-items:center">
+      <div class="reveal">
+        <span class="eyebrow">PURCHASE INQUIRY</span>
+        <h2 class="h2" style="margin-top:14px">구매 · 대량 주문 문의</h2>
+        <p class="lead" style="margin-top:14px;color:var(--body)">관공서, 기업, 사업장 등 대량 구매 문의를 환영합니다. 정식 마켓 오픈 전까지는 전화 또는 이메일로 주문하실 수 있습니다.</p>
+        <div class="steps-inline">
+          <div class="si"><div class="n">1</div><h4>문의 접수</h4><p>전화 또는 문의 폼으로 수량을 알려주세요.</p></div>
+          <div class="si"><div class="n">2</div><h4>견적 안내</h4><p>제품·수량에 맞는 견적을 안내드립니다.</p></div>
+          <div class="si"><div class="n">3</div><h4>배송</h4><p>결제 후 안전하게 배송해 드립니다.</p></div>
+        </div>
+        <p style="margin-top:24px;font-weight:800;color:var(--brand-deep);font-size:20px">구매 문의 · 031-853-3359</p>
+      </div>
+      <form class="card card-pad-lg reveal" data-delay=".08s" onsubmit="return false">
+        <h3 class="h3" style="margin-bottom:20px">제품 구매 문의</h3>
+        <div class="form-grid">
+          <div class="field"><label>성함 / 기관명 <span class="req">*</span></label><input type="text" placeholder="홍길동 / ○○기관"></div>
+          <div class="field"><label>연락처 <span class="req">*</span></label><input type="tel" placeholder="010-0000-0000"></div>
+        </div>
+        <div class="form-grid">
+          <div class="field"><label>제품</label><select><option>두리손잡고 점보롤</option><option>두리손잡고 페이퍼타올</option><option>두리손잡고 각티슈</option><option>혼합 / 기타</option></select></div>
+          <div class="field"><label>수량</label><input type="text" placeholder="예) 100박스"></div>
+        </div>
+        <div class="field"><label>문의 내용</label><textarea placeholder="배송지, 희망 일정 등을 적어주세요."></textarea></div>
+        <button class="btn btn-primary btn-lg" style="width:100%">구매 문의 보내기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두리손잡고 — 후원·가족되기</title>
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.ways{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.way{position:relative;padding:36px;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line);background:#fff;transition:.25s var(--ease)}
+.way:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);border-color:var(--green-200)}
+.way .big-ic{width:60px;height:60px;border-radius:16px;display:grid;place-items:center;background:var(--brand-soft);color:var(--brand-deep);margin-bottom:22px}
+.way .big-ic svg{width:30px;height:30px}
+.way.amber .big-ic{background:var(--amber-100);color:var(--amber-600)}
+.way h3{font-size:21px;margin-bottom:10px}
+.way p{color:var(--muted);line-height:1.65;margin-bottom:20px}
+.donate{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.amt-row{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 24px}
+.amt{padding:12px 20px;border-radius:12px;border:1.5px solid var(--line-strong);background:#fff;font-weight:700;cursor:pointer;color:var(--body);transition:.16s}
+.amt.active,.amt:hover{border-color:var(--brand);background:var(--brand-soft);color:var(--brand-deep)}
+.seg{display:flex;gap:8px;background:var(--brand-tint);padding:5px;border-radius:12px;margin-bottom:22px;width:fit-content}
+.seg button{padding:10px 22px;border:none;background:transparent;border-radius:8px;font-weight:700;font-family:inherit;font-size:15px;color:var(--muted);cursor:pointer}
+.seg button.active{background:#fff;color:var(--brand-deep);box-shadow:var(--shadow-sm)}
+.acct{background:var(--green-800);color:#dcefe3;border-radius:var(--radius-lg);padding:30px}
+.acct .label{font-size:13px;color:var(--green-300);font-weight:700;letter-spacing:.05em}
+.acct .num{font-size:24px;font-weight:800;color:#fff;letter-spacing:-.01em;margin:6px 0 4px;font-feature-settings:"tnum"}
+@media (max-width:880px){.ways{grid-template-columns:1fr}.donate{grid-template-columns:1fr;gap:32px}}
+</style>
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="crumb"><a href="index.html">홈</a> <span>›</span> 가족되기 <span>›</span> 후원·가족되기</div>
+    <h1>두리손잡고의 “가족”이 되어주세요</h1>
+    <p>여러분의 따뜻한 나눔이 “더 큰 희망”을 만들어 냅니다. 한 번의 손길이 모두가 어울려 사는 사회를 만듭니다.</p>
+    <div class="pills"><span class="chip">후원·가족되기</span><span class="chip">실습 신청하기</span><span class="chip">자원봉사 신청하기</span></div>
+  </div>
+</section>
+
+<!-- 함께하는 방법 -->
+<section class="section section--paper">
+  <div class="container">
+    <div class="section-head center mx-auto maxw reveal">
+      <span class="eyebrow eyebrow--center">JOIN US</span>
+      <h2 class="h2">함께할 수 있는 세 가지 방법</h2>
+    </div>
+    <div class="ways">
+      <div class="way reveal">
+        <div class="big-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5.5a5 5 0 0 0-7 0L12 6l-.5-.5a5 5 0 1 0-7 7l7.5 7.5 7.5-7.5a5 5 0 0 0 0-7Z"/></svg></div>
+        <h3>일시 · 정기후원</h3>
+        <p>한 번 또는 매월 정기적으로 소중한 후원에 참여해 보세요. 작은 정성이 모여 큰 변화를 만듭니다.</p>
+        <a class="link" href="#donate">후원 신청하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path class="arrow" d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="way reveal" data-delay=".06s">
+        <div class="big-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13A4 4 0 0 1 16 11"/></svg></div>
+        <h3>자원봉사 신청</h3>
+        <p>재능나눔, 활동봉사 등 다양한 방식으로 함께할 수 있습니다. 누구나 참여 가능합니다.</p>
+        <a class="link" href="volunteer.html">자원봉사 안내 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path class="arrow" d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="way amber reveal" data-delay=".12s">
+        <div class="big-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4zM8 9h8M8 13h8M8 17h5"/></svg></div>
+        <h3>기부금영수증 신청</h3>
+        <p>후원하신 금액에 대한 기부금영수증을 발급해 드립니다. 편하게 문의해 주세요.</p>
+        <a class="link" href="#donate">영수증 안내 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path class="arrow" d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 후원 신청 -->
+<section class="section section--tint" id="donate">
+  <div class="container">
+    <div class="donate">
+      <div class="reveal">
+        <span class="eyebrow">DONATION</span>
+        <h2 class="h2" style="margin-top:14px">후원 신청</h2>
+        <p class="muted" style="margin-top:14px;margin-bottom:24px">후원 방식과 금액을 선택해 주세요. 정기후원은 매월 자동으로 후원됩니다.</p>
+        <div class="seg">
+          <button class="active">정기후원</button>
+          <button>일시후원</button>
+        </div>
+        <label style="font-weight:700;color:var(--ink);font-size:15px">후원 금액</label>
+        <div class="amt-row">
+          <button class="amt">10,000원</button>
+          <button class="amt active">30,000원</button>
+          <button class="amt">50,000원</button>
+          <button class="amt">100,000원</button>
+          <button class="amt">직접 입력</button>
+        </div>
+        <div class="acct">
+          <div class="label">후원 계좌</div>
+          <div class="num">000-000000-00-000</div>
+          <div style="color:#a9c4b5">예금주 · 사회적협동조합 두리손잡고</div>
+        </div>
+      </div>
+      <form class="card card-pad-lg reveal" data-delay=".08s" onsubmit="return false">
+        <h3 class="h3" style="margin-bottom:20px">후원자 정보</h3>
+        <div class="form-grid">
+          <div class="field"><label>성함 <span class="req">*</span></label><input type="text" placeholder="홍길동"></div>
+          <div class="field"><label>연락처 <span class="req">*</span></label><input type="tel" placeholder="010-0000-0000"></div>
+        </div>
+        <div class="field"><label>이메일</label><input type="email" placeholder="email@example.com"></div>
+        <div class="field"><label>남기실 말씀</label><textarea placeholder="두리손잡고에 전하고 싶은 말씀을 남겨주세요."></textarea></div>
+        <label style="display:flex;gap:10px;align-items:center;font-size:14px;color:var(--muted);margin-bottom:20px"><input type="checkbox" style="width:auto"> 개인정보 수집 및 이용에 동의합니다.</label>
+        <button class="btn btn-accent btn-lg" style="width:100%">후원 신청하기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- 더 큰 희망 -->
+<section class="section section--paper">
+  <div class="container">
+    <div class="cta-band reveal" style="text-align:center">
+      <h2 class="h2">여러분의 따뜻한 나눔이<br>“더 큰 희망”을 만들어 냅니다</h2>
+      <p class="lead" style="color:rgba(255,255,255,.9);margin-top:16px">문의 · 두리손잡고 031-853-3359</p>
+      <div class="btn-row" style="justify-content:center;margin-top:28px">
+        <a class="btn btn-white btn-lg" href="volunteer.html">자원봉사 신청</a>
+        <a class="btn btn-lg" style="background:rgba(255,255,255,.16);color:#fff;border-color:rgba(255,255,255,.3)" href="internship.html">실습 신청</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

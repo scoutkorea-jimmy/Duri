@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두리손잡고 — 운영현황</title>
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.stat-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;text-align:center}
+.facility{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.fac-media{min-height:200px}
+.fac-body{padding:30px}
+.fac-body h3{font-size:21px;margin-bottom:6px}
+.fac-body .addr{color:var(--brand);font-weight:700;font-size:14px;margin-bottom:18px;display:flex;gap:7px;align-items:center}
+.fac-body .addr svg{width:16px;height:16px}
+.equip{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.loc-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:stretch}
+.loc-map{border-radius:var(--radius-lg);overflow:hidden;min-height:380px;position:relative;
+  background:linear-gradient(135deg,var(--green-200),var(--green-400))}
+.loc-map .pin{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px}
+.loc-map .pin .dot{width:26px;height:26px;border-radius:50% 50% 50% 0;background:var(--accent);transform:rotate(-45deg);box-shadow:0 6px 16px rgba(0,0,0,.25)}
+.loc-map .pin .lbl{background:#fff;padding:7px 14px;border-radius:999px;font-weight:700;font-size:14px;color:var(--ink);box-shadow:var(--shadow)}
+.transit{display:flex;flex-direction:column;gap:18px}
+.transit .t-item{display:flex;gap:16px}
+.transit .t-ic{width:46px;height:46px;border-radius:12px;background:var(--brand-soft);color:var(--brand-deep);display:grid;place-items:center;flex:none}
+.transit .t-ic svg{width:24px;height:24px}
+.transit h4{font-size:16px;margin-bottom:6px}
+.transit p{color:var(--muted);font-size:15px;line-height:1.65}
+@media (max-width:880px){.stat-row{grid-template-columns:1fr 1fr}.facility{grid-template-columns:1fr}.loc-wrap{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="crumb"><a href="index.html">홈</a> <span>›</span> 두리손잡고 소개 <span>›</span> 운영현황</div>
+    <h1>운영현황</h1>
+    <p>두리손잡고의 시설 개요와 생산 설비, 찾아오시는 길을 안내합니다.</p>
+  </div>
+</section>
+
+<!-- 시설 개요 -->
+<section class="section section--paper">
+  <div class="container">
+    <div class="stat-row reveal">
+      <div class="stat-card"><div class="stat"><div class="n">2018</div><div class="l">설립 연도</div></div></div>
+      <div class="stat-card"><div class="stat"><div class="n">40<span style="font-size:.55em">명</span></div><div class="l">근로사업장 정원</div></div></div>
+      <div class="stat-card"><div class="stat"><div class="n">3<span style="font-size:.55em">대</span></div><div class="l">생산 설비</div></div></div>
+      <div class="stat-card"><div class="stat"><div class="n">3<span style="font-size:.55em">종</span></div><div class="l">주요 생산품</div></div></div>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:54px;align-items:start">
+      <div class="reveal">
+        <span class="eyebrow">FACILITY</span>
+        <h2 class="h2" style="margin-top:14px">시설 개요</h2>
+        <p class="muted" style="margin-top:14px">두리손잡고는 발달장애인의 직업 적응과 자립을 지원하는 근로사업장이자 사회적협동조합입니다.</p>
+      </div>
+      <div class="card reveal" data-delay=".08s">
+        <dl class="dl">
+          <dt>시설명</dt><dd>두리손잡고</dd>
+          <dt>설립일</dt><dd>2018년 10월</dd>
+          <dt>시설장</dt><dd>유선희</dd>
+          <dt>주요생산품</dt><dd>점보롤 화장지, 종이타올, 각티슈 화장지</dd>
+          <dt>홈페이지</dt><dd>두리손잡고.com</dd>
+          <dt>전화 · 팩스</dt><dd>T. 031-853-3359 · F. 031-853-3360</dd>
+          <dt>주소</dt><dd>경기도 의정부시 오목로 225번길 100, 3층</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 시설 공간 -->
+<section class="section section--tint">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">SPACES</span>
+      <h2 class="h2" style="margin-top:14px">시설 공간 안내</h2>
+    </div>
+    <div class="grid" style="gap:26px">
+      <div class="card facility reveal">
+        <div class="media fac-media"><span class="media-tag">보호작업장 전경</span></div>
+        <div class="fac-body">
+          <h3>두리손잡고 보호작업장</h3>
+          <div class="addr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>경기도 의정부시 오목로 225번길 100, 3층</div>
+          <p class="muted">두리손잡고 사무실, 직원 휴게실, 회의실, 부자재 창고로 구성되어 있습니다.</p>
+          <div class="equip">
+            <span class="chip chip--soft">사무실</span><span class="chip chip--soft">직원 휴게실</span><span class="chip chip--soft">회의실</span><span class="chip chip--soft">부자재 창고</span>
+          </div>
+        </div>
+      </div>
+      <div class="card facility reveal" data-delay=".08s">
+        <div class="media media-2 fac-media"><span class="media-tag">화장지공장 생산시설</span></div>
+        <div class="fac-body">
+          <h3>부설 화장지공장</h3>
+          <div class="addr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>경기도 의정부시 오목로 225번길 100, 3층</div>
+          <p class="muted">공장 사무실, 생산시설, 제품 및 원부자재 적재 창고로 운영됩니다. 생산설비는 총 3대를 보유하고 있습니다.</p>
+          <div class="equip">
+            <span class="chip chip--soft">권취기 1대</span><span class="chip chip--soft">미터측정기 1대</span><span class="chip chip--soft">재단기 1대</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 오시는 길 -->
+<section class="section section--paper" id="location">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">DIRECTIONS</span>
+      <h2 class="h2" style="margin-top:14px">오시는 길</h2>
+      <p class="muted">경기도 의정부시 오목로 225번길 100, 3층 (민락동, CY타워)</p>
+    </div>
+    <div class="loc-wrap">
+      <div class="loc-map reveal">
+        <div class="pin"><span class="dot"></span><span class="lbl">두리손잡고</span></div>
+      </div>
+      <div class="transit reveal" data-delay=".08s">
+        <div class="t-item">
+          <div class="t-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6v6M16 6v6M2 12h19M7 18h.01M17 18h.01"/><rect x="3" y="4" width="16" height="16" rx="2"/></svg></div>
+          <div><h4>버스 이용 안내</h4><p>· 35번, 72-1번, 206번 → 「산들마을 2단지」 하차<br>· 3번, 11번, 107번, 206-1번 → 「낙양물사랑공원 앞」 하차</p></div>
+        </div>
+        <div class="t-item">
+          <div class="t-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="16" rx="3"/><path d="M4 11h16M8 19l-2 3M16 19l2 3M9 7h6"/></svg></div>
+          <div><h4>지하철 이용 안내</h4><p>· 어룡역 하차 → 버스 환승 → 「산들마을 2단지」 또는 「낙양물사랑공원 앞」<br>· 곤제역 하차 → 버스 환승 → 동일 정류장 하차</p></div>
+        </div>
+        <div class="t-item">
+          <div class="t-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7A2 2 0 0 1 22 16.9Z"/></svg></div>
+          <div><h4>연락처</h4><p>주간센터 TEL. (031) 853-3359<br>직업재활센터 TEL. (031) 853-3360</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

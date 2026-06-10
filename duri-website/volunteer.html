@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두리손잡고 — 자원봉사 신청하기</title>
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.area-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.area{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;text-align:center;transition:.25s var(--ease)}
+.area:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--green-200)}
+.area .ic{width:54px;height:54px;border-radius:15px;background:var(--brand-soft);color:var(--brand-deep);display:grid;place-items:center;margin:0 auto 16px}
+.area .ic svg{width:27px;height:27px}
+.area h3{font-size:17px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+@media (max-width:880px){.area-grid{grid-template-columns:1fr 1fr}.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="crumb"><a href="index.html">홈</a> <span>›</span> 가족되기 <span>›</span> 자원봉사 신청하기</div>
+    <h1>자원봉사 · 재능기부 신청하기</h1>
+    <p>장애인의 자립과 사회 참여를 위해 여러분의 따뜻한 손길이 필요합니다. 작은 관심과 노력이 더 큰 변화를 만들어 갑니다.</p>
+    <div class="pills"><span class="chip">후원·가족되기</span><span class="chip">실습 신청하기</span><span class="chip">자원봉사 신청하기</span></div>
+  </div>
+</section>
+
+<!-- 신청대상 + 활동분야 -->
+<section class="section section--paper">
+  <div class="container">
+    <div class="two">
+      <div class="card card-pad-lg reveal">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13A4 4 0 0 1 16 11"/></svg></div>
+        <h3 class="h3">신청 대상</h3>
+        <p class="muted" style="margin-top:10px">연령 제한 없이 누구나 참여 가능하며, 가족·동아리·친목단체도 함께할 수 있습니다.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px"><span class="chip chip--soft">개인</span><span class="chip chip--soft">가족</span><span class="chip chip--soft">동아리</span><span class="chip chip--soft">친목단체</span></div>
+      </div>
+      <div class="card card-pad-lg reveal" data-delay=".08s">
+        <div class="icon-badge icon-badge--amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1-6-4.5h7.6L12 2Z"/></svg></div>
+        <h3 class="h3">자원봉사 문의 · 신청</h3>
+        <p class="muted" style="margin-top:10px">자세한 사항은 두리손잡고로 문의해 주세요. VMS 봉사시간 인정이 가능합니다.</p>
+        <p style="margin-top:16px;font-weight:800;color:var(--brand-deep);font-size:20px">031-853-3359</p>
+      </div>
+    </div>
+
+    <div class="section-head reveal" style="margin-top:64px;margin-bottom:34px">
+      <span class="eyebrow">ACTIVITY AREAS</span>
+      <h2 class="h2" style="margin-top:14px">활동 분야</h2>
+    </div>
+    <div class="area-grid">
+      <div class="area reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/></svg></div><h3>행사 지원</h3></div>
+      <div class="area reveal" data-delay=".05s"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><h3>업무 지원</h3></div>
+      <div class="area reveal" data-delay=".1s"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13M9 9l12-2"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><h3>재능 나눔</h3></div>
+      <div class="area reveal" data-delay=".15s"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M6 21V9l6-4 6 4v12M10 21v-6h4v6"/></svg></div><h3>환경 미화</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- 신청 폼 -->
+<section class="section section--tint">
+  <div class="container" style="max-width:780px">
+    <div class="section-head center reveal">
+      <span class="eyebrow eyebrow--center">APPLY</span>
+      <h2 class="h2">자원봉사 신청서</h2>
+    </div>
+    <form class="card card-pad-lg reveal" onsubmit="return false">
+      <div class="form-grid">
+        <div class="field"><label>성함 / 단체명 <span class="req">*</span></label><input type="text" placeholder="홍길동 / ○○동아리"></div>
+        <div class="field"><label>연락처 <span class="req">*</span></label><input type="tel" placeholder="010-0000-0000"></div>
+        <div class="field"><label>참여 인원</label><input type="text" placeholder="예) 5명"></div>
+        <div class="field"><label>희망 활동 분야</label><select><option>행사 지원</option><option>업무 지원</option><option>재능 나눔</option><option>환경 미화</option><option>기타</option></select></div>
+      </div>
+      <div class="field"><label>희망 활동일</label><input type="text" placeholder="예) 2025.07.20 오후"></div>
+      <div class="field"><label>남기실 말씀</label><textarea placeholder="활동 관련 문의나 전하고 싶은 말씀을 남겨주세요."></textarea></div>
+      <label style="display:flex;gap:10px;align-items:center;font-size:14px;color:var(--muted);margin-bottom:20px"><input type="checkbox" style="width:auto"> 개인정보 수집 및 이용에 동의합니다.</label>
+      <button class="btn btn-primary btn-lg" style="width:100%">자원봉사 신청하기</button>
+    </form>
+  </div>
+</section>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

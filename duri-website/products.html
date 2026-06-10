@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두리손잡고 — 두리손잡고 화장지</title>
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.prod-hero{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.prod-hero .big{grid-row:span 2;min-height:auto}
+.prod-hero .media{min-height:260px;border-radius:var(--radius-lg)}
+.prod-feat{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:14px}
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.cert{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.cert .doc{aspect-ratio:3/4;background:repeating-linear-gradient(135deg,var(--green-50),var(--green-50) 12px,var(--green-100) 12px,var(--green-100) 24px);display:grid;place-items:center;position:relative;border-bottom:1px solid var(--line)}
+.cert .doc .seal{width:64px;height:64px;border-radius:50%;background:var(--brand-soft);border:2px dashed var(--green-300);display:grid;place-items:center;color:var(--brand-deep)}
+.cert .doc .seal svg{width:30px;height:30px}
+.cert .doc .mono{position:absolute;bottom:14px;font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--muted)}
+.cert .cap{padding:18px 20px}
+.cert .cap h4{font-size:16px;margin-bottom:4px}
+.cert .cap p{font-size:13.5px;color:var(--muted)}
+@media (max-width:880px){.prod-hero{grid-template-columns:1fr}.prod-hero .big{grid-row:auto}.prod-feat,.cert-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="crumb"><a href="index.html">홈</a> <span>›</span> 사업안내 <span>›</span> 두리손잡고 화장지</div>
+    <h1>두리손잡고 화장지</h1>
+    <p>친환경 인증을 받은 두리손잡고 점보롤 &amp; 페이퍼타올. 근로자들이 손수 만드는 믿을 수 있는 제품입니다.</p>
+    <div class="pills"><span class="chip">친환경 인증</span><span class="chip">중증장애인생산품</span><span class="chip">점보롤 · 페이퍼타올 · 각티슈</span></div>
+  </div>
+</section>
+
+<!-- 제품 -->
+<section class="section section--paper">
+  <div class="container">
+    <div class="prod-hero">
+      <div class="media big reveal" style="min-height:540px">
+        <span class="media-tag">두리손잡고 점보롤 화장지</span>
+      </div>
+      <div class="card card-pad-lg reveal" data-delay=".06s" style="display:flex;flex-direction:column;justify-content:center">
+        <span class="badge">대표 제품</span>
+        <h2 class="h2" style="margin-top:14px;font-size:28px">두리손잡고 점보롤</h2>
+        <p class="muted" style="margin-top:12px">두리손잡고 근로자들이 함께 만드는 친환경 인증 점보롤 화장지입니다. 안정적인 품질과 위생을 자랑합니다.</p>
+        <div class="btn-row" style="margin-top:22px"><a class="btn btn-primary" href="market.html">마켓에서 보기<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+      <div class="card card-pad-lg reveal" data-delay=".12s" style="display:flex;flex-direction:column;justify-content:center">
+        <span class="badge">위생 · 흡수력</span>
+        <h2 class="h2" style="margin-top:14px;font-size:28px">두리손잡고 페이퍼타올</h2>
+        <p class="muted" style="margin-top:12px">흡수력이 뛰어나고 위생적인 두리손잡고만의 친환경 페이퍼타올입니다. 가정과 사업장 어디에나 알맞습니다.</p>
+        <div class="btn-row" style="margin-top:22px"><a class="btn btn-outline" href="market.html">마켓에서 보기<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+    </div>
+
+    <div class="prod-feat">
+      <div class="card card-pad reveal">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C16 5 17 4.5 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></div>
+        <h3 class="h3">친환경 인증</h3>
+        <p class="muted" style="margin-top:8px">환경표지 인증을 받은 친환경 원료로 제작합니다.</p>
+      </div>
+      <div class="card card-pad reveal" data-delay=".06s">
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 1.66-.5 3.2-1.36 4.48L12 22l-7.64-5.52A8 8 0 1 1 21 12Z"/></svg></div>
+        <h3 class="h3">검증된 품질</h3>
+        <p class="muted" style="margin-top:8px">단계별 검수를 거쳐 완성도 높은 제품을 만듭니다.</p>
+      </div>
+      <div class="card card-pad reveal" data-delay=".12s">
+        <div class="icon-badge icon-badge--amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22a8 8 0 0 1 16 0"/><circle cx="10" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></div>
+        <h3 class="h3">함께 만든 가치</h3>
+        <p class="muted" style="margin-top:8px">구매가 곧 장애인의 자립과 사회 참여로 이어집니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 친환경 인증 -->
+<section class="section section--tint" id="cert">
+  <div class="container">
+    <div class="section-head center mx-auto maxw reveal">
+      <span class="eyebrow eyebrow--center">CERTIFICATIONS</span>
+      <h2 class="h2">친환경 인증 &amp; 생산시설 지정</h2>
+      <p class="muted">두리손잡고는 공인된 인증과 지정을 통해 제품의 신뢰를 더합니다.</p>
+    </div>
+    <div class="cert-grid">
+      <div class="cert reveal">
+        <div class="doc"><div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C16 5 17 4.5 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg></div><span class="mono">[ 환경표지 인증서 ]</span></div>
+        <div class="cap"><h4>환경표지 인증서</h4><p>친환경 제품 인증</p></div>
+      </div>
+      <div class="cert reveal" data-delay=".06s">
+        <div class="doc"><div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1-6-4.5h7.6L12 2Z"/></svg></div><span class="mono">[ 생산시설 지정서 ]</span></div>
+        <div class="cap"><h4>중증장애인생산품 생산시설 지정서</h4><p>점보롤 · 페이퍼타올 (2024)</p></div>
+      </div>
+      <div class="cert reveal" data-delay=".12s">
+        <div class="doc"><div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg></div><span class="mono">[ 시설 신고증 ]</span></div>
+        <div class="cap"><h4>장애인복지시설 신고증</h4><p>직업적응훈련시설 → 근로사업장</p></div>
+      </div>
+    </div>
+    <p class="center muted reveal" style="margin-top:30px;font-size:14px">※ 인증서류 이미지는 추후 실제 서류로 교체될 예정입니다.</p>
+  </div>
+</section>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

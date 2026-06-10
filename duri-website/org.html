@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두리손잡고 — 조직도</title>
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.org{display:flex;flex-direction:column;align-items:center;gap:0}
+.node{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:18px 30px;text-align:center;min-width:200px;box-shadow:var(--shadow-sm)}
+.node .role{font-size:13px;color:var(--brand);font-weight:700;letter-spacing:.02em}
+.node .name{font-size:18px;font-weight:800;color:var(--ink);margin-top:3px}
+.node.lead{background:var(--brand);border-color:var(--brand);color:#fff}
+.node.lead .role{color:rgba(255,255,255,.85)}
+.node.lead .name{color:#fff}
+.node.top{background:var(--brand-soft);border-color:transparent}
+.conn{width:2px;height:34px;background:var(--line-strong)}
+.org-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;width:100%;position:relative;padding-top:34px}
+.org-cols::before{content:"";position:absolute;top:0;left:16.66%;right:16.66%;height:2px;background:var(--line-strong)}
+.org-col{display:flex;flex-direction:column;align-items:center;position:relative}
+.org-col::before{content:"";position:absolute;top:-34px;width:2px;height:34px;background:var(--line-strong)}
+.dept{width:100%;background:#fff;border:1.5px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-sm)}
+.dept-h{background:var(--brand-deep);color:#fff;padding:14px;text-align:center;font-weight:800;font-size:16px}
+.dept ul{list-style:none;margin:0;padding:14px;display:flex;flex-direction:column;gap:8px}
+.dept li{padding:10px 14px;background:var(--brand-tint);border-radius:10px;font-weight:600;color:var(--body);font-size:15px;text-align:center}
+.aux{display:flex;gap:14px;justify-content:center;margin-top:18px}
+.aux .node{min-width:120px;padding:12px 20px}
+@media (max-width:760px){.org-cols{grid-template-columns:1fr;gap:34px}.org-cols::before{display:none}.org-col::before{display:none}}
+</style>
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="crumb"><a href="index.html">홈</a> <span>›</span> 두리손잡고 소개 <span>›</span> 조직도</div>
+    <h1>조직도</h1>
+    <p>조합원과 함께 투명하게 운영되는 두리손잡고의 조직 체계입니다.</p>
+  </div>
+</section>
+
+<section class="section section--paper">
+  <div class="container" style="max-width:920px">
+    <div class="org reveal">
+      <div class="node top"><div class="role">최고 의결기구</div><div class="name">조합원 총회</div></div>
+      <div class="conn"></div>
+      <div class="node"><div class="role">의결 · 집행</div><div class="name">이사회</div></div>
+      <div class="aux">
+        <div class="node"><div class="role">감독</div><div class="name">감사</div></div>
+        <div class="node"><div class="role">자문</div><div class="name">운영위원회</div></div>
+      </div>
+      <div class="conn"></div>
+      <div class="node lead"><div class="role">시설 운영 총괄</div><div class="name">시설장 · 유선희</div></div>
+      <div class="org-cols">
+        <div class="org-col">
+          <div class="dept">
+            <div class="dept-h">직업재활센터</div>
+            <ul><li>직업훈련교사</li><li>직업지도원</li><li>사회복지사</li></ul>
+          </div>
+        </div>
+        <div class="org-col">
+          <div class="dept">
+            <div class="dept-h">생산관리팀</div>
+            <ul><li>생산 · 공정 관리</li><li>품질 · 검수</li><li>물류 · 적재</li></ul>
+          </div>
+        </div>
+        <div class="org-col">
+          <div class="dept">
+            <div class="dept-h">사무국</div>
+            <ul><li>행정 · 회계</li><li>후원 · 홍보</li><li>시설 관리</li></ul>
+          </div>
+        </div>
+      </div>
+      <div class="conn"></div>
+      <div class="node top" style="min-width:260px"><div class="role">함께하는 주역</div><div class="name">보호작업장 근로자</div></div>
+    </div>
+    <p class="center muted reveal" style="margin-top:36px;font-size:14px">※ 조직도는 운영 현황에 따라 변동될 수 있습니다.</p>
+  </div>
+</section>
+
+<script src="assets/site.js"></script>
+</body>
+</html>
