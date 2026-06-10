@@ -299,19 +299,19 @@ p{margin:0}
   border-bottom:1px solid transparent;transition:.3s var(--ease);
 }
 .site-header.scrolled{background:rgba(255,255,255,.92);border-bottom-color:var(--line);box-shadow:0 4px 20px rgba(16,49,33,.05)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:78px;gap:24px}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:78px;gap:18px}
 .wm{display:flex;align-items:center;gap:11px;flex:none}
 .wm-mark{flex:none}
 .wm-text{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.03em}
 .wm-text b{color:var(--brand);font-weight:800}
 
-.nav-main{display:flex;align-items:center;gap:4px;height:100%}
+.nav-main{display:flex;align-items:center;gap:2px;height:100%}
 .nav-item{position:relative;height:100%;display:flex;align-items:center}
 .nav-top{
-  display:flex;align-items:center;height:100%;padding:0 16px;font-weight:600;font-size:16.5px;
-  color:var(--ink);position:relative;transition:color .2s;
+  display:flex;align-items:center;height:100%;padding:0 13px;font-weight:600;font-size:16px;
+  color:var(--ink);position:relative;transition:color .2s;white-space:nowrap;
 }
-.nav-top::after{content:"";position:absolute;left:16px;right:16px;bottom:24px;height:2.5px;border-radius:2px;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .25s var(--ease)}
+.nav-top::after{content:"";position:absolute;left:13px;right:13px;bottom:24px;height:2.5px;border-radius:2px;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .25s var(--ease)}
 .nav-item:hover .nav-top,.nav-top.active{color:var(--brand)}
 .nav-item:hover .nav-top::after,.nav-top.active::after{transform:scaleX(1)}
 
@@ -332,7 +332,7 @@ p{margin:0}
 .mega-inner a:hover{background:var(--brand-soft);color:var(--brand-deep)}
 .mega-inner a:hover svg{opacity:1;transform:none}
 
-.nav-cta{display:flex;align-items:center;gap:12px;flex:none}
+.nav-cta{display:flex;align-items:center;gap:10px;flex:none}
 .nav-burger{display:none;width:44px;height:44px;border:none;background:transparent;cursor:pointer;flex-direction:column;gap:5px;align-items:center;justify-content:center;border-radius:10px}
 .nav-burger span{width:22px;height:2.4px;border-radius:2px;background:var(--ink);transition:.25s var(--ease)}
 .menu-open .nav-burger span:nth-child(1){transform:translateY(7.4px) rotate(45deg)}
@@ -349,12 +349,12 @@ p{margin:0}
 .m-sub{display:flex;flex-wrap:wrap;gap:8px;padding:0 6px 16px}
 .m-sub a{padding:8px 14px;background:#fff;border:1px solid var(--line);border-radius:999px;font-size:14.5px;font-weight:600;color:var(--body)}
 
-@media (max-width:1080px){
+@media (max-width:1260px){
   .nav-main{display:none}
   .nav-burger{display:flex}
   .wm-text{font-size:20px}
 }
-@media (max-width:1080px) and (min-width:521px){ .nav-cta .btn span{display:inline} }
+@media (max-width:1260px) and (min-width:521px){ .nav-cta .btn span{display:inline} }
 @media (max-width:520px){
   .nav-cta .btn-accent span{display:none}
   .nav-cta .btn-accent{padding:13px}
@@ -394,14 +394,14 @@ p{margin:0}
 /* ============================================================
    account control (header) + login / write modals + board
    ============================================================ */
-.acct{display:flex;align-items:center;gap:10px;flex:none}
-.acct .acct-name{display:inline-flex;align-items:center;gap:7px;font-weight:800;font-size:14.5px;color:var(--brand-deep);
-  background:var(--brand-soft);padding:8px 14px;border-radius:999px}
-.acct .acct-name svg{width:16px;height:16px}
-.btn-login{display:inline-flex;align-items:center;gap:7px;padding:11px 18px;border-radius:999px;border:1.5px solid var(--line-strong);
-  background:#fff;font-family:inherit;font-weight:700;font-size:14.5px;color:var(--brand-deep);cursor:pointer;transition:.18s}
+.acct{display:flex;align-items:center;gap:8px;flex:none}
+.acct .acct-name{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:14px;color:var(--brand-deep);
+  background:var(--brand-soft);padding:7px 13px;border-radius:999px;white-space:nowrap}
+.acct .acct-name svg{width:15px;height:15px}
+.btn-login{display:inline-flex;align-items:center;gap:6px;padding:9px 15px;border-radius:999px;border:1.5px solid var(--line-strong);
+  background:#fff;font-family:inherit;font-weight:700;font-size:14px;color:var(--brand-deep);cursor:pointer;transition:.18s;white-space:nowrap}
 .btn-login:hover{border-color:var(--brand);background:var(--brand-soft)}
-.btn-login svg{width:16px;height:16px}
+.btn-login svg{width:15px;height:15px}
 @media (max-width:520px){ .acct .acct-name span,.btn-login span{display:none} .acct .acct-name,.btn-login{padding:9px 11px} }
 
 /* modal */

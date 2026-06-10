@@ -68,9 +68,21 @@
 .prog-item h3{font-size:18px;margin-bottom:6px}
 .prog-item p{font-size:15px;color:var(--muted);line-height:1.6}
 
-/* ============ partners ============ */
-.partners{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:center}
-.partner{padding:18px 30px;border-radius:14px;background:#fff;border:1px solid var(--line);font-weight:800;color:var(--muted);font-size:18px;letter-spacing:-.01em;opacity:.8}
+/* ============ partners (logo marquee) ============ */
+.partners-head{font-weight:700;letter-spacing:.04em;margin-bottom:32px;font-size:14px}
+.logo-marquee{position:relative;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.logo-track{display:flex;align-items:center;gap:20px;width:max-content;will-change:transform;animation:logo-scroll 38s linear infinite}
+.logo-marquee:hover .logo-track{animation-play-state:paused}
+@keyframes logo-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.logo-item{flex:none;display:flex;align-items:center;justify-content:center;height:84px;min-width:210px;padding:0 34px;
+  background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-sm);
+  font-weight:800;font-size:18px;letter-spacing:-.01em;color:var(--muted);
+  filter:grayscale(1);opacity:.8;transition:.25s var(--ease)}
+.logo-item:hover{filter:none;opacity:1;color:var(--brand-deep);border-color:var(--green-200);box-shadow:var(--shadow)}
+.logo-item img{max-height:46px;max-width:150px;width:auto;object-fit:contain;display:block}
+@media (prefers-reduced-motion:reduce){.logo-track{animation:none}}
 
 /* ============ cta band ============ */
 .cta-band{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--brand-deep),var(--brand));border-radius:var(--radius-xl);padding:64px 60px;color:#fff}
@@ -264,18 +276,38 @@
 <!-- ===================== PARTNERS ===================== -->
 <section class="section--tight section--paper" data-screen-label="함께하는 곳">
   <div class="container">
-    <p class="center muted" style="font-weight:700;letter-spacing:.04em;margin-bottom:26px;font-size:14px">두리손잡고와 함께하는 곳</p>
-    <div class="partners reveal">
-      <div class="partner">고려홍삼</div>
-      <div class="partner">NH 농협</div>
-      <div class="partner">경기북부공동모금회</div>
-      <div class="partner">산림복지재단</div>
-      <div class="partner">의정부시</div>
-      <div class="partner">한국장애인고용공단</div>
+    <p class="center muted partners-head">두리손잡고와 함께하는 곳</p>
+    <div class="logo-marquee reveal" aria-label="두리손잡고와 함께하는 기관·기업">
+      <div class="logo-track" id="logoTrack"></div>
     </div>
   </div>
 </section>
 
 <script src="assets/site.js"></script>
+<script>
+/* 파트너 로고 마퀴 — 순서를 랜덤 셔플한 뒤 끊김 없이 가로로 무한 스크롤.
+   실제 로고 이미지가 준비되면 아래 PARTNERS 항목에 logo 경로만 추가하면
+   자동으로 이미지로 표시됩니다. 예) { name:"고려홍삼", logo:"assets/logos/koryo.png" } */
+(function(){
+  var track = document.getElementById("logoTrack");
+  if(!track) return;
+  var PARTNERS = [
+    { name:"고려홍삼" },
+    { name:"NH 농협" },
+    { name:"경기북부공동모금회" },
+    { name:"산림복지재단" },
+    { name:"의정부시" },
+    { name:"한국장애인고용공단" }
+  ];
+  // 랜덤 셔플(Fisher–Yates)
+  for(var i=PARTNERS.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=PARTNERS[i]; PARTNERS[i]=PARTNERS[j]; PARTNERS[j]=t; }
+  function cell(p){
+    var inner = p.logo ? '<img src="'+p.logo+'" alt="'+p.name+'">' : p.name;
+    return '<div class="logo-item" title="'+p.name+'">'+inner+'</div>';
+  }
+  var set = PARTNERS.map(cell).join("");
+  track.innerHTML = set + set; // 이음새 없는 무한 루프를 위해 동일 세트 2회 복제
+})();
+</script>
 </body>
 </html>
