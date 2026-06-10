@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '[두리 프로젝트 규칙] 작업을 시작하기 전에 반드시 duri-website/GUIDE.md 를 먼저 읽으세요. 정적 사이트(빌드 없음), 헤더/푸터/인증/폼은 assets/site.js가 주입, 게시판은 assets/board.js(localStorage), 관리자 데모 계정 admin/admin, 디자인은 leaf+split 고정, 경로는 상대경로, 배포는 main 푸시 → GitHub Pages.'"
+            "command": "echo '[두리 프로젝트 규칙] 작업 전 CLAUDE.md(작업 가이드)와 DESIGN.md(디자인 가이드)를 먼저 확인하세요. 정적 사이트(빌드 없음), 헤더/푸터/인증/폼은 assets/site.js가 주입, 게시판은 assets/board.js(localStorage), 관리자 데모 계정 admin/admin, 디자인은 leaf+split 고정, 경로는 상대경로, 작업 후엔 별도 지시 없이 main 푸시→배포까지 완료.'"
           }
         ]
       }

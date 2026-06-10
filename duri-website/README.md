@@ -50,7 +50,8 @@
 - **컬러**: `assets/styles.css` 상단 `:root` 의 CSS 변수로 일괄 관리.
   - 핵심 토큰: `--brand`, `--brand-deep`, `--brand-soft`, `--brand-tint`, `--accent`
 - **팔레트**: 현재 **leaf 팔레트 · split 히어로로 고정**되어 있습니다. (구 "디자인 옵션" 토글은 제거됨)
-- **게시판/로그인**: 공지사항 게시판 글 작성은 관리자 로그인(임시 계정 `admin`/`admin`) 후 가능하며, 데이터는 브라우저 `localStorage` 에 저장됩니다. 자세한 내용은 [GUIDE.md](GUIDE.md) 참고.
+- **게시판/로그인**: 공지사항 게시판 글 작성은 관리자 로그인(임시 계정 `admin`/`admin`) 후 가능하며, 데이터는 브라우저 `localStorage` 에 저장됩니다.
+- **문서**: 작업 절차·구조는 저장소 루트 [CLAUDE.md](../CLAUDE.md)(작업 가이드), 디자인 시스템은 [DESIGN.md](../DESIGN.md)(디자인 가이드) 참고.
 
 ## 헤더 / 푸터 수정
 
