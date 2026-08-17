@@ -101,6 +101,23 @@ html[data-site="rehab"]{ --brand:#1f6f9e; ... }   /* styles.css 하단 */
 
 ## 2. 타이포그래피
 
+> ### ⛔ 한글 줄바꿈 — 단어(어절) 단위 고정
+>
+> `styles.css` 상단에 전역으로 걸려 있습니다. **되돌리지도, 덮어쓰지도 마세요.**
+>
+> ```css
+> html{word-break:keep-all;overflow-wrap:break-word}
+> body,h1,h2,h3,h4,h5,h6,p,li,dt,dd,td,th,label,button,a,span,div,
+> input,select,textarea,figcaption,blockquote,summary{
+>   word-break:keep-all;overflow-wrap:break-word;
+> }
+> ```
+>
+> - `keep-all` 이 없으면 브라우저가 **한글 음절 사이에서** 줄을 끊어 "두리손잡 / 고" 처럼 어절이 갈라집니다.
+> - `overflow-wrap:break-word` 는 안전판입니다. `keep-all` 만 두면 긴 URL·영문 연속 문자열이 컨테이너를 넘쳐 **가로 스크롤**이 생깁니다.
+> - 새 CSS에 `word-break:normal` 을 쓰지 마세요. 줄바꿈 위치를 조정하려면 `<br>` 이나 `<wbr>` 로 명시하세요.
+> - `keep-all` 을 넣은 뒤에는 **좁은 폭(360px·320px) 가로 스크롤**을 반드시 확인합니다 → [40-verify.md](40-verify.md)
+
 - **서체**: `Pretendard Variable`(CDN), 폴백 `Apple SD Gothic Neo / Noto Sans KR / system-ui`.
 - **본문 기본**: 17px / line-height 1.72 / letter-spacing −0.01em, 색 `--body`.
 - **제목**: `color:--ink`, line-height 1.25, letter-spacing −0.025em, weight 700~800.
@@ -255,6 +272,10 @@ green-700→600 그라데이션 배경 + 방사형 오버레이, 글자 흰색. 
 | 폭 | 변화 |
 |---|---|
 | ≤1260px | 데스크탑 네비 → 버거 메뉴 |
+| ≤1080px | index 소식 3열 → 2열 |
+| ≤900px | index 히어로·프로그램 2열 → 1열, 플로팅 카드 정적 배치 |
+| ≤700px | index 소식 1열, 히어로 장식 블롭 숨김 |
+| ≤400px | 헤더 간격·로고 축소(320px 가로 스크롤 방지) |
 | ≤980px | grid-3/4 → 2열, dl 라벨 축소 |
 | ≤880px | 히어로/일부 2열 → 1열, 갤러리 2열 |
 | ≤760px | **진입 게이트가 좌우 → 상하 분할** |

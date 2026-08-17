@@ -231,6 +231,51 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
   ok("전환 바: 검사한 6개 페이지 전부 존재", allPresent, detail.join(" | "));
 }
 
+/* ---------- 4-1. 한글 줄바꿈 — 반드시 단어(어절) 단위 ---------- */
+{
+  const PAGES = ["index", "about", "operation", "org", "business", "history", "work",
+    "products", "notice", "gallery", "family", "internship", "volunteer", "market", "rehab"];
+  const bad = [], overflow = [];
+  for (const n of PAGES) {
+    const { page } = await fresh(`/${n}.html`);
+    await page.evaluate(() => localStorage.setItem("duri.site.v1", "coop"));
+    await page.reload({ waitUntil: "networkidle2" });
+    // 실제로 렌더된 모든 한글 텍스트 요소의 계산된 word-break 를 확인한다
+    const wrong = await page.evaluate(() => {
+      const out = new Set();
+      document.querySelectorAll("main *, header *, footer *, .site-switch *").forEach(el => {
+        const hasKo = [...el.childNodes].some(nd =>
+          nd.nodeType === 3 && /[가-힣]/.test(nd.textContent));
+        if (!hasKo) return;
+        const cs = getComputedStyle(el);
+        if (cs.display === "none" || cs.visibility === "hidden") return;
+        if (cs.wordBreak !== "keep-all" && cs.whiteSpace !== "nowrap")
+          out.add(`${el.tagName.toLowerCase()}.${el.className || "-"}:${cs.wordBreak}`);
+      });
+      return [...out];
+    });
+    if (wrong.length) bad.push(`${n}: ${wrong.slice(0, 4).join(", ")}`);
+    await page.close();
+
+    // keep-all 은 좁은 폭에서 넘칠 수 있다 — 가로 스크롤이 생기지 않는지 함께 본다
+    for (const w of [360, 320]) {
+      const { page: p2 } = await fresh(`/${n}.html`, w, 800);
+      await p2.evaluate(() => localStorage.setItem("duri.site.v1", "coop"));
+      await p2.reload({ waitUntil: "networkidle2" });
+      const over = await p2.evaluate(() => {
+        const de = document.documentElement;
+        return { sw: de.scrollWidth, cw: de.clientWidth };
+      });
+      if (over.sw > over.cw + 1) overflow.push(`${n}@${w}: ${over.sw}>${over.cw}`);
+      await p2.close();
+    }
+  }
+  ok("한글 줄바꿈: 모든 한글 텍스트에 word-break:keep-all 적용", bad.length === 0,
+    bad.length ? bad.slice(0, 5).join(" | ") : "15페이지 위반 0건");
+  ok("한글 줄바꿈: keep-all 로 인한 가로 스크롤 없음(360px · 320px)", overflow.length === 0,
+    overflow.length ? overflow.slice(0, 6).join(" | ") : "15페이지 × 2폭 위반 0건");
+}
+
 /* ---------- 5. 버그 수정 검증 — select 포커스 링 / 키보드 메가메뉴 ---------- */
 {
   const { page } = await fresh("/market.html");

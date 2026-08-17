@@ -33,6 +33,23 @@
 
 ---
 
+## 2026-08-17 · 한글 줄바꿈 단어 단위 + index 반응형 분기 신설
+
+- **지시**: "한글 줄바꿈은 단어 단위로 하라고 몇번을 말해야 되냐" — 반복 지시했는데 반영되지 않았다는 지적.
+- **문제 확인**: 지적이 맞습니다. `grep -rn "word-break" duri-website/` 결과 **처리가 전혀 없었습니다.** 브라우저 기본값(`word-break:normal`)은 한글 음절 사이에서 줄을 끊어 "두리손잡 / 고" 처럼 어절을 갈라놓습니다. 더구나 이 규칙은 사용자의 다른 프로젝트 문서 `vault/03_Resources/BP_Media/Repository_Docs/rules/11-site-design.md:18` 에 `한글: word-break: keep-all` 로 **이미 규칙화되어 있었는데** 이 프로젝트로 가져오지 않았습니다.
+- **한 일**:
+  - `styles.css` 상단에 전역 적용 — `html{word-break:keep-all;overflow-wrap:break-word}` + 텍스트 요소 전체(`body,h1~h6,p,li,dt,dd,td,th,label,button,a,span,div,input,select,textarea,figcaption,blockquote,summary`). `overflow-wrap` 은 긴 URL·영문 연속 문자열이 컨테이너를 넘치는 것만 막는 안전판
+  - **절대 규칙 9로 승격**(`00-core.md`) + `20-design.md` 2절에 코드 블록과 함께 "되돌리지도, 덮어쓰지도 말 것" 명시 + `40-verify.md` 수동 체크리스트
+  - `tools/verify-headless.mjs` 에 2건 추가 — ① 렌더된 **모든 한글 텍스트 요소의 계산된 `word-break` 가 `keep-all`** ② **360px·320px에서 가로 스크롤 0**
+- **결과**: ✅ 성공
+- **사유**: `tools/verify-headless.mjs` **52건 전부 통과(실패 0)**, `verify-a11y.mjs` **23건 유지**. 실측 — 15페이지의 한글 텍스트 요소 중 `word-break` 가 `keep-all` 이 아닌 것 0건, 15페이지 × 2폭(360·320) 가로 넘침 0건.
+- **이 지시를 처리하며 드러난 별개 결함 2건** (줄바꿈 검사가 잡아냄):
+  1. **`index.html` 에 `@media` 분기가 하나도 없었습니다.** `.hero-inner`(1.05fr .95fr)·`.prog-wrap`(.85fr 1.15fr)·`.news-grid`(3열)이 모바일에서 접히지 않아 **360px에서 오른쪽으로 171px 넘쳤습니다**(`.prog-list` right=531). 1080/900/700px 분기를 신설하고 히어로 플로팅 카드를 정적 배치로 내렸습니다. 헤더도 ≤400px에서 6px 넘쳐 간격·로고 축소 분기를 추가했습니다.
+  2. **직전 커밋에서 "모션 전면 제거"라고 보고했는데 페이지 스타일에 hover 이동이 4건 남아 있었습니다** — index `.prog-item`(`translateX(4px)`), family `.way`(`translateY(-5px)`), market `.shop`(`translateY(-4px)`), volunteer `.area`(`translateY(-4px)`). `styles.css` 만 훑고 페이지별 `<style>` 을 놓친 탓입니다. 색·보더·그림자 변화로 교체했습니다.
+- **재발 방지**: `Claude_Memories/core/korean-line-break-rule.md` 를 `feedback` 메모리로 신설하고 `MEMORY.md` 에 색인했습니다. **원인은 이 규칙이 특정 프로젝트의 rules 파일에만 있어서 새 프로젝트로 넘어오지 않은 것**이므로, 프로젝트 경계를 넘는 메모리로 승격하는 것이 맞는 조치입니다.
+- **검증**: `node tools/check-links.mjs` → 15페이지 이상 없음 / `verify-headless.mjs` → `총 52건 · 통과 52 · 실패 0` / `verify-a11y.mjs` → `총 23건 · 통과 23 · 실패 0`
+- **커밋**: `PENDING`
+
 ## 2026-08-17 · 진입 게이트로 되돌아갈 수단 신설
 
 - **지시**: "그 첫 도어페이지? 좌우 선택하는 페이지로 갈 수 있는 방법은 없어? 한번 선택하면 못 돌아가나?"

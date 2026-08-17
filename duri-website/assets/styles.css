@@ -58,9 +58,25 @@
 
 *{box-sizing:border-box}
 
+/* ============================================================
+   한글 줄바꿈 — 반드시 '단어(어절) 단위'로 끊는다.
+   브라우저 기본값(word-break:normal)은 한글 음절 사이에서 줄을 끊어
+   "두리손잡 / 고" 처럼 어절이 갈라진다. keep-all 로 이를 막는다.
+   overflow-wrap:break-word 는 긴 URL·영문 연속 문자열이 컨테이너를
+   넘치는 것만 막는 안전판이다(한글에는 영향 없음).
+   ⚠️ 이 규칙을 되돌리거나 개별 컴포넌트에서 word-break 를 normal 로
+   덮어쓰지 말 것. rules/20-design.md 2절 참조.
+   ============================================================ */
+html{word-break:keep-all;overflow-wrap:break-word}
+body,h1,h2,h3,h4,h5,h6,p,li,dt,dd,td,th,label,button,a,span,div,
+input,select,textarea,figcaption,blockquote,summary{
+  word-break:keep-all;overflow-wrap:break-word;
+}
+
 html{scroll-behavior:smooth}
 body{
   margin:0;
+  word-break:keep-all;overflow-wrap:break-word;
   font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;
   color:var(--body);
   background:var(--cream);
@@ -357,6 +373,18 @@ p{margin:0}
   .wm-text{font-size:20px}
 }
 @media (max-width:1260px) and (min-width:521px){ .nav-cta .btn span{display:inline} }
+
+/* 아주 좁은 화면(≤400px)에서 헤더 우측(계정+후원+버거)이 320px 폭을 6px 넘겨
+   가로 스크롤을 만들던 문제 — 간격과 로고를 줄여 해결. 컨트롤은 44px 유지. */
+@media (max-width:400px){
+  .container{padding:0 16px}
+  .nav-inner{gap:8px}
+  .nav-cta{gap:6px}
+  .nav-cta .btn{padding:12px 13px}
+  .wm{gap:8px}
+  .wm-mark{width:32px;height:23px}
+  .wm-text{font-size:17px}
+}
 @media (max-width:520px){
   .nav-cta .btn-accent span{display:none}
   .nav-cta .btn-accent{padding:13px}

@@ -65,6 +65,14 @@
 
 ## 최근 종료
 
+### ✅ 한글 줄바꿈 단어 단위 + index 반응형 분기 (2026-08-17)
+- **지적**: 한글 줄바꿈을 단어 단위로 하라고 반복 지시했는데 반영 안 됨. `word-break` 처리가 **전혀 없었음**.
+- `styles.css` 전역에 `word-break:keep-all` + `overflow-wrap:break-word`. 절대 규칙 9로 승격.
+- 부수 발견: **`index.html` 에 `@media` 분기가 하나도 없어** 2열 그리드가 모바일에서 안 접히고 360px에서 171px 가로 넘침 → 1080/900/700px 분기 신설. 헤더는 ≤400px 대응 추가.
+- 부수 발견: 제거했다고 보고한 **hover 이동 모션 4건이 페이지 스타일에 남아 있었음**(index `.prog-item`, family `.way`, market `.shop`, volunteer `.area`) → 제거.
+- 검증: `verify-headless.mjs` 에 2건 추가 → **52건 통과**. 접근성 23건 유지.
+- 재발 방지: `Claude_Memories/core/korean-line-break-rule.md` 신설(프로젝트 rules 에만 있어서 새 프로젝트로 안 넘어온 것이 원인).
+
 ### ✅ 진입 게이트로 되돌아갈 수단 신설 (2026-08-17)
 - **문제**: 게이트가 `localStorage["duri.site.v1"]` 가 비었을 때만 떠서, 한 번 선택하면 개발자도구로 값을 지우는 것 외에 다시 볼 방법이 없었음(설계 누락, 사용자 지적).
 - 전 페이지 푸터에 **"처음 선택 화면 다시 보기"**(`.foot-reset` → `index.html?gate=1`). 홈에서는 이동 없이 즉시 열림.
