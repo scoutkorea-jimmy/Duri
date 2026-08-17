@@ -136,14 +136,17 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
         headerTop: Math.round(hd.top), items,
         onCount: sw.querySelectorAll(".sw-item.on").length,
         ariaCurrent: sw.querySelectorAll('[aria-current="page"]').length,
-        firstEl: document.body.firstElementChild.className
+        firstEl: document.body.firstElementChild.className,
+        secondEl: document.body.children[1] ? document.body.children[1].className : ""
       };
     });
     if (!s) { allPresent = false; detail.push(`${p}: 없음`); }
     else detail.push(`${p}: h=${s.h} headerTop=${s.headerTop} on=${s.onCount} 첫요소=${s.firstEl}`);
     if (s && p === "/index.html") {
       ok("전환 바: 높이가 5vh 구간(38~52px)", s.h >= 38 && s.h <= 52, `${s.h}px @900h`);
-      ok("전환 바: body 최상단 요소", /site-switch/.test(s.firstEl), s.firstEl);
+      // KWCAG 6.4.1 에 따라 body 최상단은 건너뛰기 링크이고, 전환 바가 그 다음이다
+      ok("전환 바: 건너뛰기 링크 다음(문서 최상단 영역)에 위치",
+        /skip-nav/.test(s.firstEl) && /site-switch/.test(s.secondEl), `1st=${s.firstEl} 2nd=${s.secondEl}`);
       ok("전환 바: 헤더가 바 아래에 붙음(겹침 없음)", s.headerTop >= s.h - 1, `headerTop=${s.headerTop} barH=${s.h}`);
       ok("전환 바: 두 항목 균등 분할", Math.abs(s.items[0] - s.items[1]) <= 1, `${s.items}`);
       ok("전환 바: 현재 갈래 1개만 활성 + aria-current", s.onCount === 1 && s.ariaCurrent === 1, `on=${s.onCount} aria=${s.ariaCurrent}`);

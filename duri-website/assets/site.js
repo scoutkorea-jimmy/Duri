@@ -33,12 +33,12 @@
     document.head.appendChild(fav);
   }
   // hand-holding mark: two interlocking rounded links
-  const MARK = `<svg class="wm-mark" viewBox="0 0 40 28" width="40" height="28" aria-hidden="true">
+  const MARK = `<svg class="wm-mark" aria-hidden="true" focusable="false" viewBox="0 0 40 28" width="40" height="28">
     <circle cx="14" cy="14" r="9.5" fill="none" stroke="var(--brand)" stroke-width="4.4"/>
     <circle cx="26" cy="14" r="9.5" fill="none" stroke="var(--accent)" stroke-width="4.4"/>
   </svg>`;
   // 게이트·전환 바처럼 어두운 면 위에 올라가는 흰 마크
-  const MARK_W = `<svg class="gate-mark" viewBox="0 0 40 28" aria-hidden="true">
+  const MARK_W = `<svg class="gate-mark" aria-hidden="true" focusable="false" viewBox="0 0 40 28">
     <circle cx="14" cy="14" r="9.5" fill="none" stroke="#fff" stroke-width="4.4"/>
     <circle cx="26" cy="14" r="9.5" fill="none" stroke="var(--accent)" stroke-width="4.4"/>
   </svg>`;
@@ -69,20 +69,32 @@
   const MENU = SITE === "rehab" ? NAV_REHAB : NAV;
 
   const ICON = {
-    pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
-    phone:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7A2 2 0 0 1 22 16.9Z"/></svg>',
-    mail:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>',
-    heart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5.5a5 5 0 0 0-7 0L12 6l-.5-.5a5 5 0 1 0-7 7l7.5 7.5 7.5-7.5a5 5 0 0 0 0-7Z"/></svg>',
-    login:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5M15 12H3"/></svg>',
-    user:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
-    x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>',
-    pen:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
-    arrow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
-    coop:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16.5 3.13A4 4 0 0 1 16.5 11"/></svg>',
-    rehab:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M2 13h20"/></svg>'
+    pin:'<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+    phone:'<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7A2 2 0 0 1 22 16.9Z"/></svg>',
+    mail:'<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>',
+    heart:'<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5.5a5 5 0 0 0-7 0L12 6l-.5-.5a5 5 0 1 0-7 7l7.5 7.5 7.5-7.5a5 5 0 0 0 0-7Z"/></svg>',
+    login:'<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5M15 12H3"/></svg>',
+    user:'<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+    x:'<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>',
+    pen:'<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
+    arrow:'<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+    coop:'<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16.5 3.13A4 4 0 0 1 16.5 11"/></svg>',
+    rehab:'<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M2 13h20"/></svg>'
   };
 
   const here = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+
+  /* ---------- 6.4.1 반복 영역 건너뛰기 (KWCAG) ----------
+     평소 화면에서 보이지 않고 키보드 포커스를 받으면 좌상단에 나타난다.
+     도착지는 각 페이지의 <main id="main">. */
+  const skip = document.createElement("a");
+  skip.className = "skip-nav";
+  skip.href = "#main";
+  skip.textContent = "본문 바로가기";
+  skip.addEventListener("click", ()=>{
+    const m = document.getElementById("main");
+    if(m){ m.setAttribute("tabindex","-1"); m.focus(); }
+  });
 
   /* ---------- header ---------- */
   const hasMenu = MENU.length > 0;
@@ -103,7 +115,7 @@
             <a class="nav-top${m.href.toLowerCase()===here?" active":""}" href="${m.href}">${m.label}</a>
             <div class="mega">
               <div class="mega-inner">
-                ${m.sub.map(s=>`<a href="${s[1]}">${s[0]}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>`).join("")}
+                ${m.sub.map(s=>`<a href="${s[1]}">${s[0]}<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>`).join("")}
               </div>
             </div>
           </div>`).join("")}
@@ -111,17 +123,17 @@
       <div class="nav-cta">
         <div class="acct" id="acct"></div>
         ${donateBtn}
-        ${hasMenu ? `<button class="nav-burger" aria-label="메뉴 열기"><span></span><span></span><span></span></button>` : ""}
+        ${hasMenu ? `<button class="nav-burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>` : ""}
       </div>
     </div>
-    ${hasMenu ? `<div class="mobile-nav" hidden>
+    ${hasMenu ? `<nav class="mobile-nav" id="mobileNav" aria-label="주 메뉴(모바일)" hidden>
       ${MENU.map(m=>`
         <div class="m-group">
           <a class="m-top" href="${m.href}">${m.label}</a>
           <div class="m-sub">${m.sub.map(s=>`<a href="${s[1]}">${s[0]}</a>`).join("")}</div>
         </div>`).join("")}
       ${donateBtn ? `<a class="btn btn-accent btn-lg" style="margin-top:20px;width:100%" href="family.html">${ICON.heart}<span>후원하기</span></a>` : ""}
-    </div>` : ""}`;
+    </nav>` : ""}`;
   document.body.insertBefore(header, document.body.firstChild);
 
   /* ---------- 사이트 전환 바 (최상단 고정) ---------- */
@@ -140,6 +152,7 @@
     a.addEventListener("click", ()=>rememberSite(i===0 ? "coop" : "rehab"));
   });
   document.body.insertBefore(switcher, header);
+  document.body.insertBefore(skip, document.body.firstChild);
 
   // mobile toggle
   const burger = header.querySelector(".nav-burger");
@@ -148,6 +161,8 @@
     burger.addEventListener("click", ()=>{
       const open = header.classList.toggle("menu-open");
       mnav.hidden = !open;
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+      burger.setAttribute("aria-label", open ? "메뉴 닫기" : "메뉴 열기");
       document.body.style.overflow = open ? "hidden" : "";
     });
   }
@@ -174,12 +189,13 @@
 
   const footer = document.createElement("footer");
   footer.className = "site-footer";
+  footer.setAttribute("aria-label", "사이트 정보");
   footer.innerHTML = SITE === "rehab" ? `
     <div class="container">
       <div class="foot-top">
         ${FOOT_BRAND}
         <div class="foot-col">
-          <h4>두리손잡고 직업재활센터</h4>
+          <h2>두리손잡고 직업재활센터</h2>
           <ul>
             <li><a href="rehab.html">센터 소개 (준비중)</a></li>
             <li><a href="index.html">사회적협동조합 홈페이지</a></li>
@@ -192,7 +208,7 @@
       <div class="foot-top">
         ${FOOT_BRAND}
         <div class="foot-col">
-          <h4>두리손잡고 소개</h4>
+          <h2>두리손잡고 소개</h2>
           <ul>
             <li><a href="about.html">인사말</a></li>
             <li><a href="operation.html">운영현황</a></li>
@@ -202,7 +218,7 @@
           </ul>
         </div>
         <div class="foot-col">
-          <h4>사업·소식</h4>
+          <h2>사업·소식</h2>
           <ul>
             <li><a href="work.html">임가공 사업</a></li>
             <li><a href="products.html">두리손잡고 화장지</a></li>
@@ -212,7 +228,7 @@
           </ul>
         </div>
         <div class="foot-col">
-          <h4>함께하기</h4>
+          <h2>함께하기</h2>
           <ul>
             <li><a href="family.html">후원·가족되기</a></li>
             <li><a href="internship.html">실습 신청하기</a></li>
@@ -255,14 +271,58 @@
     }
   }
 
-  /* ---------- generic modal helpers ---------- */
-  function openModal(el){ el.classList.add("open"); document.body.style.overflow="hidden"; }
-  function closeModal(el){ el.classList.remove("open"); if(!document.querySelector(".modal.open")) document.body.style.overflow=""; }
+  /* ---------- generic modal helpers ----------
+     KWCAG 6.1.1 키보드 사용 보장 / 6.1.2 초점 이동과 표시 / 8.2.1 웹 애플리케이션 접근성
+     - 열 때: 여는 요소를 기억하고 대화상자 안 첫 컨트롤로 초점을 옮긴다
+     - 열려 있을 때: Tab 이 대화상자 밖으로 나가지 않는다(초점 갇힘)
+     - 닫을 때: 원래 요소로 초점을 되돌린다  */
+  const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+  function focusables(el){
+    return Array.prototype.slice.call(el.querySelectorAll(FOCUSABLE))
+      .filter(n=>n.offsetWidth>0 || n.offsetHeight>0 || n===document.activeElement);
+  }
+  function trapTab(el, e){
+    if(e.key !== "Tab") return;
+    const f = focusables(el);
+    if(!f.length){ e.preventDefault(); return; }
+    const first = f[0], last = f[f.length-1];
+    if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  }
+  function openModal(el){
+    el.__opener = document.activeElement;
+    el.classList.add("open");
+    document.body.style.overflow="hidden";
+    const f = focusables(el.querySelector(".modal-card") || el);
+    if(f.length) setTimeout(()=>f[0].focus(), 30);
+  }
+  function closeModal(el){
+    el.classList.remove("open");
+    if(!document.querySelector(".modal.open")) document.body.style.overflow="";
+    const back = el.__opener;
+    el.__opener = null;
+    if(back && document.body.contains(back)) setTimeout(()=>back.focus(), 20);
+  }
   function wireModal(el){
-    el.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click", ()=>closeModal(el)));
+    if(!el.hasAttribute("role")){
+      el.setAttribute("role","dialog");
+      el.setAttribute("aria-modal","true");
+    }
+    const t = el.querySelector(".m-title");
+    if(t){
+      if(!t.id) t.id = "mt-" + Math.abs(t.textContent.length * 7 + el.className.length) + "-" + (wireModal.__n = (wireModal.__n||0)+1);
+      el.setAttribute("aria-labelledby", t.id);
+    }
+    el.querySelectorAll("[data-close]").forEach(b=>{
+      if(b.tagName === "BUTTON" && !b.getAttribute("type")) b.type = "button";
+      b.addEventListener("click", ()=>closeModal(el));
+    });
   }
   document.addEventListener("keydown", e=>{
-    if(e.key==="Escape") document.querySelectorAll(".modal.open").forEach(closeModal);
+    const open = document.querySelector(".modal.open");
+    if(!open) return;
+    if(e.key === "Escape") closeModal(open);
+    else trapTab(open.querySelector(".modal-card") || open, e);
   });
 
   /* ---------- login modal ---------- */
@@ -289,8 +349,10 @@
   document.body.appendChild(loginModal);
   wireModal(loginModal);
   const loginErr = loginModal.querySelector("#loginErr");
+  loginErr.setAttribute("role","alert");
   function openLogin(){
     loginErr.classList.remove("show");
+    loginModal.querySelectorAll("#loginId,#loginPw").forEach(i=>i.removeAttribute("aria-invalid"));
     loginModal.querySelector("#loginForm").reset();
     openModal(loginModal);
     setTimeout(()=>loginModal.querySelector("#loginId").focus(), 60);
@@ -300,7 +362,12 @@
     const id = loginModal.querySelector("#loginId").value.trim();
     const pw = loginModal.querySelector("#loginPw").value;
     if(Auth.login(id, pw)){ closeModal(loginModal); }
-    else { loginErr.classList.add("show"); }
+    else {
+      loginErr.classList.add("show");
+      loginModal.querySelector("#loginId").setAttribute("aria-invalid","true");
+      loginModal.querySelector("#loginPw").setAttribute("aria-invalid","true");
+      loginModal.querySelector("#loginId").focus();
+    }
   });
 
   renderAcct();
@@ -317,7 +384,7 @@
     <div class="modal-card">
       <button class="m-close" data-close aria-label="닫기">${ICON.x}</button>
       <div style="width:58px;height:58px;border-radius:16px;background:var(--brand-soft);color:var(--brand-deep);display:grid;place-items:center;margin-bottom:18px">
-        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
       </div>
       <h3 class="m-title" id="okTitle">접수 완료</h3>
       <p class="m-sub" id="okMsg" style="white-space:pre-line"></p>
@@ -334,14 +401,32 @@
   /* ---------- single-select toggle button groups (.seg / .amt-row / .filter-row) ---------- */
   function makeToggleGroup(container, onChange){
     const btns = Array.prototype.slice.call(container.querySelectorAll("button"));
-    btns.forEach(b=>{
+    const isRadio = container.getAttribute("role") === "radiogroup";
+    function sync(){
+      btns.forEach(x=>{
+        const on = x.classList.contains("active");
+        if(isRadio){ x.setAttribute("role","radio"); x.setAttribute("aria-checked", on ? "true" : "false"); }
+      });
+    }
+    btns.forEach((b,i)=>{
       if(b.getAttribute("type") === null) b.type = "button"; // 그룹 버튼이 폼을 제출하지 않도록
       b.addEventListener("click", ()=>{
         btns.forEach(x=>x.classList.remove("active"));
         b.classList.add("active");
+        sync();
         if(onChange) onChange(b);
       });
+      // 라디오 그룹은 좌우/상하 화살표로도 옮길 수 있어야 한다
+      b.addEventListener("keydown", e=>{
+        if(!isRadio) return;
+        const d = (e.key==="ArrowRight"||e.key==="ArrowDown") ? 1 : (e.key==="ArrowLeft"||e.key==="ArrowUp") ? -1 : 0;
+        if(!d) return;
+        e.preventDefault();
+        const next = btns[(i + d + btns.length) % btns.length];
+        next.click(); next.focus();
+      });
     });
+    sync();
   }
   document.querySelectorAll(".seg, .amt-row").forEach(g=>makeToggleGroup(g));
 
@@ -369,6 +454,9 @@
       </div>`;
     document.body.appendChild(gModal);
     wireModal(gModal);
+    tiles.forEach(t=>t.addEventListener("keydown", e=>{
+      if(e.key === "Enter" || e.key === " "){ e.preventDefault(); t.click(); }
+    }));
     tiles.forEach(t=>t.addEventListener("click", ()=>{
       const ph = t.querySelector(".ph"), cap = t.querySelector(".cap"), yr = t.querySelector(".yr");
       const grad = ph ? Array.prototype.slice.call(ph.classList).find(c=>/^g\d$/.test(c)) : "";
@@ -384,6 +472,7 @@
     if(form.id === "loginForm" || form.id === "writeForm") return;
     const err = document.createElement("div");
     err.className = "form-err";
+    err.setAttribute("role", "alert");
     err.textContent = "필수 항목(*)을 모두 입력해 주세요.";
     form.insertBefore(err, form.firstChild);
     form.addEventListener("submit", e=>{
@@ -401,10 +490,17 @@
           .find(c=>/동의/.test((c.parentElement||{}).textContent||""));
         if(agree && !agree.checked) missing = agree;
       }
+      // 이전 오류 표시 정리
+      form.querySelectorAll('[aria-invalid="true"]').forEach(n=>n.removeAttribute("aria-invalid"));
       if(missing){
+        missing.setAttribute("aria-invalid", "true");
+        const lab = missing.closest(".field") ? missing.closest(".field").querySelector("label") : null;
+        err.textContent = lab
+          ? `'${lab.textContent.replace("(필수 항목)","").replace("*","").trim()}' 항목을 입력해 주세요.`
+          : "필수 항목(*)을 모두 입력해 주세요.";
         err.classList.add("show");
         missing.focus();
-        missing.scrollIntoView({ behavior:"smooth", block:"center" });
+        missing.scrollIntoView({ block:"center" });
         return;
       }
       err.classList.remove("show");
@@ -446,20 +542,19 @@
     gate.className = "gate";
     gate.setAttribute("role", "dialog");
     gate.setAttribute("aria-modal", "true");
-    gate.setAttribute("aria-label", "찾으시는 곳을 선택하세요");
+    gate.setAttribute("aria-labelledby", "gateTitle");
     gate.innerHTML =
-      `<div class="gate-head">${MARK_W}<span class="t">어느 곳을 찾으시나요?</span></div>` +
+      `<div class="gate-head">${MARK_W}<p class="t" id="gateTitle">어느 곳을 찾으시나요?</p></div>` +
       ["coop","rehab"].map(k=>{
-        const s = SITES[k];
-        return `<a class="gate-half ${k}" href="${s.home}" data-site-pick="${k}">`+
-                 `<span class="gate-tag">${s.line2}</span>`+
+        const s2 = SITES[k];
+        return `<a class="gate-half ${k}" href="${s2.home}" data-site-pick="${k}">`+
                  MARK_W+
-                 `<span class="gate-name">${s.line1}<br>${s.line2}</span>`+
-                 `<span class="gate-desc">${s.desc}</span>`+
+                 `<span class="gate-name">${s2.line1}<br>${s2.line2}</span>`+
+                 `<span class="gate-desc">${s2.desc}</span>`+
                  `<span class="gate-go">바로가기 ${ICON.arrow}</span>`+
                `</a>`;
       }).join("") +
-      `<div class="gate-foot">선택한 곳은 기억되며, 화면 맨 위 전환 바로 언제든 옮겨갈 수 있습니다.</div>`;
+      `<p class="gate-foot">선택한 곳은 기억되며, 화면 맨 위 전환 바로 언제든 옮겨갈 수 있습니다.</p>`;
     document.body.appendChild(gate);
     document.body.style.overflow = "hidden";
 
@@ -469,13 +564,15 @@
         rememberSite(pick);
         if(pick === "rehab") return;          // rehab.html 로 그대로 이동
         e.preventDefault();                    // 조합은 이 페이지가 이미 목적지
-        gate.classList.add("out");
         document.body.style.overflow = "";
-        setTimeout(()=>gate.remove(), 320);
+        gate.remove();
+        const m = document.getElementById("main");
+        if(m){ m.setAttribute("tabindex","-1"); m.focus(); }
       });
     });
-
-    setTimeout(()=>{ const f = gate.querySelector(".gate-half"); if(f) f.focus(); }, 80);
+    // 게이트가 열려 있는 동안 Tab 이 배경으로 나가지 않게 한다
+    gate.addEventListener("keydown", e=>trapTab(gate, e));
+    setTimeout(()=>{ const f = gate.querySelector(".gate-half"); if(f) f.focus(); }, 60);
   }
 
   if(SITE === "coop" && !storedSite() && (here === "index.html" || here === "")) openGate();

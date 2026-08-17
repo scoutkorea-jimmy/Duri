@@ -16,13 +16,13 @@
 .greet-visual .q span{opacity:.85;font-weight:600;margin-top:10px;display:block}
 .greet-body p{margin-bottom:22px;color:var(--body)}
 .greet-body .hello{font-size:clamp(26px,2.6vw,34px);font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1.35;margin-bottom:30px}
-.greet-body .hello b{color:var(--brand)}
+.greet-body .hello b{color:var(--brand-deep)}
 .sign{margin-top:36px;padding-top:24px;border-top:1px solid var(--line);font-weight:800;color:var(--ink);font-size:19px}
 @media (max-width:880px){.greet-wrap{grid-template-columns:1fr;gap:36px}.greet-visual{position:relative;top:0;aspect-ratio:4/3;max-height:340px}}
 </style>
 </head>
 <body>
-
+<main id="main">
 <section class="page-hero">
   <div class="container">
     <div class="crumb"><a href="index.html">홈</a> <span>›</span> 두리손잡고 소개 <span>›</span> 인사말</div>
@@ -62,31 +62,32 @@
     </div>
     <div class="grid grid-2">
       <div class="card card-pad-lg reveal">
-        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
         <h3 class="h3">직업 적응 훈련</h3>
         <p class="muted" style="margin-top:10px">직무상담, 취업연계 및 직업교육 실시. 직업평가를 기반으로 개인별 맞춤 서비스를 제공합니다.</p>
       </div>
       <div class="card card-pad-lg reveal" data-delay=".06s">
-        <div class="icon-badge icon-badge--amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5.5a5 5 0 0 0-7 0L12 6l-.5-.5a5 5 0 1 0-7 7l7.5 7.5 7.5-7.5a5 5 0 0 0 0-7Z"/></svg></div>
+        <div class="icon-badge icon-badge--amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 5.5a5 5 0 0 0-7 0L12 6l-.5-.5a5 5 0 1 0-7 7l7.5 7.5 7.5-7.5a5 5 0 0 0 0-7Z"/></svg></div>
         <h3 class="h3">원가족과의 유대</h3>
         <p class="muted" style="margin-top:10px">보호자 개별 상담 및 정기 간담회를 운영하여 가정과의 연계를 강화합니다.</p>
       </div>
       <div class="card card-pad-lg reveal">
-        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22a8 8 0 0 1 16 0"/><circle cx="10" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></div>
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 22a8 8 0 0 1 16 0"/><circle cx="10" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></div>
         <h3 class="h3">보호작업장</h3>
         <p class="muted" style="margin-top:10px">장애인 맞춤형 직무 배치 및 근로 지원. 안정적 소득 창출을 통한 자립을 도모합니다.</p>
       </div>
       <div class="card card-pad-lg reveal" data-delay=".06s">
-        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z"/></svg></div>
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z"/></svg></div>
         <h3 class="h3">지역사회적응훈련</h3>
         <p class="muted" style="margin-top:10px">지역사회 구성원과의 교류 증진, 사회행사 및 프로그램 참여를 지원합니다.</p>
       </div>
     </div>
     <div class="center" style="margin-top:44px">
-      <a class="btn btn-primary btn-lg reveal" href="business.html">사업안내 및 비전 자세히 보기<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-primary btn-lg reveal" href="business.html">사업안내 및 비전 자세히 보기<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
 </section>
+</main>
 
 <script src="assets/site.js"></script>
 </body>

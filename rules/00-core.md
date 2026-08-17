@@ -12,6 +12,30 @@
 4. **디자인은 조합=leaf 그린 팔레트 + split 히어로로 고정.** 과거 "디자인 옵션" 토글은 제거됨 — 되살리지 말 것. 직업재활센터는 `data-site="rehab"` 토큰 오버라이드로만 색을 바꿉니다([20-design.md](20-design.md) 참조).
 5. **경로는 모두 상대경로**(`href="about.html"`, `href="assets/..."`). GitHub Pages가 `/Duri/` 하위로 서빙하므로 `/`로 시작하는 절대경로는 깨집니다.
 6. **커밋 전 검증 필수.** [40-verify.md](40-verify.md)의 절차를 거친 뒤에만 푸시합니다.
+7. **웹 접근성(KWCAG 2.2)은 타협 대상이 아닙니다.** 이 사이트는 장애인 직업재활시설의 공식 홈페이지입니다.
+   아래 7-1을 어기는 변경은 "디자인이 더 예뻐서"를 포함한 어떤 이유로도 넣지 않습니다.
+8. **자동으로 움직이는 것을 새로 만들지 마세요.** 무한 반복 애니메이션·자동 슬라이드·마퀴 금지
+   (KWCAG 6.2.2). 상태 변화에 따른 즉각적 전환만 허용합니다.
+
+---
+
+## 1-1. 접근성 최소선 (KWCAG 2.2 · 한국형 웹 콘텐츠 접근성 지침)
+
+새 마크업을 쓸 때마다 지켜야 하는 것들입니다. 전체 검사 항목과 근거는 [40-verify.md](40-verify.md).
+
+| 무엇을 만들 때 | 반드시 |
+|---|---|
+| 입력 컨트롤 | `<label for>` ↔ `id` 결속. **placeholder 는 레이블이 아닙니다.** 필수는 `required` + `aria-required` + `.req`(*) + `<span class="sr-only">(필수 항목)</span>` |
+| 장식 아이콘·SVG | `aria-hidden="true" focusable="false"` |
+| 의미 있는 이미지 | `alt` 작성. 장식이면 `alt=""` |
+| 클릭되는 요소 | `<a>`/`<button>` 우선. `div` 를 쓰면 `role="button" tabindex="0"` + Enter/Space 핸들러 |
+| 컨트롤 크기 | 최소 **44×44px** |
+| 색으로 상태를 표시 | 색 외 단서를 하나 더 (기호·보더·`aria-checked`·`aria-current`) |
+| 텍스트 색 | 배경과 **4.5:1** 이상(큰 텍스트 3:1). `--brand` 는 **면 색**이고, 글자에는 `--brand-deep` 을 씁니다. 앰버 글자는 `--amber-700` |
+| 단일 선택 버튼 그룹 | `role="radiogroup"` + `aria-label`, 각 버튼 `role="radio"` + `aria-checked`, 화살표 키 이동 |
+| 대화상자(모달) | `role="dialog"` + `aria-modal="true"` + `aria-labelledby`, 열 때 내부로 초점, Tab 갇힘, ESC 닫힘, 닫을 때 원래 위치 복귀 → `wireModal()` 이 처리 |
+| 오류 안내 | `role="alert"` + 어느 항목인지 말해주는 문구 + `aria-invalid` + 해당 입력으로 초점 |
+| 새 페이지 | `<html lang="ko">` · `<title>` 고유 · `<h1>` 1개 · `<main id="main">` 1개 (건너뛰기 링크 도착지) |
 
 ---
 

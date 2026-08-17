@@ -11,7 +11,7 @@
   const POSTS_KEY = "duri.posts.v1";
   const PER_PAGE = 10;
 
-  const MEGA = `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3zM11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>`;
+  const MEGA = `<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3zM11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>`;
   const CATS = ["공지", "새소식", "언론보도"];
   const PILL = { "공지":"notice", "새소식":"news", "언론보도":"press" };
 
@@ -106,9 +106,12 @@
       boardEl.innerHTML = `<div class="board-empty">검색 결과가 없습니다.</div>`;
     } else {
       boardEl.innerHTML = slice.map(p=>{
-        const no = p.pinned ? `<span class="no">${MEGA}</span>` : `<span class="no">${noMap[p.id]||""}</span>`;
+        const no = p.pinned
+          ? `<span class="no">${MEGA}<span class="sr-only">공지 고정</span></span>`
+          : `<span class="no">${noMap[p.id]||""}</span>`;
         const pill = `<span class="tag-pill ${PILL[p.cat]||"notice"}">${p.cat==="공지"?"공지":esc(p.cat)}</span>`;
-        return `<div class="board-row${p.pinned?" is-notice":""}" data-id="${esc(p.id)}" role="button" tabindex="0">`+
+        return `<div class="board-row${p.pinned?" is-notice":""}" data-id="${esc(p.id)}" role="button" tabindex="0"`+
+               ` aria-label="${esc(p.cat)} · ${esc(p.title)} · ${esc(p.date)} · 자세히 보기">`+
                  no +
                  `<span class="ti">${pill}${esc(p.title)}</span>`+
                  `<span class="dt">${esc(p.date)}</span>`+
@@ -117,9 +120,12 @@
     }
 
     // pager
-    let ph = `<button data-pg="prev" ${state.page<=1?"disabled":""}>‹</button>`;
-    for(let i=1;i<=pages;i++){ ph += `<button data-pg="${i}" class="${i===state.page?"active":""}">${i}</button>`; }
-    ph += `<button data-pg="next" ${state.page>=pages?"disabled":""}>›</button>`;
+    let ph = `<button type="button" data-pg="prev" aria-label="이전 페이지" ${state.page<=1?"disabled":""}>‹</button>`;
+    for(let i=1;i<=pages;i++){
+      ph += `<button type="button" data-pg="${i}" class="${i===state.page?"active":""}"`+
+            ` aria-label="${i} 페이지"${i===state.page?' aria-current="page"':""}>${i}</button>`;
+    }
+    ph += `<button type="button" data-pg="next" aria-label="다음 페이지" ${state.page>=pages?"disabled":""}>›</button>`;
     pagerEl.innerHTML = ph;
   }
 
@@ -188,10 +194,12 @@
   document.body.appendChild(writeModal);
   if(D.wireModal) D.wireModal(writeModal);
   const writeErr = writeModal.querySelector("#writeErr");
+  writeErr.setAttribute("role","alert");
 
   function openWrite(){
     if(!(Auth && Auth.isAdmin())){ if(D.openLogin) D.openLogin(); return; }
     writeErr.classList.remove("show");
+    writeModal.querySelectorAll('[aria-invalid="true"]').forEach(n=>n.removeAttribute("aria-invalid"));
     writeModal.querySelector("#writeForm").reset();
     D.openModal(writeModal);
     setTimeout(()=>writeModal.querySelector("#wTitle").focus(), 60);
@@ -203,7 +211,14 @@
     const body  = writeModal.querySelector("#wBody").value.trim();
     const cat   = writeModal.querySelector("#wCat").value;
     const pin   = writeModal.querySelector("#wPin").checked;
-    if(!title || !body){ writeErr.classList.add("show"); return; }
+    if(!title || !body){
+      writeErr.classList.add("show");
+      const bad = !title ? writeModal.querySelector("#wTitle") : writeModal.querySelector("#wBody");
+      bad.setAttribute("aria-invalid","true");
+      bad.focus();
+      return;
+    }
+    writeModal.querySelectorAll('[aria-invalid="true"]').forEach(n=>n.removeAttribute("aria-invalid"));
     const arr = userPosts();
     arr.unshift({ id:"u"+Date.now(), cat:cat, pinned:pin, date:todayStr(), title:title, body:body });
     save(arr);
@@ -223,9 +238,24 @@
   /* ---------- tabs ---------- */
   function syncTabs(){
     tabsEl.querySelectorAll(".tab").forEach(t=>{
-      t.classList.toggle("active", t.textContent.trim() === state.tab);
+      const on = t.textContent.trim() === state.tab;
+      t.classList.toggle("active", on);
+      t.setAttribute("role", "radio");
+      t.setAttribute("aria-checked", on ? "true" : "false");
+      if(!t.getAttribute("type")) t.type = "button";
     });
   }
+  // 라디오 그룹 관례: 좌우/상하 화살표로 분류 이동
+  tabsEl.addEventListener("keydown", e=>{
+    const d = (e.key==="ArrowRight"||e.key==="ArrowDown") ? 1 : (e.key==="ArrowLeft"||e.key==="ArrowUp") ? -1 : 0;
+    if(!d) return;
+    const list = Array.prototype.slice.call(tabsEl.querySelectorAll(".tab"));
+    const cur = list.indexOf(e.target.closest(".tab"));
+    if(cur < 0) return;
+    e.preventDefault();
+    const next = list[(cur + d + list.length) % list.length];
+    next.click(); next.focus();
+  });
 
   /* ---------- events ---------- */
   boardEl.addEventListener("click", e=>{

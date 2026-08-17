@@ -10,6 +10,10 @@
 - **무드**: Nature Green — 따뜻하고, 희망적이며, 사람 중심(warm / hopeful / human).
 - **그린이 주인공, 앰버는 조연.** 앰버(`--accent`)는 후원·가족되기·CTA 등 "행동"을 유도하는 곳에만 절제해서 사용.
 - **부드러운 곡률 + 낮은 채도 그림자**로 포근함을 표현. 날카로운 직각·강한 그림자 지양.
+- ⚠️ **화려하지 않게, 보수적이고 명확하게.** 장애인 직업재활시설의 공식 홈페이지입니다(사용자 지시, 2026-08-17).
+  그라데이션·색면 같은 **정적 장식은 유지**하되 **움직이는 것은 두지 않습니다** — 자동 애니메이션, 마퀴,
+  등장 효과, hover 시 요소가 떠오르는 연출은 전부 제거됐습니다. 되살리지 마세요.
+  hover 는 **색·보더·그림자만** 바꿉니다(위치·크기 변화 금지).
 - **여백을 넉넉하게.** 섹션 상하 패딩이 크고(104px), 타이포 letter-spacing은 음수로 단정하게.
 - **사진 전 단계**: 실제 사진이 없는 자리는 그라데이션 플레이스홀더(`.media`, `.tile`)로 채우고 추후 교체.
 - 디자인은 현재 **leaf 팔레트 + split 히어로로 고정**(과거 "디자인 옵션" 토글 제거). 되살리지 말 것.
@@ -20,6 +24,10 @@
 ## 1. 컬러 토큰 (`:root`)
 
 색은 항상 **CSS 변수로** 쓰세요. 하드코딩 금지.
+
+> ⚠️ **`--brand`(#2a8159)는 '면' 색입니다.** 흰 글자를 얹는 배경으로만 쓰세요.
+> **글자·아이콘에는 `--brand-deep`(#1f6242)** 을 씁니다 — `--brand` 는 옅은 배경(brand-soft) 위에서 4.20:1 로 기준 미달입니다.
+> 앰버 글자는 `--amber-700`(#96530a). `--amber-500/600` 은 글자로 쓰면 2.4:1 로 판독 불가입니다.
 
 ### 그린 코어
 | 토큰 | HEX | 용도 |
@@ -38,7 +46,8 @@
 ### 앰버 액센트 (절제 사용)
 | 토큰 | HEX | 용도 |
 |---|---|---|
-| `--amber-600` | `#d98a2b` | 앰버 텍스트 |
+| `--amber-600` | `#d98a2b` | 앰버 면·보더 (**글자로 쓰지 말 것** — 2.4:1) |
+| `--amber-700` | `#96530a` | **앰버 글자 전용** (흰 배경 5.93:1, amber-100 위 5.22:1) |
 | `--amber-500` | `#eda23c` | = `--accent`, 후원/CTA 버튼·필수표시(*) |
 | `--amber-200` | `#f8dcab` | 그라데이션 포인트 |
 | `--amber-100` | `#fcefd6` | 앰버 배지 배경 |
@@ -50,7 +59,7 @@
 | `--paper` | `#ffffff` | 카드/패널 |
 | `--ink` | `#19271f` | 제목 텍스트 |
 | `--body` | `#3b4a41` | 본문 텍스트 |
-| `--muted` | `#6e7d73` | 보조 텍스트 |
+| `--muted` | `#556258` | 보조 텍스트 (흰 배경 6.41:1) |
 | `--line` | `#e3ece6` | 기본 보더 |
 | `--line-strong` | `#cfddd4` | 입력 필드 보더 등 |
 
@@ -78,7 +87,7 @@ html[data-site="rehab"]{ --brand:#1f6f9e; ... }   /* styles.css 하단 */
 | 딥 섹션 / 푸터 | `#184a35` / `#103127` | `#12466a` / `#0d2c40` |
 | `--accent` (앰버) | `#eda23c` | `#eda23c` — **공통 유지** |
 | body 배경 | `--cream` `#f8f7f0` | `#f6f8fa` (쿨 톤) |
-| 텍스트 `--ink` / `--body` / `--muted` | `#19271f` / `#3b4a41` / `#6e7d73` | `#17222b` / `#3b4650` / `#6b7783` |
+| 텍스트 `--ink` / `--body` / `--muted` | `#19271f` / `#3b4a41` / `#556258` | `#17222b` / `#3b4650` / `#57626d` |
 | 보더 `--line` / `--line-strong` | `#e3ece6` / `#cfddd4` | `#e2e9ee` / `#ccd7e0` |
 
 **규칙**
@@ -126,9 +135,12 @@ html[data-site="rehab"]{ --brand:#1f6f9e; ... }   /* styles.css 하단 */
 - **반경**: `--radius-sm`10 · `--radius`16 · `--radius-lg`24 · `--radius-xl`34 · 알약형은 `999px`.
 - **그림자**: `--shadow-sm`(은은) · `--shadow`(카드 hover) · `--shadow-lg`(모달·플로팅).
 - **이징**: `--ease` = `cubic-bezier(.22,.61,.36,1)`. 전환은 보통 `.2~.3s var(--ease)`.
-- **hover 관용구**: 카드·버튼은 `transform:translateY(-2~-4px)` + 그림자 강화.
-- **등장 애니메이션**: `.reveal` 요소가 뷰포트 진입 시 `.in`이 붙어 `riseIn`(translateY 18→0). 콘텐츠를 절대 가리지 않도록 기본 상태는 항상 보이게 설계됨. 동적 렌더 후 `window.__revealRescan()` 호출.
-- `prefers-reduced-motion`을 존중(마퀴·reveal 모두 모션 축소 시 정지/비활성).
+- **등장 애니메이션은 제거됐습니다.** `.reveal` 클래스와 `data-delay`, `window.__revealRescan()` 은 남아 있지만
+  **시각 효과가 없습니다**(콘텐츠는 항상 즉시 보임). 되살리지 마세요 — 15개 HTML 에서 클래스를 걷어내는 대신
+  CSS 를 무효화해 둔 상태입니다.
+- **hover 관용구는 색·보더·그림자만.** `translateY`, `scale`, `filter:brightness` 로 요소를 움직이지 않습니다.
+- 사이트에 무한 반복 애니메이션이 **하나도 없습니다.** `tools/verify-a11y.mjs` 가 이를 검사합니다.
+  따라서 `prefers-reduced-motion` 분기도 필요하지 않습니다(모션 자체가 없음).
 
 ---
 
@@ -136,13 +148,13 @@ html[data-site="rehab"]{ --brand:#1f6f9e; ... }   /* styles.css 하단 */
 
 ### 버튼 `.btn`
 알약형(999px), weight 700, gap 9px, `--ease` 전환. 변형:
-- `.btn-primary` — 그린 채움(주요 행동). hover 시 brand-deep + 상승.
-- `.btn-accent` — 앰버 채움(후원/CTA 전용). 글자색 `#3c2606`.
+- `.btn-primary` — 그린 채움(주요 행동). hover 시 brand-deep(색만 변함).
+- `.btn-accent` — 앰버 채움(후원/CTA 전용). 글자색 `#3c2606`(앰버 위 6.68:1). hover 시 amber-600 + 흰 글자.
 - `.btn-outline` — 투명+보더, 보조 행동.
 - `.btn-ghost` — 흰 배경+옅은 보더+`--shadow-sm`.
 - `.btn-white` — 어두운 배경 위 흰 버튼.
 - 크기: 기본 / `.btn-lg`(17px). 묶음은 `.btn-row`(gap 14, wrap).
-- 텍스트 링크는 `.link`(그린, 화살표 svg는 hover 시 `translateX(4px)` — `.arrow`).
+- 텍스트 링크는 `.link` — `--brand-deep` + **밑줄**(색만으로 링크를 알리지 않기 위해, KWCAG 5.2.1). 화살표는 고정(움직이지 않음).
 
 ### 칩 · 배지
 - `.chip` — 알약 보더 칩(흰 배경). `.chip--soft`는 brand-soft 배경. 페이지 히어로 안에서는 반투명 흰색으로 자동 변형.
@@ -150,7 +162,7 @@ html[data-site="rehab"]{ --brand:#1f6f9e; ... }   /* styles.css 하단 */
 - 게시판 태그 `.tag-pill` — `.notice`(그린) / `.news`(앰버) / `.press`(보라 `#5b3fa0`).
 
 ### 카드 `.card`
-흰 배경, 보더 `--line`, 반경 `--radius-lg`, `--shadow-sm`. hover 시 `--shadow-lg` + 상승 + 보더 green-200. 패딩 헬퍼 `.card-pad`(30) / `.card-pad-lg`(38).
+흰 배경, 보더 `--line`, 반경 `--radius-lg`, `--shadow-sm`. hover 시 그림자 강화 + 보더 `--brand`(위치 변화 없음). 패딩 헬퍼 `.card-pad`(30) / `.card-pad-lg`(38).
 
 ### 아이콘 박스
 - `.icon-badge` 56×56(반경16, brand-soft, svg 28). `.icon-badge--amber`.
@@ -165,8 +177,11 @@ html[data-site="rehab"]{ --brand:#1f6f9e; ... }   /* styles.css 하단 */
 green-700→600 그라데이션 배경 + 방사형 오버레이, 글자 흰색. 내부: `.crumb`(브레드크럼) → `h1` → `p` → `.pills`(반투명 칩, 실제 링크로 연결).
 
 ### 폼 `.field`
-라벨(700, `--ink`) + 입력(보더 `--line-strong`, 반경 12, 16px). 포커스 시 `--brand` 보더 + `--brand-soft` 4px 링. 필수 표시는 라벨 안 `.req`(앰버 `*`). 2열 배치는 `.form-grid`. textarea 최소 130px.
-- 제출 동작은 site.js가 처리: 필수(`.req`) 검증 → "접수 완료" 모달. 이메일 등은 브라우저 기본 검증도 함께 동작.
+라벨(700, `--ink`) + 입력(보더 `--line-strong`, 반경 12, 16px). 포커스 시 `--brand` 보더 + `--brand-soft` 4px 링. 2열 배치는 `.form-grid`. textarea 최소 130px.
+- **레이블은 `for` ↔ 컨트롤 `id` 로 결속합니다.** placeholder 는 레이블이 아닙니다(KWCAG 7.4.1).
+- **필수 항목은 3중으로 알립니다**: `.req`(`*`, `--amber-700`) + `<span class="sr-only">(필수 항목)</span>` + 컨트롤에 `required aria-required="true"`.
+- 폼에는 **`novalidate`** 를 붙입니다. 브라우저 기본 검증이 submit 을 가로채면 site.js 의 한국어 오류 안내가 실행되지 않습니다.
+- 제출 동작은 site.js가 처리: 필수 검증 실패 시 `role="alert"` 오류 박스에 **어느 항목인지 이름을 넣어** 표시 + 해당 입력에 `aria-invalid="true"`(2px 보더) + 초점 이동. 통과 시 "접수 완료" 모달.
 
 ### 표 · 타임라인 · 통계
 - `.dl` — 정의형 표(좌측 라벨 brand-tint). 운영현황 등.
@@ -186,10 +201,12 @@ green-700→600 그라데이션 배경 + 방사형 오버레이, 글자 흰색. 
 ### 진입 게이트 `.gate` (첫 방문 시 index.html)
 
 전체화면 `position:fixed` 오버레이(z-index 400). **`site.js`가 주입**하며 HTML에 직접 쓰지 않습니다.
+**단색 면입니다** — 그라데이션·점 패턴·hover 확대·페이드 인이 모두 제거됐습니다(보수적 톤 + 정확한 50/50 유지).
 
-- `.gate-half` 두 장을 `flex:1`로 나란히 → **좌 50% 조합(그린 그라데이션) / 우 50% 직업재활센터(오션 블루 그라데이션)**. 각 면은 `<a>`이므로 키보드로 도달·선택 가능합니다.
-- hover / `:focus-visible` 시 해당 면이 `flex:1.12`로 넓어지고 라벨이 밝아집니다(`--ease`, .45s).
-- 내부 구조: 마크 → `.gate-name`(clamp 22–38px, 800) → `.gate-desc` → `.gate-go`(알약 버튼 모양 라벨).
+- `.gate-half` 두 장을 `flex:1 1 50%`로 나란히 → **좌 50% 조합 `#1f6242` / 우 50% 직업재활센터 `#17567b`**(둘 다 흰 글자 7:1 이상). 사이를 3px 흰 구분선으로 나눕니다. 각 면은 `<a>`이므로 키보드로 도달·선택 가능합니다.
+- hover 시 **배경색만** 어두워집니다. **크기를 바꾸지 마세요** — 진입 시 첫 선택지에 초점이 가므로 포커스/hover 로 폭을 바꾸면 요구 사항인 정확한 50/50 이 깨집니다.
+- `role="dialog"` + `aria-modal="true"` + `aria-labelledby`, 진입 시 첫 선택지로 초점, Tab 이 게이트 밖으로 나가지 않음.
+- 내부 구조: 마크 → `.gate-name`(clamp 22–36px, 800) → `.gate-desc` → `.gate-go`(흰 알약 버튼).
 - 상단에 `.gate-head`(로고 + "어느 곳을 찾으시나요?"), 하단에 `.gate-foot`(상단 바로 언제든 이동 가능하다는 안내).
 - ≤760px에서 `flex-direction:column` → **상하 50/50** 분할, hover 확대 비활성.
 - `prefers-reduced-motion` 시 확대·페이드 전환 없음.
@@ -201,14 +218,18 @@ green-700→600 그라데이션 배경 + 방사형 오버레이, 글자 흰색. 
 
 - `position:sticky; top:0; z-index:120`. 높이 **`clamp(38px, 5vh, 52px)`** — CSS 변수 `--switch-h`로 노출되며 `.site-header`의 `top`이 이 값을 참조합니다.
 - 배경은 `--green-900` / `rehab`에서는 `#0d2c40`. 두 개의 `.sw-item`을 균등 분할.
+- 비활성 항목 글자색은 `#d7e2dc`(딥 배경 위 9:1). 반투명 흰색으로 되돌리지 마세요 — 이전 `rgba(255,255,255,.62)` 는 3.49:1 로 기준 미달이었습니다.
 - 현재 갈래에 `.on` — 배경이 `--brand`로 채워지고 글자가 흰색, **하단 전체 폭에 3px 앰버 하이라이트**(`::after`, `left:0;right:0;bottom:0`).
   색만으로 활성 갈래를 구분하면 색각 이상 사용자에게 단서가 하나뿐이므로 형태 단서를 함께 둡니다. **제거하지 마세요.**
 - 비활성 쪽은 반투명 흰색 텍스트, hover 시 밝아짐.
 - ≤520px에서는 기관명을 축약형(`.sw-short`)으로 교체합니다(`조합` / `직업재활센터`).
 - 스크린리더용으로 `<nav aria-label="사이트 선택">` + 현재 항목에 `aria-current="page"`.
 
-### 파트너 로고 마퀴 (index.html)
-`.logo-marquee`(overflow hidden + 양끝 페이드 mask) 안의 `.logo-track`이 `logo-scroll`로 끊김 없이 가로 무한 스크롤(38s linear, hover 시 일시정지). `.logo-item`은 흰 카드형 로고 슬롯(기본 grayscale, hover 시 컬러). 항목은 JS에서 셔플 후 2배 복제해 이음새 제거. **실제 로고는 `PARTNERS`에 `logo` 경로만 추가하면 `<img>`로 자동 표시**(`assets/logos/`).
+### CTA 배너 `.cta-band` (index / family)
+단색 딥 그린 면(`--deep-800`) + 반경 `--radius-xl`, 글자 흰색(7.3:1). 내부 `.cta-cards` 는 3열 `.cta-tile`(반투명 흰 면 + 흰 보더). ⚠️ 이 클래스들은 한동안 **정의 없이 사용되어 흰 글자가 흰 배경에 렌더**되고 있었습니다(2026-08-17 수정). 지우지 마세요.
+
+### 파트너 로고 `.logo-grid` (index.html)
+**정적 그리드입니다** — 6열(980px 3열, 560px 2열) `<ul>`/`<li>`. 흰 카드형 슬롯 `.logo-item`. 예전 무한 가로 스크롤 마퀴는 **KWCAG 6.2.2(정지 기능 제공) 때문에 제거**했습니다. 되살리지 마세요. 순서도 셔플하지 않습니다(낭독 사용자가 위치를 기억할 수 없게 됩니다). **실제 로고는 `PARTNERS`에 `logo` 경로만 추가하면 `<img>`로 자동 표시**(`assets/logos/`).
 
 ---
 

@@ -19,6 +19,7 @@
   --green-50:#f1faf4;
   /* Warm accent — sparse, for family / donation / CTA */
   --amber-600:#d98a2b;
+  --amber-700:#96530a;   /* 앰버 계열 '글자' 전용 — amber-100 위 5.22:1 / 흰 배경 5.93:1 */
   --amber-500:#eda23c;
   --amber-200:#f8dcab;
   --amber-100:#fcefd6;
@@ -27,7 +28,7 @@
   --paper:#ffffff;
   --ink:#19271f;
   --body:#3b4a41;
-  --muted:#6e7d73;
+  --muted:#556258;   /* KWCAG 5.3.1: 흰색 6.41 / cream 5.97 / tint 6.02 : 1 */
   --line:#e3ece6;
   --line-strong:#cfddd4;
 
@@ -89,12 +90,12 @@ p{margin:0}
 .eyebrow{
   display:inline-flex;align-items:center;gap:8px;
   font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--brand);
+  color:var(--brand-deep);
 }
 .eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--brand);display:inline-block}
 .eyebrow--center{justify-content:center}
 
-.kicker{font-size:15px;font-weight:600;color:var(--brand);letter-spacing:.02em}
+.kicker{font-size:15px;font-weight:600;color:var(--brand-deep);letter-spacing:.02em}
 
 .h-display{font-size:clamp(38px,5vw,64px);font-weight:800;letter-spacing:-.035em;line-height:1.12}
 .h1{font-size:clamp(32px,3.6vw,46px);font-weight:800;letter-spacing:-.03em}
@@ -120,22 +121,22 @@ p{margin:0}
 }
 .btn svg{width:18px;height:18px}
 .btn-primary{background:var(--brand);color:#fff;box-shadow:0 6px 18px rgba(42,129,89,.28)}
-.btn-primary:hover{background:var(--brand-deep);transform:translateY(-2px);box-shadow:0 12px 26px rgba(42,129,89,.32)}
+.btn-primary:hover{background:var(--brand-deep)}
 .btn-accent{background:var(--accent);color:#3c2606;box-shadow:0 6px 18px rgba(237,162,60,.3)}
-.btn-accent:hover{filter:brightness(1.04);transform:translateY(-2px)}
+.btn-accent:hover{background:var(--amber-600);color:#fff}
 .btn-outline{background:transparent;border-color:var(--line-strong);color:var(--brand-deep)}
-.btn-outline:hover{border-color:var(--brand);background:var(--brand-soft);transform:translateY(-2px)}
+.btn-outline:hover{border-color:var(--brand-deep);background:var(--brand-soft)}
 .btn-ghost{background:#fff;color:var(--brand-deep);border-color:var(--line);box-shadow:var(--shadow-sm)}
-.btn-ghost:hover{border-color:var(--brand);transform:translateY(-2px)}
+.btn-ghost:hover{border-color:var(--brand-deep);background:var(--brand-tint)}
 .btn-white{background:#fff;color:var(--brand-deep)}
-.btn-white:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn-white:hover{box-shadow:var(--shadow)}
 .btn-lg{padding:17px 34px;font-size:17px}
 .btn-row{display:flex;gap:14px;flex-wrap:wrap}
 
-.arrow{transition:transform .25s var(--ease)}
-.btn:hover .arrow,.link:hover .arrow{transform:translateX(4px)}
+/* .arrow 의 hover 이동 제거 — 아이콘은 고정 */
+.arrow{flex:none}
 
-.link{display:inline-flex;align-items:center;gap:7px;font-weight:700;color:var(--brand);font-size:15px}
+.link{display:inline-flex;align-items:center;gap:7px;font-weight:700;color:var(--brand-deep);font-size:15px;text-decoration:underline;text-underline-offset:3px}
 .link svg{width:16px;height:16px}
 
 /* ---------- chips / badges ---------- */
@@ -150,14 +151,14 @@ p{margin:0}
   font-size:12.5px;font-weight:700;letter-spacing:.02em;
   background:var(--brand-soft);color:var(--brand-deep);
 }
-.badge--amber{background:var(--amber-100);color:var(--amber-600)}
+.badge--amber{background:var(--amber-100);color:var(--amber-700)}
 
 /* ---------- cards ---------- */
 .card{
   background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);
   box-shadow:var(--shadow-sm);transition:.3s var(--ease);overflow:hidden;
 }
-.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px);border-color:var(--green-200)}
+.card:hover{box-shadow:var(--shadow);border-color:var(--brand)}
 .card-pad{padding:30px}
 .card-pad-lg{padding:38px}
 
@@ -171,7 +172,7 @@ p{margin:0}
   background:var(--brand-soft);color:var(--brand-deep);margin-bottom:20px;flex:none;
 }
 .icon-badge svg{width:28px;height:28px}
-.icon-badge--amber{background:var(--amber-100);color:var(--amber-600)}
+.icon-badge--amber{background:var(--amber-100);color:var(--amber-700)}
 
 .num-badge{
   width:46px;height:46px;border-radius:13px;display:grid;place-items:center;
@@ -252,7 +253,7 @@ p{margin:0}
 /* ---------- timeline ---------- */
 .timeline{position:relative}
 .tl-year{display:grid;grid-template-columns:130px 1fr;gap:28px;padding:14px 0 40px;position:relative}
-.tl-year .yr{font-size:30px;font-weight:800;color:var(--brand);letter-spacing:-.02em;position:sticky;top:120px;align-self:start}
+.tl-year .yr{font-size:30px;font-weight:800;color:var(--brand-deep);letter-spacing:-.02em;position:sticky;top:120px;align-self:start}
 .tl-items{border-left:2px solid var(--line-strong);padding-left:30px;display:flex;flex-direction:column;gap:18px}
 .tl-item{position:relative}
 .tl-item::before{content:"";position:absolute;left:-39px;top:8px;width:13px;height:13px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px var(--brand-soft)}
@@ -262,7 +263,7 @@ p{margin:0}
 /* ---------- forms ---------- */
 .field{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
 .field label{font-weight:700;color:var(--ink);font-size:15px}
-.field label .req{color:var(--accent)}
+.field label .req{color:var(--amber-700);font-weight:800;margin-left:2px}  /* 흰 카드 5.93:1 */
 .field input,.field select,.field textarea{
   padding:14px 16px;border:1.5px solid var(--line-strong);border-radius:12px;font-size:16px;
   font-family:inherit;color:var(--ink);background:#fff;transition:.2s;width:100%;
@@ -283,16 +284,14 @@ p{margin:0}
 .board-row:hover{background:var(--brand-tint)}
 .board-row .no{color:var(--muted);font-weight:700;text-align:center}
 .board-row .ti{font-weight:600;color:var(--ink)}
-.board-row .ti:hover{color:var(--brand)}
+.board-row .ti:hover{color:var(--brand-deep)}
 .board-row .dt{color:var(--muted);font-size:14px;text-align:right}
-.board-row.is-notice .no{color:var(--brand)}
+.board-row.is-notice .no{color:var(--brand-deep)}
 
-/* ---------- reveal: ALWAYS visible (transform-only entrance, never traps content) ---------- */
+/* ---------- reveal: 등장 애니메이션 제거됨 (KWCAG 6.2.2 · 보수적 톤) ----------
+   .reveal / data-delay / site.js 의 __revealRescan 은 남아 있으나 시각 효과가 없다.
+   콘텐츠는 항상 즉시 보인다. 애니메이션을 되살리지 말 것. */
 .reveal{opacity:1;transform:none}
-@media (prefers-reduced-motion:no-preference){
-  .reveal.in{animation:riseIn .6s var(--ease) both}
-  @keyframes riseIn{from{transform:translateY(18px)}to{transform:none}}
-}
 
 /* ---------- header / mega menu ---------- */
 .site-header{
@@ -305,7 +304,7 @@ p{margin:0}
 .wm{display:flex;align-items:center;gap:11px;flex:none}
 .wm-mark{flex:none}
 .wm-text{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.03em}
-.wm-text b{color:var(--brand);font-weight:800}
+.wm-text b{color:var(--brand-deep);font-weight:800}
 
 .nav-main{display:flex;align-items:center;gap:2px;height:100%}
 .nav-item{position:relative;height:100%;display:flex;align-items:center}
@@ -313,16 +312,16 @@ p{margin:0}
   display:flex;align-items:center;height:100%;padding:0 13px;font-weight:600;font-size:16px;
   color:var(--ink);position:relative;transition:color .2s;white-space:nowrap;
 }
-.nav-top::after{content:"";position:absolute;left:13px;right:13px;bottom:24px;height:2.5px;border-radius:2px;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .25s var(--ease)}
-.nav-item:hover .nav-top,.nav-item:focus-within .nav-top,.nav-top.active{color:var(--brand)}
-.nav-item:hover .nav-top::after,.nav-item:focus-within .nav-top::after,.nav-top.active::after{transform:scaleX(1)}
+.nav-top::after{content:"";position:absolute;left:13px;right:13px;bottom:24px;height:3px;border-radius:2px;background:var(--brand-deep);display:none}
+.nav-item:hover .nav-top,.nav-item:focus-within .nav-top,.nav-top.active{color:var(--brand-deep)}
+.nav-item:hover .nav-top::after,.nav-item:focus-within .nav-top::after,.nav-top.active::after{display:block}
 
 .mega{
-  position:absolute;top:calc(100% - 8px);left:50%;transform:translateX(-50%) translateY(8px);
-  min-width:230px;padding-top:10px;opacity:0;visibility:hidden;transition:.22s var(--ease);
+  position:absolute;top:calc(100% - 8px);left:50%;transform:translateX(-50%);
+  min-width:230px;padding-top:10px;opacity:0;visibility:hidden;transition:opacity .15s linear,visibility .15s linear;
 }
 /* 키보드 접근: hover 뿐 아니라 내부 링크가 포커스를 받을 때도 열린다 */
-.nav-item:hover .mega,.nav-item:focus-within .mega{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.nav-item:hover .mega,.nav-item:focus-within .mega{opacity:1;visibility:visible}
 .mega-inner{
   background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-lg);
   padding:10px;display:flex;flex-direction:column;
@@ -331,9 +330,9 @@ p{margin:0}
   display:flex;align-items:center;justify-content:space-between;gap:14px;
   padding:11px 14px;border-radius:10px;font-weight:600;font-size:15.5px;color:var(--body);transition:.16s;
 }
-.mega-inner a svg{width:16px;height:16px;color:var(--brand);opacity:0;transform:translateX(-4px);transition:.18s}
+.mega-inner a svg{width:16px;height:16px;color:var(--brand-deep);opacity:0}
 .mega-inner a:hover,.mega-inner a:focus-visible{background:var(--brand-soft);color:var(--brand-deep)}
-.mega-inner a:hover svg,.mega-inner a:focus-visible svg{opacity:1;transform:none}
+.mega-inner a:hover svg,.mega-inner a:focus-visible svg{opacity:1}
 
 .nav-cta{display:flex;align-items:center;gap:10px;flex:none}
 .nav-burger{display:none;width:44px;height:44px;border:none;background:transparent;cursor:pointer;flex-direction:column;gap:5px;align-items:center;justify-content:center;border-radius:10px}
@@ -346,7 +345,7 @@ p{margin:0}
   position:fixed;inset:calc(var(--switch-h) + 78px) 0 0;background:var(--cream);z-index:99;overflow-y:auto;
   padding:24px 24px 60px;animation:mfade .25s var(--ease);
 }
-@keyframes mfade{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@keyframes mfade{from{opacity:0}to{opacity:1}}
 .m-group{border-bottom:1px solid var(--line);padding:6px 0}
 .m-top{display:block;padding:14px 6px;font-size:19px;font-weight:800;color:var(--ink)}
 .m-sub{display:flex;flex-wrap:wrap;gap:8px;padding:0 6px 16px}
@@ -368,7 +367,7 @@ p{margin:0}
 .site-footer a:hover{color:#fff}
 .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.1)}
 .foot-brand .wm{color:#fff;font-weight:800;font-size:22px;letter-spacing:-.02em;margin-bottom:14px;display:flex;align-items:center;gap:10px}
-.foot-col h4{color:#fff;font-size:15px;margin-bottom:16px;letter-spacing:.01em}
+.foot-col h2{color:#fff;font-size:15px;margin-bottom:16px;letter-spacing:.01em}
 .foot-col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
 .foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;padding-top:26px;font-size:13.5px;color:#7fa291}
 .foot-contact{display:flex;flex-direction:column;gap:8px}
@@ -401,21 +400,21 @@ p{margin:0}
 .acct .acct-name{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:14px;color:var(--brand-deep);
   background:var(--brand-soft);padding:7px 13px;border-radius:999px;white-space:nowrap}
 .acct .acct-name svg{width:15px;height:15px}
-.btn-login{display:inline-flex;align-items:center;gap:6px;padding:9px 15px;border-radius:999px;border:1.5px solid var(--line-strong);
+.btn-login{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 15px;min-height:44px;min-width:44px;border-radius:999px;border:1.5px solid var(--line-strong);
   background:#fff;font-family:inherit;font-weight:700;font-size:14px;color:var(--brand-deep);cursor:pointer;transition:.18s;white-space:nowrap}
 .btn-login:hover{border-color:var(--brand);background:var(--brand-soft)}
 .btn-login svg{width:15px;height:15px}
 @media (max-width:520px){ .acct .acct-name span,.btn-login span{display:none} .acct .acct-name,.btn-login{padding:9px 11px} }
+.acct .acct-name{min-height:44px}
 
 /* modal */
 .modal{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;padding:24px}
 .modal.open{display:flex}
-.modal-backdrop{position:absolute;inset:0;background:rgba(16,49,33,.5);backdrop-filter:blur(3px);animation:mfade .2s var(--ease)}
+.modal-backdrop{position:absolute;inset:0;background:rgba(16,49,33,.6);animation:mfade .16s linear}
 .modal-card{position:relative;z-index:2;background:#fff;border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);
-  width:100%;max-width:460px;max-height:88vh;overflow:auto;padding:36px 34px;animation:mpop .24s var(--ease)}
+  width:100%;max-width:460px;max-height:88vh;overflow:auto;padding:36px 34px;animation:mfade .16s linear}
 .modal-card.lg{max-width:620px}
-@keyframes mpop{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
-.modal-card .m-close{position:absolute;top:16px;right:16px;width:38px;height:38px;border:none;border-radius:11px;background:var(--brand-tint);
+.modal-card .m-close{position:absolute;top:14px;right:14px;width:44px;height:44px;border:none;border-radius:11px;background:var(--brand-tint);
   color:var(--brand-deep);cursor:pointer;display:grid;place-items:center;transition:.16s}
 .modal-card .m-close:hover{background:var(--brand-soft)}
 .modal-card .m-close svg{width:20px;height:20px}
@@ -428,10 +427,10 @@ p{margin:0}
 .modal-actions .btn{flex:1;justify-content:center}
 
 /* write button + board extras */
-.btn-write{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;border:none;
+.btn-write{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 20px;min-height:44px;border-radius:999px;border:none;
   background:var(--brand);color:#fff;font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;transition:.18s;
   box-shadow:0 6px 18px rgba(42,129,89,.28)}
-.btn-write:hover{background:var(--brand-deep);transform:translateY(-2px)}
+.btn-write:hover{background:var(--brand-deep)}
 .btn-write svg{width:17px;height:17px}
 .board-row{cursor:pointer}
 .tag-pill.press{background:#e7e0f4;color:#5b3fa0}
@@ -464,11 +463,11 @@ p{margin:0}
 .site-switch .sw-item{
   flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
   font-size:clamp(12px,1.15vw,14.5px);font-weight:700;letter-spacing:-.01em;
-  color:rgba(255,255,255,.62);position:relative;transition:.22s var(--ease);
+  color:#d7e2dc;position:relative;transition:background-color .15s linear;
   padding:0 10px;text-align:center;line-height:1.2;
 }
 .site-switch .sw-item svg{width:15px;height:15px;flex:none}
-.site-switch .sw-item:hover{color:rgba(255,255,255,.92);background:rgba(255,255,255,.06)}
+.site-switch .sw-item:hover{color:#fff;background:rgba(255,255,255,.10);text-decoration:underline;text-underline-offset:3px}
 .site-switch .sw-item.on{background:var(--brand);color:#fff}
 .site-switch .sw-item.on::after{
   content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--accent);
@@ -482,80 +481,50 @@ p{margin:0}
 
 /* ============================================================
    진입 게이트 — 첫 방문 시 전체화면 좌/우 50% 분기 (site.js 주입)
+   보수적 톤: 단색 면 · 확대/부동 효과 없음 · 그라데이션·점패턴 없음
    ============================================================ */
-.gate{
-  position:fixed;inset:0;z-index:400;display:flex;
-  animation:gfade .35s var(--ease) both;
-}
-.gate.out{animation:gout .3s var(--ease) both;pointer-events:none}
-@keyframes gfade{from{opacity:0}to{opacity:1}}
-@keyframes gout{from{opacity:1}to{opacity:0}}
+.gate{position:fixed;inset:0;z-index:400;display:flex;background:var(--paper)}
 
 .gate-half{
-  flex:1;position:relative;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:14px;
-  padding:40px 26px;overflow:hidden;text-align:center;color:#fff;
-  transition:flex-grow .45s var(--ease),filter .45s var(--ease);
+  flex:1 1 50%;min-width:0;position:relative;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:16px;
+  padding:40px 26px;text-align:center;color:#fff;
 }
-.gate-half.coop{background:linear-gradient(155deg,#37a06d,#103127)}
-.gate-half.rehab{background:linear-gradient(155deg,#2f8bbd,#0d2c40)}
-.gate-half::before{
-  content:"";position:absolute;inset:0;
-  background:radial-gradient(58% 58% at 30% 22%,rgba(255,255,255,.30),transparent 62%),
-             radial-gradient(48% 48% at 82% 88%,var(--amber-500),transparent 58%);
-  mix-blend-mode:soft-light;opacity:.72;
-}
-.gate-half::after{
-  content:"";position:absolute;inset:0;opacity:.30;mix-blend-mode:overlay;
-  background-image:radial-gradient(rgba(255,255,255,.7) 1px,transparent 1.4px);background-size:16px 16px;
-}
-.gate-half > *{position:relative;z-index:2}
-/* 확대는 hover 에서만. 진입 시 첫 선택지에 포커스가 가므로 focus 로 넓히면
-   요구 사항인 정확한 좌우 50/50 이 깨진다(검증에서 758/682 로 어긋남을 확인). */
-.gate-half:hover{flex-grow:1.12}
-.gate:hover .gate-half:not(:hover){filter:saturate(.72) brightness(.86)}
+.gate-half.coop{background:#1f6242}   /* 사회적협동조합 — 그린 (흰 글자 7.3:1) */
+.gate-half.rehab{background:#17567b}  /* 직업재활센터 — 오션 블루 (흰 글자 7.9:1) */
+.gate-half + .gate-half{border-left:3px solid #fff}
+.gate-half:hover{background-color:#164b33}
+.gate-half.rehab:hover{background-color:#11405d}
 
-.gate-mark{width:56px;height:40px;margin-bottom:6px}
-.gate-name{font-size:clamp(21px,2.9vw,38px);font-weight:800;letter-spacing:-.035em;line-height:1.2;color:#fff}
-.gate-desc{font-size:clamp(13.5px,1.15vw,16px);color:rgba(255,255,255,.82);max-width:340px;line-height:1.65}
+.gate-mark{width:52px;height:38px;margin-bottom:4px}
+.gate-name{font-size:clamp(22px,2.8vw,36px);font-weight:800;letter-spacing:-.03em;line-height:1.3;color:#fff}
+.gate-desc{font-size:clamp(14px,1.1vw,16px);color:#fff;max-width:340px;line-height:1.7}
 .gate-go{
-  display:inline-flex;align-items:center;gap:8px;margin-top:12px;
-  padding:12px 24px;border-radius:999px;background:rgba(255,255,255,.16);
-  border:1.5px solid rgba(255,255,255,.42);backdrop-filter:blur(4px);
-  font-size:14.5px;font-weight:700;color:#fff;transition:.25s var(--ease);
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;
+  min-height:48px;padding:13px 26px;border-radius:999px;
+  background:#fff;border:2px solid #fff;
+  font-size:15.5px;font-weight:700;color:#1f6242;
 }
-.gate-half:hover .gate-go,.gate-half:focus-visible .gate-go{background:#fff;color:#16261f;border-color:#fff}
-.gate-go svg{width:16px;height:16px}
-.gate-tag{
-  position:absolute;top:0;left:0;right:0;padding:14px;font-size:12px;font-weight:700;
-  letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);z-index:2;
-}
+.gate-half.rehab .gate-go{color:#17567b}
+.gate-go svg{width:17px;height:17px}
 
 .gate-head{
-  position:absolute;top:0;left:0;right:0;z-index:5;padding:22px 26px;
+  position:absolute;top:0;left:0;right:0;z-index:5;padding:20px 26px;
   display:flex;align-items:center;justify-content:center;gap:12px;pointer-events:none;
 }
-.gate-head .t{font-size:14.5px;font-weight:700;color:rgba(255,255,255,.9);letter-spacing:-.01em}
+.gate-head .t{font-size:15px;font-weight:700;color:#fff}
 .gate-foot{
-  position:absolute;bottom:0;left:0;right:0;z-index:5;padding:20px 26px;text-align:center;
-  font-size:12.5px;color:rgba(255,255,255,.62);pointer-events:none;
+  position:absolute;bottom:0;left:0;right:0;z-index:5;padding:18px 26px;text-align:center;
+  font-size:13px;color:#fff;pointer-events:none;
 }
 
 @media (max-width:760px){
   .gate{flex-direction:column}
-  .gate-half{padding:34px 22px;gap:10px}
-  .gate-half:hover{flex-grow:1}
-  .gate:hover .gate-half:not(:hover){filter:none}
-  .gate-mark{width:44px;height:32px;margin-bottom:2px}
+  .gate-half{padding:30px 22px;gap:12px}
+  .gate-half + .gate-half{border-left:none;border-top:3px solid #fff}
+  .gate-mark{width:42px;height:31px;margin-bottom:0}
   .gate-desc{display:none}
-  .gate-go{margin-top:6px;padding:10px 20px}
   .gate-head,.gate-foot{display:none}
-}
-@media (prefers-reduced-motion:reduce){
-  .gate,.gate.out{animation:none}
-  .gate-half{transition:none}
-  .gate-half:hover{flex-grow:1}
-  .gate:hover .gate-half:not(:hover){filter:none}
 }
 
 /* ============================================================
@@ -586,7 +555,7 @@ html[data-site="rehab"]{
   --cream:#f6f8fa;
   --ink:#17222b;
   --body:#3b4650;
-  --muted:#6b7783;
+  --muted:#57626d;   /* KWCAG 5.3.1: 흰색 6.23 / #f6f8fa 5.85 : 1 */
   --line:#e2e9ee;
   --line-strong:#ccd7e0;
 
@@ -602,3 +571,83 @@ html[data-site="rehab"] .btn-primary:hover{box-shadow:0 12px 26px rgba(31,111,15
 html[data-site="rehab"] .btn-write{box-shadow:0 6px 18px rgba(31,111,158,.28)}
 html[data-site="rehab"] .site-header{background:rgba(246,248,250,.85)}
 html[data-site="rehab"] .modal-backdrop{background:rgba(13,44,64,.5)}
+
+/* ============================================================
+   접근성 유틸 — KWCAG 2.2
+   ============================================================ */
+
+/* 6.4.1 반복 영역 건너뛰기 — 평소 숨김, 키보드 포커스 시 최상단에 나타남 */
+.skip-nav{
+  position:absolute;left:0;top:0;z-index:500;
+  width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;
+}
+.skip-nav:focus{
+  width:auto;height:auto;overflow:visible;clip:auto;
+  display:inline-flex;align-items:center;
+  min-height:44px;padding:12px 22px;
+  background:var(--ink);color:#fff;font-weight:700;font-size:15.5px;
+  outline:3px solid var(--accent);outline-offset:-3px;
+}
+
+/* 시각적으로만 숨기고 스크린리더에는 읽히는 텍스트 */
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+}
+
+/* 본문 영역 — 건너뛰기 링크의 도착지. 포커스 링을 그리지 않는다 */
+main:focus{outline:none}
+
+/* 7.4.2 오류 정정 — 오류가 난 입력을 색 외의 단서(두꺼운 보더)로도 표시 */
+.field input[aria-invalid="true"],.field select[aria-invalid="true"],.field textarea[aria-invalid="true"]{
+  border-color:#c0392b;border-width:2px;
+}
+
+/* 5.2.1 색에 무관한 인식 — 필수는 기호(*) + 스크린리더용 "(필수 항목)" 텍스트 + required 속성 3중 제공 */
+
+/* 6.1.3 조작 가능 — 컨트롤 최소 크기 44×44 (페이지별 <style> 보다 뒤에 오도록 :where 로 구체성 0 유지 금지) */
+body .tab, body .fb, body .amt, body .seg button, body .pager button, body .amt-row button{
+  min-height:44px;min-width:44px;
+}
+body .pager button{width:44px;height:44px}
+
+/* ============================================================
+   CTA 배너 · 타일 — 이 클래스들은 index/family 에서 쓰이는데
+   정의가 없어 흰 글자가 흰 배경에 렌더되고 있었다(2026-08-17 발견).
+   단색 딥 그린 면으로 정의한다. 흰 글자 7.3:1.
+   ============================================================ */
+.cta-band{
+  background:var(--deep-800);border-radius:var(--radius-xl);
+  padding:64px 48px;color:#fff;
+}
+.cta-band h2,.cta-band h3{color:#fff}
+.cta-band .lead,.cta-band p{color:#fff}
+.cta-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.cta-tile{
+  display:block;background:rgba(255,255,255,.10);border:1.5px solid rgba(255,255,255,.34);
+  border-radius:var(--radius-lg);padding:28px 26px;color:#fff;transition:background-color .18s linear;
+}
+.cta-tile:hover,.cta-tile:focus-visible{background:rgba(255,255,255,.20);border-color:#fff}
+.cta-tile .ic{
+  width:50px;height:50px;border-radius:14px;display:grid;place-items:center;
+  background:rgba(255,255,255,.18);color:#fff;margin-bottom:18px;
+}
+.cta-tile .ic svg{width:25px;height:25px}
+.cta-tile h3{font-size:19px;font-weight:800;color:#fff;margin-bottom:8px}
+.cta-tile p{font-size:14.5px;line-height:1.65;color:#fff}
+@media (max-width:880px){ .cta-cards{grid-template-columns:1fr} .cta-band{padding:44px 26px} }
+
+/* ============================================================
+   파트너 로고 — 정적 그리드 (자동 스크롤 없음, KWCAG 6.2.2)
+   ============================================================ */
+.logo-grid{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:14px;list-style:none;margin:0;padding:0;
+}
+.logo-item{
+  display:flex;align-items:center;justify-content:center;min-height:78px;padding:14px 12px;
+  background:#fff;border:1px solid var(--line-strong);border-radius:var(--radius-sm);
+  font-weight:700;font-size:14.5px;color:var(--body);text-align:center;line-height:1.4;
+}
+.logo-item img{max-height:44px;width:auto;object-fit:contain}
+@media (max-width:980px){ .logo-grid{grid-template-columns:repeat(3,1fr)} }
+@media (max-width:560px){ .logo-grid{grid-template-columns:repeat(2,1fr)} }

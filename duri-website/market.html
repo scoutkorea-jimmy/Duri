@@ -31,7 +31,7 @@
 </style>
 </head>
 <body>
-
+<main id="main">
 <section class="page-hero">
   <div class="container">
     <div class="crumb"><a href="index.html">홈</a> <span>›</span> 두리손잡고 마켓</div>
@@ -103,22 +103,23 @@
         </div>
         <p style="margin-top:24px;font-weight:800;color:var(--brand-deep);font-size:20px">구매 문의 · 031-853-3359</p>
       </div>
-      <form class="card card-pad-lg reveal" data-delay=".08s" onsubmit="return false">
+      <form class="card card-pad-lg reveal" data-delay=".08s" novalidate>
         <h3 class="h3" style="margin-bottom:20px">제품 구매 문의</h3>
         <div class="form-grid">
-          <div class="field"><label>성함 / 기관명 <span class="req">*</span></label><input type="text" placeholder="홍길동 / ○○기관"></div>
-          <div class="field"><label>연락처 <span class="req">*</span></label><input type="tel" placeholder="010-0000-0000"></div>
+          <div class="field"><label for="market-f1">성함 / 기관명 <span class="req" aria-hidden="true">*</span><span class="sr-only">(필수 항목)</span></label><input id="market-f1" required aria-required="true" type="text" placeholder="홍길동 / ○○기관"></div>
+          <div class="field"><label for="market-f2">연락처 <span class="req" aria-hidden="true">*</span><span class="sr-only">(필수 항목)</span></label><input id="market-f2" required aria-required="true" type="tel" placeholder="010-0000-0000"></div>
         </div>
         <div class="form-grid">
-          <div class="field"><label>제품</label><select><option>두리손잡고 점보롤</option><option>두리손잡고 페이퍼타올</option><option>두리손잡고 각티슈</option><option>혼합 / 기타</option></select></div>
-          <div class="field"><label>수량</label><input type="text" placeholder="예) 100박스"></div>
+          <div class="field"><label for="market-f3">제품</label><select id="market-f3"><option>두리손잡고 점보롤</option><option>두리손잡고 페이퍼타올</option><option>두리손잡고 각티슈</option><option>혼합 / 기타</option></select></div>
+          <div class="field"><label for="market-f4">수량</label><input id="market-f4" type="text" placeholder="예) 100박스"></div>
         </div>
-        <div class="field"><label>문의 내용</label><textarea placeholder="배송지, 희망 일정 등을 적어주세요."></textarea></div>
+        <div class="field"><label for="market-f5">문의 내용</label><textarea id="market-f5" placeholder="배송지, 희망 일정 등을 적어주세요."></textarea></div>
         <button class="btn btn-primary btn-lg" style="width:100%">구매 문의 보내기</button>
       </form>
     </div>
   </div>
 </section>
+</main>
 
 <script src="assets/site.js"></script>
 </body>

@@ -9,17 +9,16 @@
 /* ============ hero ============ */
 .hero{position:relative;overflow:hidden;background:var(--brand-tint)}
 .hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
-.hero-bg .b{position:absolute;border-radius:50%;filter:blur(10px);opacity:.55;animation:float 16s ease-in-out infinite}
+.hero-bg .b{position:absolute;border-radius:50%;filter:blur(10px);opacity:.5}
 .hero-bg .b1{width:520px;height:520px;background:radial-gradient(circle at 30% 30%,var(--green-300),var(--green-500));top:-160px;right:-100px}
-.hero-bg .b2{width:420px;height:420px;background:radial-gradient(circle at 30% 30%,var(--amber-200),var(--green-200));bottom:-180px;left:-120px;animation-delay:-5s}
-.hero-bg .b3{width:300px;height:300px;background:radial-gradient(circle at 40% 40%,var(--green-200),transparent 70%);top:30%;left:42%;animation-delay:-9s}
+.hero-bg .b2{width:420px;height:420px;background:radial-gradient(circle at 30% 30%,var(--amber-200),var(--green-200));bottom:-180px;left:-120px}
+.hero-bg .b3{width:300px;height:300px;background:radial-gradient(circle at 40% 40%,var(--green-200),transparent 70%);top:30%;left:42%}
 .hero-bg .grain{position:absolute;inset:0;opacity:.5;background-image:radial-gradient(rgba(16,49,33,.06) 1px,transparent 1.3px);background-size:18px 18px}
-@keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(20px,-26px) scale(1.06)}}
 
 .hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:96px 0 104px;min-height:80vh}
 .hero-copy .eyebrow{margin-bottom:22px}
 .hero h1{font-size:clamp(40px,5.4vw,68px);font-weight:800;line-height:1.1;letter-spacing:-.04em;color:var(--ink)}
-.hero h1 .hl{color:var(--brand);position:relative;white-space:nowrap}
+.hero h1 .hl{color:var(--brand-deep);position:relative;white-space:nowrap}
 .hero h1 .hl::after{content:"";position:absolute;left:-2px;right:-2px;bottom:.08em;height:.28em;background:var(--accent);opacity:.34;border-radius:6px;z-index:-1}
 .hero .lead{margin-top:24px;max-width:480px}
 .hero .btn-row{margin-top:36px}
@@ -38,16 +37,15 @@
 .float-card .ic svg{width:24px;height:24px}
 .float-card .t{font-size:13px;color:var(--muted);font-weight:600}
 .float-card .v{font-size:18px;font-weight:800;color:var(--ink);letter-spacing:-.02em}
-.fc-1{left:-32px;top:18%;animation:bob 6s ease-in-out infinite}
-.fc-2{right:-26px;bottom:16%;animation:bob 6s ease-in-out infinite;animation-delay:-3s}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.fc-1{left:-32px;top:18%}
+.fc-2{right:-26px;bottom:16%}
 
 /* ============ news strip ============ */
 .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
 .news-card{display:flex;flex-direction:column}
 .news-card .media{min-height:200px;border-radius:0}
 .news-card .nc-body{padding:28px 28px 30px;display:flex;flex-direction:column;flex:1}
-.news-card .tag{font-size:13px;font-weight:700;color:var(--brand);letter-spacing:.02em;margin-bottom:12px}
+.news-card .tag{font-size:13px;font-weight:700;color:var(--brand-deep);letter-spacing:.02em;margin-bottom:12px}
 .news-card h3{font-size:20px;line-height:1.4;margin-bottom:auto}
 .news-card .link{margin-top:22px}
 
@@ -68,48 +66,12 @@
 .prog-item h3{font-size:18px;margin-bottom:6px}
 .prog-item p{font-size:15px;color:var(--muted);line-height:1.6}
 
-/* ============ partners (logo marquee) ============ */
-.partners-head{font-weight:700;letter-spacing:.04em;margin-bottom:32px;font-size:14px}
-.logo-marquee{position:relative;overflow:hidden;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
-          mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
-.logo-track{display:flex;align-items:center;gap:20px;width:max-content;will-change:transform;animation:logo-scroll 38s linear infinite}
-.logo-marquee:hover .logo-track{animation-play-state:paused}
-@keyframes logo-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.logo-item{flex:none;display:flex;align-items:center;justify-content:center;height:84px;min-width:210px;padding:0 34px;
-  background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-sm);
-  font-weight:800;font-size:18px;letter-spacing:-.01em;color:var(--muted);
-  filter:grayscale(1);opacity:.8;transition:.25s var(--ease)}
-.logo-item:hover{filter:none;opacity:1;color:var(--brand-deep);border-color:var(--green-200);box-shadow:var(--shadow)}
-.logo-item img{max-height:46px;max-width:150px;width:auto;object-fit:contain;display:block}
-@media (prefers-reduced-motion:reduce){.logo-track{animation:none}}
-
-/* ============ cta band ============ */
-.cta-band{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--brand-deep),var(--brand));border-radius:var(--radius-xl);padding:64px 60px;color:#fff}
-.cta-band::after{content:"";position:absolute;inset:0;opacity:.4;background:radial-gradient(45% 60% at 90% 15%,rgba(255,255,255,.2),transparent 60%),radial-gradient(40% 60% at 5% 95%,rgba(16,49,33,.5),transparent 60%)}
-.cta-band > *{position:relative;z-index:2}
-.cta-band h2{color:#fff}
-.cta-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px}
-.cta-tile{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:var(--radius);padding:26px;transition:.25s var(--ease);backdrop-filter:blur(4px)}
-.cta-tile:hover{background:rgba(255,255,255,.2);transform:translateY(-4px)}
-.cta-tile .ic{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;background:rgba(255,255,255,.2);margin-bottom:16px}
-.cta-tile .ic svg{width:26px;height:26px;color:#fff}
-.cta-tile h3{color:#fff;font-size:19px;margin-bottom:8px}
-.cta-tile p{color:rgba(255,255,255,.85);font-size:15px;line-height:1.6}
-
-@media (max-width:880px){
-  .hero-inner{grid-template-columns:1fr;text-align:center;justify-items:center;min-height:auto;padding:64px 0 72px}
-  .hero-visual{display:none}
-  .hero .lead{margin-left:auto;margin-right:auto}
-  .hero .eyebrow,.hero .btn-row,.hero-meta{justify-content:center}
-  .news-grid,.cta-cards{grid-template-columns:1fr}
-  .prog-wrap{grid-template-columns:1fr;gap:36px}
-  .cta-band{padding:44px 28px}
-}
+/* ============ partners (정적 그리드 — 자동 스크롤 없음) ============ */
+.partners-head{font-size:14.5px;font-weight:700;letter-spacing:.02em;margin-bottom:22px}
 </style>
 </head>
 <body>
-
+<main id="main">
 <!-- ===================== HERO ===================== -->
 <section class="hero" data-screen-label="홈 히어로">
   <div class="hero-bg" aria-hidden="true">
@@ -123,7 +85,7 @@
         <h1>당신의 가능성,<br><span class="hl">우리가 함께합니다</span></h1>
         <p class="lead">두리손잡고는 발달장애인과 지역사회가 서로의 손을 맞잡고, 모두가 존중받는 따뜻한 공동체를 만들어갑니다.</p>
         <div class="btn-row">
-          <a class="btn btn-primary btn-lg" href="about.html">두리손잡고 소개<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-primary btn-lg" href="about.html">두리손잡고 소개<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           <a class="btn btn-ghost btn-lg" href="family.html">후원·가족되기</a>
         </div>
         <div class="hero-meta">
@@ -135,11 +97,11 @@
       <div class="hero-visual reveal" data-delay=".1s">
         <div class="hero-panel"></div>
         <div class="float-card fc-1">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22a8 8 0 0 1 16 0"/><path d="M14 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/><path d="M19 8v6M22 11h-6"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 22a8 8 0 0 1 16 0"/><path d="M14 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/><path d="M19 8v6M22 11h-6"/></svg></div>
           <div><div class="t">함께하는 가족</div><div class="v">손잡고 공동체</div></div>
         </div>
         <div class="float-card fc-2">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C16 5 17 4.5 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11 20A7 7 0 0 1 9.8 6.1C16 5 17 4.5 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></div>
           <div><div class="t">친환경 생산</div><div class="v">점보롤 · 페이퍼타올</div></div>
         </div>
       </div>
@@ -160,7 +122,7 @@
         <div class="nc-body">
           <div class="tag">두리손잡고 새소식</div>
           <h3>모두가 함께 만들어가는<br>따뜻한 공간, 두리손잡고의 새소식</h3>
-          <span class="link">새소식 보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path class="arrow" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <span class="link">새소식 보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path class="arrow" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </div>
       </a>
       <a class="card news-card reveal" data-delay=".08s" href="gallery.html">
@@ -168,7 +130,7 @@
         <div class="nc-body">
           <div class="tag">두리손잡고 갤러리</div>
           <h3>두리손잡고 가족들의 가슴<br>따스해지는 사진 갤러리</h3>
-          <span class="link">갤러리 보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path class="arrow" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <span class="link">갤러리 보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path class="arrow" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </div>
       </a>
       <a class="card news-card reveal" data-delay=".16s" href="notice.html">
@@ -176,7 +138,7 @@
         <div class="nc-body">
           <div class="tag">언론 속 두리손잡고</div>
           <h3>따뜻한 세상을 만들어 나가는<br>두리손잡고의 발자취</h3>
-          <span class="link">언론 속 두리손잡고 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path class="arrow" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <span class="link">언론 속 두리손잡고 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path class="arrow" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </div>
       </a>
     </div>
@@ -191,7 +153,7 @@
         <span class="eyebrow">DURI PRODUCTS</span>
         <h2 class="h2" style="margin-top:14px">근로자들이 손수 만드는<br>친환경 제품과 프로그램</h2>
       </div>
-      <a class="btn btn-outline" href="products.html">전체 제품 보기<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-outline" href="products.html">전체 제품 보기<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
     <div class="grid grid-3">
       <a class="card prod-card reveal" href="products.html">
@@ -200,7 +162,7 @@
           <span class="badge">친환경 인증</span>
           <h3>두리손잡고 점보롤</h3>
           <p>두리손잡고 근로자들이 함께 만드는 친환경 인증 점보롤 화장지</p>
-          <span class="link">더 알아보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path class="arrow" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <span class="link">더 알아보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path class="arrow" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </div>
       </a>
       <a class="card prod-card reveal" data-delay=".08s" href="products.html">
@@ -209,7 +171,7 @@
           <span class="badge">위생·흡수력</span>
           <h3>두리손잡고 페이퍼타올</h3>
           <p>흡수력이 뛰어나고 위생적인 두리손잡고만의 친환경 페이퍼타올</p>
-          <span class="link">더 알아보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path class="arrow" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <span class="link">더 알아보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path class="arrow" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </div>
       </a>
       <a class="card prod-card reveal" data-delay=".16s" href="internship.html">
@@ -218,7 +180,7 @@
           <span class="badge badge--amber">실습생 모집</span>
           <h3>사회복지 실습생 프로그램</h3>
           <p>미래의 사회복지 실습생의 다양한 실습활동 지원을 위한 프로그램</p>
-          <span class="link">신청하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path class="arrow" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <span class="link">신청하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path class="arrow" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </div>
       </a>
     </div>
@@ -233,7 +195,7 @@
         <span class="eyebrow">PROGRAMS</span>
         <h2 class="h2" style="margin-top:14px">두리손잡고<br>보호작업장에서는</h2>
         <p class="lead" style="margin-top:20px;color:var(--muted)">건강한 사회생활을 준비하고, 직무 능력을 키우며, 지역사회 안에서 자립을 향해 한 걸음씩 나아갑니다.</p>
-        <a class="btn btn-primary" style="margin-top:28px" href="business.html">사업안내 및 비전<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-primary" style="margin-top:28px" href="business.html">사업안내 및 비전<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
       <div class="prog-list">
         <div class="prog-item reveal"><div class="num-badge">01</div><div><h3>문제해결훈련</h3><p>인권교육, 일상생활훈련, 대인관계 및 안전교육, 예방교육, 성교육 등을 통해 건강한 사회생활을 준비합니다.</p></div></div>
@@ -250,22 +212,22 @@
 <section class="section section--cream" data-screen-label="가족되기 CTA">
   <div class="container">
     <div class="cta-band reveal">
-      <span class="eyebrow eyebrow--center" style="color:rgba(255,255,255,.9);justify-content:center"><span style="background:rgba(255,255,255,.9)"></span></span>
+      <span class="eyebrow eyebrow--center" style="color:#fff;justify-content:center"><span style="background:#fff"></span></span>
       <div class="center maxw mx-auto">
         <h2 class="h2">여러분의 따뜻한 나눔이<br>“더 큰 희망”을 만들어 냅니다</h2>
-        <p class="lead" style="color:rgba(255,255,255,.88);margin-top:16px">두리손잡고의 가족이 되어, 모두가 어울려 살아가는 사회를 함께 만들어주세요.</p>
+        <p class="lead" style="margin-top:16px">두리손잡고의 가족이 되어, 모두가 어울려 살아가는 사회를 함께 만들어주세요.</p>
       </div>
       <div class="cta-cards">
         <a class="cta-tile" href="family.html">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5.5a5 5 0 0 0-7 0L12 6l-.5-.5a5 5 0 1 0-7 7l7.5 7.5 7.5-7.5a5 5 0 0 0 0-7Z"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 5.5a5 5 0 0 0-7 0L12 6l-.5-.5a5 5 0 1 0-7 7l7.5 7.5 7.5-7.5a5 5 0 0 0 0-7Z"/></svg></div>
           <h3>일시·정기후원</h3><p>한 번 또는 매월 정기적으로 소중한 후원에 참여해 보세요.</p>
         </a>
         <a class="cta-tile" href="volunteer.html">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13A4 4 0 0 1 16 11"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13A4 4 0 0 1 16 11"/></svg></div>
           <h3>자원봉사 신청</h3><p>재능나눔, 활동봉사 등 다양한 방식으로 함께할 수 있습니다.</p>
         </a>
         <a class="cta-tile" href="internship.html">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
           <h3>실습 신청</h3><p>미래의 사회복지 실습생을 위한 현장 경험을 지원합니다.</p>
         </a>
       </div>
@@ -277,20 +239,20 @@
 <section class="section--tight section--paper" data-screen-label="함께하는 곳">
   <div class="container">
     <p class="center muted partners-head">두리손잡고와 함께하는 곳</p>
-    <div class="logo-marquee reveal" aria-label="두리손잡고와 함께하는 기관·기업">
-      <div class="logo-track" id="logoTrack"></div>
-    </div>
+    <ul class="logo-grid" id="logoGrid"></ul>
   </div>
 </section>
+</main>
 
 <script src="assets/site.js"></script>
 <script>
-/* 파트너 로고 마퀴 — 순서를 랜덤 셔플한 뒤 끊김 없이 가로로 무한 스크롤.
+/* 파트너 로고 — 정적 그리드. 자동으로 움직이지 않는다(KWCAG 6.2.2).
+   순서는 고정한다: 매 방문마다 순서가 바뀌면 화면 낭독 사용자가 위치를 기억할 수 없다.
    실제 로고 이미지가 준비되면 아래 PARTNERS 항목에 logo 경로만 추가하면
    자동으로 이미지로 표시됩니다. 예) { name:"고려홍삼", logo:"assets/logos/koryo.png" } */
 (function(){
-  var track = document.getElementById("logoTrack");
-  if(!track) return;
+  var grid = document.getElementById("logoGrid");
+  if(!grid) return;
   var PARTNERS = [
     { name:"고려홍삼" },
     { name:"NH 농협" },
@@ -299,14 +261,13 @@
     { name:"의정부시" },
     { name:"한국장애인고용공단" }
   ];
-  // 랜덤 셔플(Fisher–Yates)
-  for(var i=PARTNERS.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=PARTNERS[i]; PARTNERS[i]=PARTNERS[j]; PARTNERS[j]=t; }
   function cell(p){
-    var inner = p.logo ? '<img src="'+p.logo+'" alt="'+p.name+'">' : p.name;
-    return '<div class="logo-item" title="'+p.name+'">'+inner+'</div>';
+    var inner = p.logo
+      ? '<img src="'+p.logo+'" alt="'+p.name+'">'
+      : '<span>'+p.name+'</span>';
+    return '<li class="logo-item">'+inner+'</li>';
   }
-  var set = PARTNERS.map(cell).join("");
-  track.innerHTML = set + set; // 이음새 없는 무한 루프를 위해 동일 세트 2회 복제
+  grid.innerHTML = PARTNERS.map(cell).join("");
 })();
 </script>
 </body>

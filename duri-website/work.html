@@ -10,7 +10,7 @@
 .intro-split .media{min-height:380px;border-radius:var(--radius-xl)}
 .info-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:30px}
 .info-cards .ic{background:var(--brand-tint);border-radius:14px;padding:22px 24px}
-.info-cards .ic .k{font-size:13px;color:var(--brand);font-weight:700;letter-spacing:.04em}
+.info-cards .ic .k{font-size:13px;color:var(--brand-deep);font-weight:700;letter-spacing:.04em}
 .info-cards .ic .v{font-size:17px;font-weight:700;color:var(--ink);margin-top:6px}
 .proc{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
 .proc-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column}
@@ -30,7 +30,7 @@
 </style>
 </head>
 <body>
-
+<main id="main">
 <section class="page-hero">
   <div class="container">
     <div class="crumb"><a href="index.html">홈</a> <span>›</span> 사업안내 <span>›</span> 임가공 사업</div>
@@ -96,10 +96,11 @@
       </div>
     </div>
     <div class="center" style="margin-top:46px">
-      <a class="btn btn-primary btn-lg reveal" href="products.html">두리손잡고 화장지 보러가기<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-primary btn-lg reveal" href="products.html">두리손잡고 화장지 보러가기<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
 </section>
+</main>
 
 <script src="assets/site.js"></script>
 </body>

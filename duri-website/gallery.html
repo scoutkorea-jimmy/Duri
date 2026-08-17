@@ -8,14 +8,14 @@
 <style>
 .filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:34px}
 .fb{padding:10px 20px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-weight:700;font-size:14.5px;color:var(--body);cursor:pointer;transition:.18s}
-.fb.active{background:var(--brand);border-color:var(--brand);color:#fff}
+.fb.active{background:var(--brand);border-color:var(--brand-deep);color:#fff}
 .masonry{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:18px}
 .tile{position:relative;border-radius:var(--radius);overflow:hidden;cursor:pointer}
 .tile .ph{position:absolute;inset:0}
 .tile .ph::after{content:"";position:absolute;inset:0;opacity:.45;mix-blend-mode:overlay;background-image:radial-gradient(rgba(255,255,255,.7) 1px,transparent 1.4px);background-size:14px 14px}
-.tile .cap{position:absolute;left:0;right:0;bottom:0;padding:16px;color:#fff;font-weight:700;font-size:15px;z-index:2;background:linear-gradient(transparent,rgba(16,49,33,.72));transform:translateY(6px);opacity:.92;transition:.25s}
-.tile:hover .cap{transform:none;opacity:1}
-.tile .yr{position:absolute;top:14px;left:14px;z-index:2;font-size:12px;font-weight:700;color:#fff;background:rgba(0,0,0,.25);padding:4px 10px;border-radius:999px;backdrop-filter:blur(4px)}
+.tile .cap{position:absolute;left:0;right:0;bottom:0;padding:16px;color:#fff;font-weight:700;font-size:15px;z-index:2;background:linear-gradient(rgba(16,49,33,.25),rgba(16,49,33,.86))}
+
+.tile .yr{position:absolute;top:14px;left:14px;z-index:2;font-size:12px;font-weight:700;color:#fff;background:rgba(16,49,33,.72);padding:4px 10px;border-radius:999px;backdrop-filter:blur(4px)}
 .tile.w2{grid-column:span 2}
 .tile.h2{grid-row:span 2}
 .g1{background:linear-gradient(135deg,var(--green-300),var(--green-600))}
@@ -28,7 +28,7 @@
 </style>
 </head>
 <body>
-
+<main id="main">
 <section class="page-hero">
   <div class="container">
     <div class="crumb"><a href="index.html">홈</a> <span>›</span> 두리손잡고 소식 <span>›</span> 사진갤러리</div>
@@ -40,7 +40,7 @@
 
 <section class="section section--paper">
   <div class="container">
-    <div class="filter-row reveal">
+    <div class="filter-row reveal" role="radiogroup" aria-label="사진 분류">
       <button class="fb active">전체</button>
       <button class="fb">작업 현장</button>
       <button class="fb">프로그램 활동</button>
@@ -49,22 +49,23 @@
     </div>
 
     <div class="masonry reveal">
-      <div class="tile w2 h2" data-cat="작업 현장"><div class="ph g1"></div><span class="yr">2024</span><span class="cap">보호작업장 작업 현장</span></div>
-      <div class="tile" data-cat="생산 설비"><div class="ph g3"></div><span class="cap">점보롤 생산 공정</span></div>
-      <div class="tile" data-cat="작업 현장"><div class="ph g4"></div><span class="cap">검수 · 포장 작업</span></div>
-      <div class="tile w2" data-cat="프로그램 활동"><div class="ph g2"></div><span class="yr">2023</span><span class="cap">CHALLENGE 체육교실</span></div>
-      <div class="tile h2" data-cat="행사 · 나들이"><div class="ph g5"></div><span class="cap">숲체험 나들이</span></div>
-      <div class="tile" data-cat="프로그램 활동"><div class="ph g4"></div><span class="cap">보호자 간담회</span></div>
-      <div class="tile" data-cat="작업 현장"><div class="ph g1"></div><span class="cap">직무 적응 훈련</span></div>
-      <div class="tile w2" data-cat="행사 · 나들이"><div class="ph g3"></div><span class="cap">자원봉사 활동</span></div>
-      <div class="tile" data-cat="생산 설비"><div class="ph g2"></div><span class="cap">생산 설비 점검</span></div>
-      <div class="tile" data-cat="프로그램 활동"><div class="ph g5"></div><span class="cap">CHALLENGE COOK</span></div>
-      <div class="tile w2" data-cat="행사 · 나들이"><div class="ph g1"></div><span class="yr">2025</span><span class="cap">두리손잡고 가족 한마당</span></div>
-      <div class="tile" data-cat="생산 설비"><div class="ph g4"></div><span class="cap">페이퍼타올 적재</span></div>
+      <div class="tile w2 h2" data-cat="작업 현장" role="button" tabindex="0" aria-label="보호작업장 작업 현장 — 크게 보기"><div class="ph g1"></div><span class="yr">2024</span><span class="cap">보호작업장 작업 현장</span></div>
+      <div class="tile" role="button" tabindex="0" aria-label="점보롤 생산 공정 — 크게 보기" data-cat="생산 설비"><div class="ph g3"></div><span class="cap">점보롤 생산 공정</span></div>
+      <div class="tile" role="button" tabindex="0" aria-label="검수 · 포장 작업 — 크게 보기" data-cat="작업 현장"><div class="ph g4"></div><span class="cap">검수 · 포장 작업</span></div>
+      <div class="tile w2" data-cat="프로그램 활동" role="button" tabindex="0" aria-label="CHALLENGE 체육교실 — 크게 보기"><div class="ph g2"></div><span class="yr">2023</span><span class="cap">CHALLENGE 체육교실</span></div>
+      <div class="tile h2" data-cat="행사 · 나들이" role="button" tabindex="0" aria-label="숲체험 나들이 — 크게 보기"><div class="ph g5"></div><span class="cap">숲체험 나들이</span></div>
+      <div class="tile" role="button" tabindex="0" aria-label="보호자 간담회 — 크게 보기" data-cat="프로그램 활동"><div class="ph g4"></div><span class="cap">보호자 간담회</span></div>
+      <div class="tile" role="button" tabindex="0" aria-label="직무 적응 훈련 — 크게 보기" data-cat="작업 현장"><div class="ph g1"></div><span class="cap">직무 적응 훈련</span></div>
+      <div class="tile w2" data-cat="행사 · 나들이" role="button" tabindex="0" aria-label="자원봉사 활동 — 크게 보기"><div class="ph g3"></div><span class="cap">자원봉사 활동</span></div>
+      <div class="tile" role="button" tabindex="0" aria-label="생산 설비 점검 — 크게 보기" data-cat="생산 설비"><div class="ph g2"></div><span class="cap">생산 설비 점검</span></div>
+      <div class="tile" role="button" tabindex="0" aria-label="CHALLENGE COOK — 크게 보기" data-cat="프로그램 활동"><div class="ph g5"></div><span class="cap">CHALLENGE COOK</span></div>
+      <div class="tile w2" data-cat="행사 · 나들이" role="button" tabindex="0" aria-label="두리손잡고 가족 한마당 — 크게 보기"><div class="ph g1"></div><span class="yr">2025</span><span class="cap">두리손잡고 가족 한마당</span></div>
+      <div class="tile" role="button" tabindex="0" aria-label="페이퍼타올 적재 — 크게 보기" data-cat="생산 설비"><div class="ph g4"></div><span class="cap">페이퍼타올 적재</span></div>
     </div>
     <p class="center muted reveal" style="margin-top:30px;font-size:14px">※ 갤러리 이미지는 추후 실제 사진으로 교체됩니다. (장애우 사진 10장 내외, 작업·설비 사진 등)</p>
   </div>
 </section>
+</main>
 
 <script src="assets/site.js"></script>
 </body>
