@@ -247,7 +247,7 @@ p{margin:0}
 .page-hero h1{color:#fff;font-size:clamp(34px,4.4vw,52px);font-weight:800;letter-spacing:-.03em}
 .page-hero p{margin-top:18px;font-size:clamp(17px,1.5vw,20px);color:rgba(255,255,255,.9);max-width:680px}
 .page-hero .pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
-.page-hero .pills .chip{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.25);color:#fff;backdrop-filter:blur(4px)}
+.page-hero .pills .chip{background:rgba(255,255,255,.18);border-color:transparent;color:#fff}
 
 /* ---------- list / feature rows ---------- */
 .feature{display:flex;gap:18px;align-items:flex-start}
@@ -536,7 +536,7 @@ p{margin:0}
 .gate-go{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;
   min-height:48px;padding:13px 26px;border-radius:999px;
-  background:#fff;border:2px solid #fff;
+  background:#fff;border:none;
   font-size:15.5px;font-weight:700;color:#1f6242;
 }
 .gate-half.rehab .gate-go{color:#17567b}
@@ -552,12 +552,13 @@ p{margin:0}
 .gate-close{
   position:absolute;top:16px;right:20px;z-index:6;
   display:inline-flex;align-items:center;justify-content:center;gap:7px;
-  min-height:44px;padding:10px 18px;border-radius:999px;
-  background:rgba(255,255,255,.14);border:1.5px solid #fff;
-  font-family:inherit;font-size:14.5px;font-weight:700;color:#fff;cursor:pointer;
+  min-height:44px;padding:11px 20px;border-radius:999px;
+  background:#fff;border:none;
+  font-family:inherit;font-size:14.5px;font-weight:700;color:#1f6242;cursor:pointer;
   transition:background-color .15s linear;
 }
-.gate-close:hover{background:#fff;color:#16261f}
+.gate-half.rehab ~ .gate-close,.gate-close{color:#1f6242}
+.gate-close:hover{background:#e4f4ea}
 .gate-close svg{width:16px;height:16px}
 .gate-foot{
   position:absolute;bottom:0;left:0;right:0;z-index:5;padding:18px 26px;text-align:center;
@@ -637,6 +638,11 @@ html[data-site="rehab"] .modal-backdrop{background:rgba(13,44,64,.5)}
   outline:3px solid var(--accent);outline-offset:-3px;
 }
 
+/* 절대 쪼개면 안 되는 덩어리 — 고유명사("두리손잡고"), 전화번호, 단위가 붙은 수치 등.
+   한글 줄바꿈 규칙(word-break:keep-all)이 어절은 지켜주지만, 사이에 ·, -, ( ) 가
+   들어간 덩어리는 그 기호에서 끊긴다. 그런 곳에 이 클래스를 쓴다. */
+.nb{white-space:nowrap}
+
 /* 시각적으로만 숨기고 스크린리더에는 읽히는 텍스트 */
 .sr-only{
   position:absolute;width:1px;height:1px;padding:0;margin:-1px;
@@ -672,10 +678,10 @@ body .pager button{width:44px;height:44px}
 .cta-band .lead,.cta-band p{color:#fff}
 .cta-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
 .cta-tile{
-  display:block;background:rgba(255,255,255,.10);border:1.5px solid rgba(255,255,255,.34);
+  display:block;background:rgba(255,255,255,.14);border:none;
   border-radius:var(--radius-lg);padding:28px 26px;color:#fff;transition:background-color .18s linear;
 }
-.cta-tile:hover,.cta-tile:focus-visible{background:rgba(255,255,255,.20);border-color:#fff}
+.cta-tile:hover,.cta-tile:focus-visible{background:rgba(255,255,255,.24)}
 .cta-tile .ic{
   width:50px;height:50px;border-radius:14px;display:grid;place-items:center;
   background:rgba(255,255,255,.18);color:#fff;margin-bottom:18px;

@@ -12,12 +12,14 @@
     coop: {
       full:"사회적협동조합 두리손잡고", short:"조합", line1:"두리손잡고", line2:"사회적협동조합",
       home:"index.html", key:"#2a8159",
-      desc:"임가공 사업과 친환경 화장지 생산, 후원·자원봉사로 함께하는 길"
+      // 줄바꿈 위치를 쉼표로 고정한다. 자동 줄바꿈에 맡기면 "…함께하는 / 길" 처럼
+      // 한 음절만 남는다(1100·900px 실측). 문구를 고칠 때 <br> 를 함께 옮길 것.
+      desc:"임가공 사업과 친환경 화장지 생산,<br>후원·자원봉사로 함께하는 길"
     },
     rehab:{
       full:"두리손잡고 직업재활센터", short:"직업재활센터", line1:"두리손잡고", line2:"직업재활센터",
       home:"rehab.html", key:"#1f6f9e",
-      desc:"직업재활·주간보호 프로그램과 실습 안내"
+      desc:"<span class=\"nb\">직업재활·주간보호</span> 프로그램과<br>이용·실습 안내"
     }
   };
   const ME = SITES[SITE];
@@ -182,7 +184,7 @@
           <p style="max-width:300px;line-height:1.7">서로의 손을 맞잡고 함께 나아가는 길. 모두가 존중받는 따뜻한 공동체를 만들어갑니다.</p>
           <div class="foot-contact" style="margin-top:22px">
             <div class="row">${ICON.pin}<span>경기도 의정부시 오목로 225번길 100, 3층 (민락동, CY타워)</span></div>
-            <div class="row">${ICON.phone}<span>주간센터 031-853-3359 · 직업재활센터 031-853-3360</span></div>
+            <div class="row">${ICON.phone}<span><span class="nb">주간센터 031-853-3359</span> · <span class="nb">직업재활센터 031-853-3360</span></span></div>
           </div>
         </div>`;
   const FOOT_BOTTOM = `

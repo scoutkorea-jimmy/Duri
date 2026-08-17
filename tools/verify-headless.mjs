@@ -274,7 +274,95 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
     bad.length ? bad.slice(0, 5).join(" | ") : "15페이지 위반 0건");
   ok("한글 줄바꿈: keep-all 로 인한 가로 스크롤 없음(360px · 320px)", overflow.length === 0,
     overflow.length ? overflow.slice(0, 6).join(" | ") : "15페이지 × 2폭 위반 0건");
+
+  // 전화번호·고유명사처럼 쪼개면 안 되는 덩어리가 실제로 두 줄로 갈라지지 않는지
+  const split = [];
+  for (const n of PAGES) {
+    for (const w of [1440, 900, 600, 390, 320]) {
+      const { page } = await fresh(`/${n}.html`, w, 900);
+      await page.evaluate(() => localStorage.setItem("duri.site.v1", "coop"));
+      await page.reload({ waitUntil: "networkidle2" });
+      const bads = await page.evaluate(() => {
+        const out = [];
+        document.querySelectorAll(".nb").forEach(el => {
+          const tops = new Set([...el.getClientRects()].filter(r => r.width > .5).map(r => Math.round(r.top)));
+          if (tops.size > 1) out.push(el.textContent.trim().slice(0, 26));
+        });
+        return out;
+      });
+      for (const b of bads) split.push(`${n}@${w}: "${b}"`);
+      await page.close();
+    }
+  }
+  ok("한글 줄바꿈: .nb(전화번호·고유명사) 덩어리가 갈라지지 않음", split.length === 0,
+    split.length ? split.slice(0, 5).join(" | ") : "15페이지 × 5폭 위반 0건");
 }
+
+/* ---------- 4-2. 게이트 설명 줄바꿈 · 투명 카드 외곽선 없음 ---------- */
+{
+  const { page } = await fresh("/index.html");
+  await page.evaluate(() => localStorage.clear());
+  await page.reload({ waitUntil: "networkidle2" });
+  const r = await page.evaluate(() => {
+    // 블록 요소의 getClientRects() 는 줄 단위가 아니므로 Range 로 각 글자의 y 를 잰다
+    function lines(el) {
+      const out = [];
+      const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      let n, cur = "", top = null;
+      while ((n = walk.nextNode())) {
+        const t = n.textContent;
+        for (let i = 0; i < t.length; i++) {
+          const rg = document.createRange();
+          rg.setStart(n, i); rg.setEnd(n, i + 1);
+          const rc = rg.getClientRects()[0];
+          if (!rc) { cur += t[i]; continue; }
+          const y = Math.round(rc.top);
+          if (top === null) top = y;
+          if (y !== top) { out.push(cur.trim()); cur = t[i]; top = y; } else cur += t[i];
+        }
+      }
+      if (cur.trim()) out.push(cur.trim());
+      return out.filter(Boolean);
+    }
+    const d = document.querySelector(".gate-half.coop .gate-desc");
+    return { html: d.innerHTML, lines: lines(d), br: d.querySelectorAll("br").length };
+  });
+  ok("게이트 설명이 쉼표에서 2줄로 고정",
+    r.lines.length === 2 && /생산,$/.test(r.lines[0]) && r.br === 1,
+    JSON.stringify(r.lines));
+  await page.close();
+}
+{
+  const bad = [];
+  for (const n of ["index", "about", "family", "notice", "gallery", "rehab"]) {
+    const { page } = await fresh(`/${n}.html`);
+    await page.evaluate(() => localStorage.clear());
+    await page.reload({ waitUntil: "networkidle2" });
+    const found = await page.evaluate(() => {
+      const out = [];
+      document.querySelectorAll("*").forEach(el => {
+        const cs = getComputedStyle(el);
+        const bg = cs.backgroundColor.match(/rgba\(([\d.]+),\s*([\d.]+),\s*([\d.]+),\s*([\d.]+)\)/);
+        if (!bg) return;
+        const a = +bg[4];
+        if (a <= 0.02 || a >= 0.95) return;            // 투명하거나 사실상 불투명한 면은 제외
+        const bw = parseFloat(cs.borderTopWidth) || 0;
+        if (bw < 0.5) return;
+        const bc = cs.borderTopColor.match(/rgba?\(([\d.]+),\s*([\d.]+),\s*([\d.]+)(?:,\s*([\d.]+))?\)/);
+        if (!bc) return;
+        const ba = bc[4] === undefined ? 1 : +bc[4];
+        if (ba < 0.02) return;                          // 투명 보더는 없는 것으로 본다
+        out.push(`${el.tagName.toLowerCase()}.${(el.className || "-").toString().slice(0, 20)}`);
+      });
+      return [...new Set(out)];
+    });
+    if (found.length) bad.push(`${n}: ${found.join(", ")}`);
+    await page.close();
+  }
+  ok("반투명 카드에 외곽선 없음", bad.length === 0, bad.join(" | ") || "6페이지 위반 0건");
+}
+
+
 
 /* ---------- 5. 버그 수정 검증 — select 포커스 링 / 키보드 메가메뉴 ---------- */
 {

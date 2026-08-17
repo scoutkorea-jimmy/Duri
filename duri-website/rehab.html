@@ -79,7 +79,7 @@
         <div class="row" id="cRow1"></div>
         <div class="row" id="cRow2"></div>
         <div class="btn-row" style="margin-top:22px">
-          <a class="btn btn-primary" href="tel:031-853-3360">전화로 문의하기</a>
+          <a class="btn btn-primary" href="tel:<span class="nb">031-853-3360</span>">전화로 문의하기</a>
           <a class="btn btn-outline" href="index.html">사회적협동조합 홈페이지 보기</a>
         </div>
       </div>
@@ -94,7 +94,7 @@
 (function(){
   var I = (window.DURI && window.DURI.ICON) || {};
   var r1 = document.getElementById("cRow1"), r2 = document.getElementById("cRow2");
-  if(r1) r1.innerHTML = (I.phone||"") + '<span><b>직업재활센터</b> 031-853-3360 · <b>주간센터</b> 031-853-3359</span>';
+  if(r1) r1.innerHTML = (I.phone||"") + '<span><b>직업재활센터</b> <span class="nb">031-853-3360</span> · <b>주간센터</b> <span class="nb">031-853-3359</span></span>';
   if(r2) r2.innerHTML = (I.pin||"") + '<span>경기도 의정부시 오목로 225번길 100, 3층 (민락동, CY타워)</span>';
 })();
 </script>
