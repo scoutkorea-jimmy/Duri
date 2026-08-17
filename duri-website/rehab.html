@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko" data-site="rehab">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두리손잡고 직업재활센터 — 홈페이지 준비중</title>
+<meta name="description" content="두리손잡고 직업재활센터 홈페이지를 준비하고 있습니다. 직업재활·주간보호 프로그램 문의는 031-853-3360으로 연락 주세요.">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.soon{position:relative;overflow:hidden;background:var(--brand-tint);padding:96px 0 104px}
+.soon-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.soon-bg .b{position:absolute;border-radius:50%;filter:blur(10px);opacity:.5}
+.soon-bg .b1{width:480px;height:480px;background:radial-gradient(circle at 30% 30%,var(--blue-300),var(--blue-500));top:-170px;right:-110px}
+.soon-bg .b2{width:380px;height:380px;background:radial-gradient(circle at 30% 30%,var(--amber-200),var(--blue-200));bottom:-160px;left:-120px}
+.soon-bg .grain{position:absolute;inset:0;opacity:.5;background-image:radial-gradient(rgba(13,44,64,.06) 1px,transparent 1.3px);background-size:18px 18px}
+.soon-inner{position:relative;z-index:2;max-width:760px;margin:0 auto;text-align:center}
+.soon h1{font-size:clamp(32px,4.4vw,54px);font-weight:800;letter-spacing:-.035em;line-height:1.15;margin-top:20px}
+.soon h1 .hl{color:var(--brand)}
+.soon .lead{margin:22px auto 0;max-width:560px}
+
+.prog{margin:44px auto 0;max-width:520px}
+.prog-bar{height:10px;border-radius:999px;background:var(--brand-soft);overflow:hidden}
+.prog-bar i{display:block;height:100%;width:18%;border-radius:999px;background:linear-gradient(90deg,var(--brand),var(--blue-400))}
+.prog-txt{display:flex;justify-content:space-between;margin-top:10px;font-size:13.5px;font-weight:700;color:var(--muted)}
+
+.plan{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px;text-align:left}
+.plan .card-pad{display:flex;flex-direction:column;gap:10px}
+.plan .st{font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--brand)}
+
+.contact-box{margin-top:56px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm);padding:34px 30px;text-align:left}
+.contact-box .row{display:flex;align-items:flex-start;gap:12px;padding:11px 0;font-size:15.5px;color:var(--body)}
+.contact-box .row svg{width:19px;height:19px;color:var(--brand);flex:none;margin-top:3px}
+.contact-box .row b{color:var(--ink)}
+
+@media (max-width:880px){ .plan{grid-template-columns:1fr} }
+@media (max-width:680px){ .soon{padding:64px 0 76px} }
+</style>
+</head>
+<body>
+
+<section class="soon">
+  <div class="soon-bg"><span class="b b1"></span><span class="b b2"></span><span class="grain"></span></div>
+  <div class="container">
+    <div class="soon-inner">
+      <span class="badge reveal">두리손잡고 직업재활센터</span>
+      <h1 class="reveal" data-delay=".05s">홈페이지를<br><span class="hl">준비하고 있습니다</span></h1>
+      <p class="lead reveal" data-delay=".1s">
+        직업재활센터의 프로그램과 이용 안내를 담은 별도 홈페이지를 만들고 있습니다.
+        준비가 끝나는 대로 이곳에서 만나뵙겠습니다.
+      </p>
+
+      <div class="prog reveal" data-delay=".15s">
+        <div class="prog-bar" role="img" aria-label="홈페이지 준비 진행률 약 18%"><i></i></div>
+        <div class="prog-txt"><span>기획·자료 정리 단계</span><span>약 18%</span></div>
+      </div>
+
+      <div class="plan">
+        <div class="card card-pad reveal" data-delay=".2s">
+          <span class="st">step 01</span>
+          <h3 class="h3">센터 소개 · 이용 안내</h3>
+          <p class="muted" style="font-size:15px">시설 개요, 이용 대상과 절차, 운영 시간을 정리합니다.</p>
+        </div>
+        <div class="card card-pad reveal" data-delay=".26s">
+          <span class="st">step 02</span>
+          <h3 class="h3">프로그램 안내</h3>
+          <p class="muted" style="font-size:15px">직업적응훈련·주간보호·체육교실 등 프로그램별 상세 안내.</p>
+        </div>
+        <div class="card card-pad reveal" data-delay=".32s">
+          <span class="st">step 03</span>
+          <h3 class="h3">신청 · 문의</h3>
+          <p class="muted" style="font-size:15px">이용 상담과 실습·자원봉사 신청 창구를 온라인으로 엽니다.</p>
+        </div>
+      </div>
+
+      <div class="contact-box reveal" data-delay=".38s">
+        <h3 class="h3" style="margin-bottom:8px">준비되기 전 문의는 이렇게</h3>
+        <p class="muted" style="font-size:15px;margin-bottom:10px">전화로 먼저 상담해 주시면 담당자가 안내드립니다.</p>
+        <div class="row" id="cRow1"></div>
+        <div class="row" id="cRow2"></div>
+        <div class="btn-row" style="margin-top:22px">
+          <a class="btn btn-primary" href="tel:031-853-3360">전화로 문의하기</a>
+          <a class="btn btn-outline" href="index.html">사회적협동조합 홈페이지 보기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="assets/site.js"></script>
+<script>
+/* 연락처 아이콘은 site.js 의 ICON 세트를 재사용한다(중복 SVG 방지) */
+(function(){
+  var I = (window.DURI && window.DURI.ICON) || {};
+  var r1 = document.getElementById("cRow1"), r2 = document.getElementById("cRow2");
+  if(r1) r1.innerHTML = (I.phone||"") + '<span><b>직업재활센터</b> 031-853-3360 · <b>주간센터</b> 031-853-3359</span>';
+  if(r2) r2.innerHTML = (I.pin||"") + '<span>경기도 의정부시 오목로 225번길 100, 3층 (민락동, CY타워)</span>';
+})();
+</script>
+</body>
+</html>

@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '[두리 프로젝트 규칙] 작업 전 CLAUDE.md(작업 가이드)와 DESIGN.md(디자인 가이드)를 먼저 확인하세요. 정적 사이트(빌드 없음), 헤더/푸터/인증/폼은 assets/site.js가 주입, 게시판은 assets/board.js(localStorage), 관리자 데모 계정 admin/admin, 디자인은 leaf+split 고정, 경로는 상대경로, 작업 후엔 별도 지시 없이 main 푸시→배포까지 완료.'"
+            "command": "echo '[두리 프로젝트 제1규칙] ① 무조건 rules/HANDOFF.md 를 가장 먼저 열어라 — 진행 중·보류 작업을 확인하고, 받은 지시를 코드에 손대기 전에 HANDOFF 에 항목으로 등록한다. ② 그다음 rules/README.md 를 읽고 지정된 규칙 파일(00-core / 10-structure / 20-design / 30-content / 40-verify / 50-roadmap)을 확인하라. 루트에는 CLAUDE.md 하나만 있고 규칙 본문은 전부 rules/ 에 있다. HANDOFF=진행 중, WORKLOG=끝난 것. 종료 시 rules/WORKLOG.md 에 결과와 성공·실패 사유를 기록하고 HANDOFF 항목을 종료로 옮긴다. 검증(node tools/check-links.mjs + tools/verify-headless.mjs) → main 커밋·푸시 → 배포 success 확인까지가 한 작업이다.'"
           }
         ]
       }

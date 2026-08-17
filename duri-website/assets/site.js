@@ -2,15 +2,44 @@
    두리손잡고 — shared header (mega menu) + footer + interactions
    ============================================================ */
 (function(){
-  // favicon (brand mark) — avoids 404 across all pages
+  /* ============================================================
+     사이트 갈래 판별 — <html data-site="coop|rehab">, 없으면 coop
+     규칙: rules/00-core.md 4절 · rules/20-design.md 1-1절
+     ============================================================ */
+  const SITE_KEY = "duri.site.v1";
+  const SITE = document.documentElement.getAttribute("data-site") === "rehab" ? "rehab" : "coop";
+  const SITES = {
+    coop: {
+      full:"사회적협동조합 두리손잡고", short:"조합", line1:"두리손잡고", line2:"사회적협동조합",
+      home:"index.html", key:"#2a8159",
+      desc:"임가공 사업과 친환경 화장지 생산, 후원·자원봉사로 함께하는 길"
+    },
+    rehab:{
+      full:"두리손잡고 직업재활센터", short:"직업재활센터", line1:"두리손잡고", line2:"직업재활센터",
+      home:"rehab.html", key:"#1f6f9e",
+      desc:"직업재활·주간보호 프로그램과 실습 안내"
+    }
+  };
+  const ME = SITES[SITE];
+  const OTHER_KEY = SITE === "coop" ? "rehab" : "coop";
+
+  function storedSite(){ try{ return localStorage.getItem(SITE_KEY); }catch(e){ return null; } }
+  function rememberSite(v){ try{ localStorage.setItem(SITE_KEY, v); }catch(e){} }
+
+  // favicon (brand mark) — 갈래 키 컬러로 주입. avoids 404 across all pages
   if(!document.querySelector('link[rel="icon"]')){
     var fav=document.createElement("link"); fav.rel="icon";
-    fav.href='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 28"><circle cx="14" cy="14" r="9.5" fill="none" stroke="#2a8159" stroke-width="4.4"/><circle cx="26" cy="14" r="9.5" fill="none" stroke="#e0913a" stroke-width="4.4"/></svg>');
+    fav.href='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 28"><circle cx="14" cy="14" r="9.5" fill="none" stroke="'+ME.key+'" stroke-width="4.4"/><circle cx="26" cy="14" r="9.5" fill="none" stroke="#e0913a" stroke-width="4.4"/></svg>');
     document.head.appendChild(fav);
   }
   // hand-holding mark: two interlocking rounded links
   const MARK = `<svg class="wm-mark" viewBox="0 0 40 28" width="40" height="28" aria-hidden="true">
     <circle cx="14" cy="14" r="9.5" fill="none" stroke="var(--brand)" stroke-width="4.4"/>
+    <circle cx="26" cy="14" r="9.5" fill="none" stroke="var(--accent)" stroke-width="4.4"/>
+  </svg>`;
+  // 게이트·전환 바처럼 어두운 면 위에 올라가는 흰 마크
+  const MARK_W = `<svg class="gate-mark" viewBox="0 0 40 28" aria-hidden="true">
+    <circle cx="14" cy="14" r="9.5" fill="none" stroke="#fff" stroke-width="4.4"/>
     <circle cx="26" cy="14" r="9.5" fill="none" stroke="var(--accent)" stroke-width="4.4"/>
   </svg>`;
 
@@ -33,6 +62,12 @@
     ]}
   ];
 
+  /* 직업재활센터 메뉴 — 페이지가 준비되면 NAV 와 같은 형태로 채운다.
+     비어 있으면 헤더가 메뉴 없는 축약형으로 렌더된다. (rules/30-content.md 1절) */
+  const NAV_REHAB = [];
+
+  const MENU = SITE === "rehab" ? NAV_REHAB : NAV;
+
   const ICON = {
     pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
     phone:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7A2 2 0 0 1 22 16.9Z"/></svg>',
@@ -41,22 +76,29 @@
     login:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5M15 12H3"/></svg>',
     user:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
     x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>',
-    pen:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>'
+    pen:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
+    arrow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+    coop:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16.5 3.13A4 4 0 0 1 16.5 11"/></svg>',
+    rehab:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M2 13h20"/></svg>'
   };
 
   const here = (location.pathname.split("/").pop() || "index.html").toLowerCase();
 
   /* ---------- header ---------- */
+  const hasMenu = MENU.length > 0;
+  const donateBtn = SITE === "coop"
+    ? `<a class="btn btn-accent" href="family.html">${ICON.heart}<span>후원하기</span></a>` : "";
+
   const header = document.createElement("header");
   header.className = "site-header";
   header.innerHTML = `
     <div class="container nav-inner">
-      <a class="wm" href="index.html" aria-label="두리손잡고 홈">
+      <a class="wm" href="${ME.home}" aria-label="${ME.full} 홈">
         ${MARK}
-        <span class="wm-text">두리<b>손잡고</b></span>
+        <span class="wm-text">두리<b>손잡고</b>${SITE==="rehab"?' <span style="font-size:15px;font-weight:700;color:var(--brand-deep);letter-spacing:-.02em">직업재활센터</span>':""}</span>
       </a>
-      <nav class="nav-main" aria-label="주 메뉴">
-        ${NAV.map(m=>`
+      ${hasMenu ? `<nav class="nav-main" aria-label="주 메뉴">
+        ${MENU.map(m=>`
           <div class="nav-item">
             <a class="nav-top${m.href.toLowerCase()===here?" active":""}" href="${m.href}">${m.label}</a>
             <div class="mega">
@@ -65,42 +107,57 @@
               </div>
             </div>
           </div>`).join("")}
-      </nav>
+      </nav>` : ""}
       <div class="nav-cta">
         <div class="acct" id="acct"></div>
-        <a class="btn btn-accent" href="family.html">${ICON.heart}<span>후원하기</span></a>
-        <button class="nav-burger" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+        ${donateBtn}
+        ${hasMenu ? `<button class="nav-burger" aria-label="메뉴 열기"><span></span><span></span><span></span></button>` : ""}
       </div>
     </div>
-    <div class="mobile-nav" hidden>
-      ${NAV.map(m=>`
+    ${hasMenu ? `<div class="mobile-nav" hidden>
+      ${MENU.map(m=>`
         <div class="m-group">
           <a class="m-top" href="${m.href}">${m.label}</a>
           <div class="m-sub">${m.sub.map(s=>`<a href="${s[1]}">${s[0]}</a>`).join("")}</div>
         </div>`).join("")}
-      <a class="btn btn-accent btn-lg" style="margin-top:20px;width:100%" href="family.html">${ICON.heart}<span>후원하기</span></a>
-    </div>`;
+      ${donateBtn ? `<a class="btn btn-accent btn-lg" style="margin-top:20px;width:100%" href="family.html">${ICON.heart}<span>후원하기</span></a>` : ""}
+    </div>` : ""}`;
   document.body.insertBefore(header, document.body.firstChild);
+
+  /* ---------- 사이트 전환 바 (최상단 고정) ---------- */
+  const switcher = document.createElement("nav");
+  switcher.className = "site-switch";
+  switcher.setAttribute("aria-label", "사이트 선택");
+  switcher.innerHTML = ["coop","rehab"].map(k=>{
+    const s = SITES[k], on = k === SITE;
+    return `<a class="sw-item${on?" on":""}" href="${s.home}"${on?' aria-current="page"':""}>`+
+             ICON[k]+
+             `<span class="sw-full">${s.full}</span><span class="sw-short">${s.short}</span>`+
+           `</a>`;
+  }).join("");
+  // 전환 바로 이동할 때도 선택을 기억해 게이트가 다시 뜨지 않게 한다
+  switcher.querySelectorAll(".sw-item").forEach((a,i)=>{
+    a.addEventListener("click", ()=>rememberSite(i===0 ? "coop" : "rehab"));
+  });
+  document.body.insertBefore(switcher, header);
 
   // mobile toggle
   const burger = header.querySelector(".nav-burger");
   const mnav = header.querySelector(".mobile-nav");
-  burger.addEventListener("click", ()=>{
-    const open = header.classList.toggle("menu-open");
-    mnav.hidden = !open;
-    document.body.style.overflow = open ? "hidden" : "";
-  });
+  if(burger && mnav){
+    burger.addEventListener("click", ()=>{
+      const open = header.classList.toggle("menu-open");
+      mnav.hidden = !open;
+      document.body.style.overflow = open ? "hidden" : "";
+    });
+  }
 
   // scrolled state
   const onScroll = ()=> header.classList.toggle("scrolled", window.scrollY > 12);
   onScroll(); window.addEventListener("scroll", onScroll, {passive:true});
 
   /* ---------- footer ---------- */
-  const footer = document.createElement("footer");
-  footer.className = "site-footer";
-  footer.innerHTML = `
-    <div class="container">
-      <div class="foot-top">
+  const FOOT_BRAND = `
         <div class="foot-brand">
           <div class="wm" >${MARK}<span>두리<b style="color:var(--green-400)">손잡고</b></span></div>
           <p style="max-width:300px;line-height:1.7">서로의 손을 맞잡고 함께 나아가는 길. 모두가 존중받는 따뜻한 공동체를 만들어갑니다.</p>
@@ -108,7 +165,32 @@
             <div class="row">${ICON.pin}<span>경기도 의정부시 오목로 225번길 100, 3층 (민락동, CY타워)</span></div>
             <div class="row">${ICON.phone}<span>주간센터 031-853-3359 · 직업재활센터 031-853-3360</span></div>
           </div>
+        </div>`;
+  const FOOT_BOTTOM = `
+      <div class="foot-bottom">
+        <span>© 2026 사회적협동조합 두리손잡고. All rights reserved.</span>
+        <span>시설장 유선희 · 설립 2018년 10월 · 중증장애인생산품 생산시설</span>
+      </div>`;
+
+  const footer = document.createElement("footer");
+  footer.className = "site-footer";
+  footer.innerHTML = SITE === "rehab" ? `
+    <div class="container">
+      <div class="foot-top">
+        ${FOOT_BRAND}
+        <div class="foot-col">
+          <h4>두리손잡고 직업재활센터</h4>
+          <ul>
+            <li><a href="rehab.html">센터 소개 (준비중)</a></li>
+            <li><a href="index.html">사회적협동조합 홈페이지</a></li>
+          </ul>
         </div>
+      </div>
+      ${FOOT_BOTTOM}
+    </div>` : `
+    <div class="container">
+      <div class="foot-top">
+        ${FOOT_BRAND}
         <div class="foot-col">
           <h4>두리손잡고 소개</h4>
           <ul>
@@ -138,10 +220,7 @@
           </ul>
         </div>
       </div>
-      <div class="foot-bottom">
-        <span>© 2026 사회적협동조합 두리손잡고. All rights reserved.</span>
-        <span>시설장 유선희 · 설립 2018년 10월 · 중증장애인생산품 생산시설</span>
-      </div>
+      ${FOOT_BOTTOM}
     </div>`;
   document.body.appendChild(footer);
 
@@ -355,6 +434,52 @@
   setTimeout(()=>document.querySelectorAll(".reveal:not(.in)").forEach(el=>el.classList.add("in")), 1400);
   window.__revealRescan = check;
 
-  // expose icons + auth + modal helpers for pages
-  window.DURI = { ICON, NAV, Auth, openLogin, openModal, closeModal, wireModal };
+  /* ============================================================
+     진입 게이트 — 첫 방문 시 전체화면 좌/우 50% 분기
+     - 조합 홈(index)에서만, 그리고 선택 이력이 없을 때만 뜬다
+     - 조합 선택 → 제자리에서 닫힘 / 직업재활센터 선택 → rehab.html
+     - JS 가 이 블록까지 오지 못하면 게이트가 없는 상태로 보인다(콘텐츠를 가두지 않음)
+     규칙: rules/00-core.md 4절 · rules/20-design.md
+     ============================================================ */
+  function openGate(){
+    const gate = document.createElement("div");
+    gate.className = "gate";
+    gate.setAttribute("role", "dialog");
+    gate.setAttribute("aria-modal", "true");
+    gate.setAttribute("aria-label", "찾으시는 곳을 선택하세요");
+    gate.innerHTML =
+      `<div class="gate-head">${MARK_W}<span class="t">어느 곳을 찾으시나요?</span></div>` +
+      ["coop","rehab"].map(k=>{
+        const s = SITES[k];
+        return `<a class="gate-half ${k}" href="${s.home}" data-site-pick="${k}">`+
+                 `<span class="gate-tag">${s.line2}</span>`+
+                 MARK_W+
+                 `<span class="gate-name">${s.line1}<br>${s.line2}</span>`+
+                 `<span class="gate-desc">${s.desc}</span>`+
+                 `<span class="gate-go">바로가기 ${ICON.arrow}</span>`+
+               `</a>`;
+      }).join("") +
+      `<div class="gate-foot">선택한 곳은 기억되며, 화면 맨 위 전환 바로 언제든 옮겨갈 수 있습니다.</div>`;
+    document.body.appendChild(gate);
+    document.body.style.overflow = "hidden";
+
+    gate.querySelectorAll("[data-site-pick]").forEach(a=>{
+      a.addEventListener("click", e=>{
+        const pick = a.getAttribute("data-site-pick");
+        rememberSite(pick);
+        if(pick === "rehab") return;          // rehab.html 로 그대로 이동
+        e.preventDefault();                    // 조합은 이 페이지가 이미 목적지
+        gate.classList.add("out");
+        document.body.style.overflow = "";
+        setTimeout(()=>gate.remove(), 320);
+      });
+    });
+
+    setTimeout(()=>{ const f = gate.querySelector(".gate-half"); if(f) f.focus(); }, 80);
+  }
+
+  if(SITE === "coop" && !storedSite() && (here === "index.html" || here === "")) openGate();
+
+  // expose site info + icons + auth + modal helpers for pages
+  window.DURI = { SITE, SITES, ICON, NAV, Auth, openLogin, openModal, closeModal, wireModal };
 })();
