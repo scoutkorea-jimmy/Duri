@@ -117,6 +117,81 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
   await page.close();
 }
 
+/* ---------- 3-1. 선택 후 게이트로 되돌아가기 ---------- */
+{
+  // (a) 홈이 아닌 페이지: 푸터 링크가 index.html?gate=1 로 향한다
+  const { page, errors } = await fresh("/about.html");
+  await page.evaluate(() => localStorage.setItem("duri.site.v1", "coop"));
+  await page.reload({ waitUntil: "networkidle2" });
+  const link = await page.evaluate(() => {
+    const a = document.getElementById("reopenGate");
+    if (!a) return null;
+    const r = a.getBoundingClientRect();
+    return { href: a.getAttribute("href"), text: a.textContent.trim(), h: Math.round(r.height) };
+  });
+  ok("되돌아가기: 하위 페이지 푸터에 '처음 선택 화면 다시 보기' 링크", !!link && /gate=1/.test(link.href),
+    link ? `${link.text} → ${link.href} (h=${link.h})` : "없음");
+  ok("되돌아가기: 링크 터치 타깃 44px 이상", !!link && link.h >= 43.5, link ? `${link.h}px` : "");
+  ok("되돌아가기 링크 페이지: 콘솔 에러 0", errors.length === 0, errors.join(" / "));
+  await page.close();
+}
+{
+  // (b) 선택이 이미 있는 상태에서 ?gate=1 로 들어가면 게이트가 다시 뜨고, 닫을 수 있다
+  const { page, errors } = await fresh("/index.html");
+  await page.evaluate(() => localStorage.setItem("duri.site.v1", "coop"));
+  await page.goto(BASE + "/index.html?gate=1", { waitUntil: "networkidle2" });
+  const r = await page.evaluate(() => ({
+    gate: !!document.querySelector(".gate"),
+    close: !!document.getElementById("gateClose"),
+    stored: localStorage.getItem("duri.site.v1")
+  }));
+  ok("되돌아가기: 선택이 있어도 ?gate=1 로 게이트 재노출", r.gate, `저장값 유지=${r.stored}`);
+  ok("되돌아가기: 재노출된 게이트에 닫기 버튼 존재", r.close);
+  const closed = await page.evaluate(async () => {
+    document.getElementById("gateClose").click();
+    await new Promise(r => setTimeout(r, 250));
+    return { gate: !!document.querySelector(".gate"), overflow: document.body.style.overflow,
+             stored: localStorage.getItem("duri.site.v1") };
+  });
+  ok("되돌아가기: 닫기 버튼으로 닫히고 기존 선택이 유지됨",
+    closed.gate === false && closed.overflow === "" && closed.stored === "coop",
+    `게이트=${closed.gate} overflow="${closed.overflow}" 저장값=${closed.stored}`);
+  ok("되돌아가기: 재노출 게이트 콘솔 에러 0", errors.length === 0, errors.join(" / "));
+  await page.close();
+}
+{
+  // (c) 홈에서 푸터 링크를 누르면 이동 없이 바로 열리고, 고르면 주소창의 ?gate=1 이 정리된다
+  const { page } = await fresh("/index.html");
+  await page.evaluate(() => localStorage.setItem("duri.site.v1", "coop"));
+  await page.reload({ waitUntil: "networkidle2" });
+  const inline = await page.evaluate(async () => {
+    document.getElementById("reopenGate").click();
+    await new Promise(r => setTimeout(r, 250));
+    return { gate: !!document.querySelector(".gate"), url: location.pathname + location.search };
+  });
+  ok("되돌아가기: 홈에서는 페이지 이동 없이 즉시 열림",
+    inline.gate && !/gate=1/.test(inline.url), `${inline.url}`);
+  await page.goto(BASE + "/index.html?gate=1", { waitUntil: "networkidle2" });
+  const cleaned = await page.evaluate(async () => {
+    document.querySelector(".gate-half.coop").click();
+    await new Promise(r => setTimeout(r, 300));
+    return location.search;
+  });
+  ok("되돌아가기: 선택 후 주소창의 ?gate=1 정리", cleaned === "", `search="${cleaned}"`);
+  await page.close();
+}
+{
+  // (d) 첫 방문 게이트에는 닫기 버튼이 없다(선택 자체가 진행 경로)
+  const { page } = await fresh("/index.html");
+  await page.evaluate(() => localStorage.clear());
+  await page.reload({ waitUntil: "networkidle2" });
+  const r = await page.evaluate(() => ({
+    gate: !!document.querySelector(".gate"), close: !!document.getElementById("gateClose")
+  }));
+  ok("첫 방문 게이트에는 닫기 버튼 없음", r.gate && r.close === false, `닫기버튼=${r.close}`);
+  await page.close();
+}
+
 /* ---------- 4. 전환 바 — 전 페이지 존재 / 높이 / 헤더 겹침 ---------- */
 {
   const pages = ["/index.html", "/about.html", "/notice.html", "/gallery.html", "/market.html", "/rehab.html"];

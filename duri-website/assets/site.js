@@ -25,6 +25,10 @@
 
   function storedSite(){ try{ return localStorage.getItem(SITE_KEY); }catch(e){ return null; } }
   function rememberSite(v){ try{ localStorage.setItem(SITE_KEY, v); }catch(e){} }
+  // 선택을 이미 했어도 게이트를 다시 볼 수 있는 경로 (푸터 링크 · 북마크 · 공유용)
+  function gateRequested(){
+    return /(^|[?&])gate=1(&|$)/.test(location.search) || location.hash === "#gate";
+  }
 
   // favicon (brand mark) — 갈래 키 컬러로 주입. avoids 404 across all pages
   if(!document.querySelector('link[rel="icon"]')){
@@ -185,6 +189,7 @@
       <div class="foot-bottom">
         <span>© 2026 사회적협동조합 두리손잡고. All rights reserved.</span>
         <span>시설장 유선희 · 설립 2018년 10월 · 중증장애인생산품 생산시설</span>
+        <a class="foot-reset" href="index.html?gate=1" id="reopenGate">처음 선택 화면 다시 보기</a>
       </div>`;
 
   const footer = document.createElement("footer");
@@ -537,7 +542,7 @@
      - JS 가 이 블록까지 오지 못하면 게이트가 없는 상태로 보인다(콘텐츠를 가두지 않음)
      규칙: rules/00-core.md 4절 · rules/20-design.md
      ============================================================ */
-  function openGate(){
+  function openGate(reopened){
     const gate = document.createElement("div");
     gate.className = "gate";
     gate.setAttribute("role", "dialog");
@@ -545,6 +550,7 @@
     gate.setAttribute("aria-labelledby", "gateTitle");
     gate.innerHTML =
       `<div class="gate-head">${MARK_W}<p class="t" id="gateTitle">어느 곳을 찾으시나요?</p></div>` +
+      (reopened ? `<button type="button" class="gate-close" id="gateClose" aria-label="선택 화면 닫기">${ICON.x}<span>닫기</span></button>` : "") +
       ["coop","rehab"].map(k=>{
         const s2 = SITES[k];
         return `<a class="gate-half ${k}" href="${s2.home}" data-site-pick="${k}">`+
@@ -554,7 +560,7 @@
                  `<span class="gate-go">바로가기 ${ICON.arrow}</span>`+
                `</a>`;
       }).join("") +
-      `<p class="gate-foot">선택한 곳은 기억되며, 화면 맨 위 전환 바로 언제든 옮겨갈 수 있습니다.</p>`;
+      `<p class="gate-foot">선택한 곳은 기억됩니다. 화면 맨 위 전환 바로 옮겨갈 수 있고, 이 화면은 각 페이지 맨 아래 ‘처음 선택 화면 다시 보기’로 다시 열 수 있습니다.</p>`;
     document.body.appendChild(gate);
     document.body.style.overflow = "hidden";
 
@@ -566,16 +572,45 @@
         e.preventDefault();                    // 조합은 이 페이지가 이미 목적지
         document.body.style.overflow = "";
         gate.remove();
+        // 주소창에 남은 ?gate=1 / #gate 를 지워 새로고침 시 다시 뜨지 않게 한다
+        if(gateRequested() && history.replaceState){
+          history.replaceState(null, "", location.pathname);
+        }
         const m = document.getElementById("main");
         if(m){ m.setAttribute("tabindex","-1"); m.focus(); }
       });
     });
+    // 다시 열어본 경우에만 닫기 수단을 제공한다.
+    // (첫 방문에는 두 선택지 자체가 진행 경로이므로 닫기 버튼을 두지 않는다)
+    function dismiss(){
+      document.body.style.overflow = "";
+      gate.remove();
+      const back = document.querySelector(".foot-reset");
+      if(back) back.focus();
+    }
+    if(reopened){
+      gate.querySelector("#gateClose").addEventListener("click", dismiss);
+      gate.addEventListener("keydown", e=>{ if(e.key === "Escape") dismiss(); });
+    }
     // 게이트가 열려 있는 동안 Tab 이 배경으로 나가지 않게 한다
     gate.addEventListener("keydown", e=>trapTab(gate, e));
     setTimeout(()=>{ const f = gate.querySelector(".gate-half"); if(f) f.focus(); }, 60);
   }
 
-  if(SITE === "coop" && !storedSite() && (here === "index.html" || here === "")) openGate();
+  const onHome = (here === "index.html" || here === "");
+  if(SITE === "coop" && onHome){
+    if(gateRequested()) openGate(true);        // 다시 보기 — 닫기 가능
+    else if(!storedSite()) openGate(false);    // 첫 방문 — 선택이 곧 진행
+  }
+  // 홈이 아닌 페이지의 푸터 링크는 index.html?gate=1 로 이동시킨다(기본 href 그대로).
+  // 홈에 있을 때는 이동 없이 바로 열어준다.
+  const reopenLink = document.querySelector("#reopenGate");
+  if(reopenLink && onHome){
+    reopenLink.addEventListener("click", e=>{
+      e.preventDefault();
+      if(!document.querySelector(".gate")) openGate(true);
+    });
+  }
 
   // expose site info + icons + auth + modal helpers for pages
   window.DURI = { SITE, SITES, ICON, NAV, Auth, openLogin, openModal, closeModal, wireModal };
