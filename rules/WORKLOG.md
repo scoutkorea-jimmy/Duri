@@ -48,7 +48,7 @@
   2. **직전 커밋에서 "모션 전면 제거"라고 보고했는데 페이지 스타일에 hover 이동이 4건 남아 있었습니다** — index `.prog-item`(`translateX(4px)`), family `.way`(`translateY(-5px)`), market `.shop`(`translateY(-4px)`), volunteer `.area`(`translateY(-4px)`). `styles.css` 만 훑고 페이지별 `<style>` 을 놓친 탓입니다. 색·보더·그림자 변화로 교체했습니다.
 - **재발 방지**: `Claude_Memories/core/korean-line-break-rule.md` 를 `feedback` 메모리로 신설하고 `MEMORY.md` 에 색인했습니다. **원인은 이 규칙이 특정 프로젝트의 rules 파일에만 있어서 새 프로젝트로 넘어오지 않은 것**이므로, 프로젝트 경계를 넘는 메모리로 승격하는 것이 맞는 조치입니다.
 - **검증**: `node tools/check-links.mjs` → 15페이지 이상 없음 / `verify-headless.mjs` → `총 52건 · 통과 52 · 실패 0` / `verify-a11y.mjs` → `총 23건 · 통과 23 · 실패 0`
-- **커밋**: `PENDING`
+- **커밋**: `1f0fab6`
 
 ## 2026-08-17 · 진입 게이트로 되돌아갈 수단 신설
 
