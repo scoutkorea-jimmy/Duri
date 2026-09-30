@@ -16,7 +16,7 @@
 ├─ .github/workflows/deploy.yml
 └─ duri-website/            ★ 배포 산출물
    ├─ index.html            직업재활센터 메인(히어로/소식/제품/프로그램/CTA/파트너) + 진입 게이트
-   ├─ coop.html             사회적협동조합 — 준비중 페이지 (data-site="coop")
+   ├─ coop.html             사회적협동조합 — 자료 기반 소개·사업·문의 페이지 (data-site="coop")
    │  ※ 아래 13쪽과 index 는 전부 data-site="rehab" (2026-09-30 맞바꿈)
    ├─ about · operation · org · business · history   소개 계열
    ├─ work · products                                사업안내
@@ -100,4 +100,4 @@ window.DURI = { SITE, SITES, ICON, NAV /* 현재 갈래 메뉴 */, Auth, openLog
 - 클릭 가능한 요소는 `<a>`/`<button>`을 우선 사용하고, 부득이 `div`를 쓰면 `role="button" tabindex="0"` + Enter/Space 핸들러를 반드시 붙입니다.
 
 ---
-© 사회적협동조합 두리손잡고
+© 두리손잡고 사회적협동조합

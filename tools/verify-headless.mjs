@@ -117,11 +117,35 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
   ok("조합 선택: coop.html 로 이동", /coop\.html$/.test(r.url), r.url);
   ok("조합 선택: localStorage 에 coop 저장", r.stored === "coop", `저장값=${r.stored}`);
   ok("coop: 갈래 속성 = coop", r.site === "coop", r.site);
+  ok("coop: 정식 명칭과 두 사업 안내", await page.evaluate(() => {
+    const text = document.querySelector("main").textContent;
+    return document.title.includes("두리손잡고 사회적협동조합") &&
+      text.includes("발달장애인 주간활동서비스") && text.includes("방과후활동서비스");
+  }));
   ok("coop: 프라이머리 버튼 실제 렌더색 = rgb(42,129,89)", r.primaryBg.replace(/\s/g, "") === "rgb(42,129,89)", r.primaryBg);
-  ok("coop: 메뉴 미주입(준비중)", r.nav === false);
+  ok("coop: 조합 메뉴 표시", r.nav === true);
   ok("coop: 후원 버튼 미주입", r.donate === false);
   ok("coop: 전환 바 활성 항목이 조합", /조합/.test(r.switchOn || ""), r.switchOn);
   ok("coop: 콘솔 에러 0", errors.length === 0, errors.join(" / "));
+  await page.close();
+}
+
+/* ---------- 일시후원만 선택 가능, 정기후원은 준비중 안내 ---------- */
+{
+  const { page, errors } = await fresh("/family.html");
+  await page.evaluate(() => localStorage.setItem("duri.site.v1", "rehab"));
+  await page.reload({ waitUntil: "networkidle2" });
+  await page.click('[data-unavailable="서비스 운영 준비중"]');
+  const donation = await page.evaluate(() => ({
+    selected: document.querySelector(".seg button.active")?.textContent.trim(),
+    title: document.querySelector("#okTitle")?.textContent.trim(),
+    modal: document.querySelector(".modal.open") !== null,
+    phone: document.querySelector('#donate a[href="tel:031-853-3359"]') !== null,
+    fakeAccount: document.querySelector(".donate-acct") !== null
+  }));
+  ok("정기후원: 준비중 안내, 일시후원 선택 유지", donation.modal && donation.title === "서비스 운영 준비중" && donation.selected === "일시후원");
+  ok("일시후원: 실제 전화 문의 경로, 임시 계좌 제거", donation.phone && !donation.fakeAccount);
+  ok("후원 화면: 콘솔 에러 0", errors.length === 0, errors.join(" / "));
   await page.close();
 }
 

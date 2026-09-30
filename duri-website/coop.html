@@ -3,100 +3,133 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>사회적협동조합 두리손잡고 — 홈페이지 준비중</title>
-<meta name="description" content="사회적협동조합 두리손잡고 홈페이지를 준비하고 있습니다. 문의는 031-853-3359로 연락 주세요.">
+<title>두리손잡고 사회적협동조합 | 의미 있는 하루를 함께</title>
+<meta name="description" content="두리손잡고 사회적협동조합의 발달장애인 주간활동서비스와 청소년 방과후활동서비스, 조합의 방향과 문의 방법을 안내합니다.">
 <link rel="stylesheet" href="assets/styles.css">
 <style>
-.soon{position:relative;overflow:hidden;background:var(--brand-tint);padding:96px 0 104px}
-.soon-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
-.soon-bg .b{position:absolute;border-radius:50%;filter:blur(10px);opacity:.5}
-.soon-bg .b1{width:480px;height:480px;background:radial-gradient(circle at 30% 30%,var(--green-300),var(--green-500));top:-170px;right:-110px}
-.soon-bg .b2{width:380px;height:380px;background:radial-gradient(circle at 30% 30%,var(--amber-200),var(--green-200));bottom:-160px;left:-120px}
-.soon-bg .grain{position:absolute;inset:0;opacity:.5;background-image:radial-gradient(rgba(15,42,30,.06) 1px,transparent 1.3px);background-size:18px 18px}
-.soon-inner{position:relative;z-index:2;max-width:760px;margin:0 auto;text-align:center}
-.soon h1{font-size:clamp(32px,4.4vw,54px);font-weight:800;letter-spacing:-.035em;line-height:1.15;margin-top:20px}
-.soon h1 .hl{color:var(--brand-deep)}
-.soon .lead{margin:22px auto 0;max-width:560px}
-
-.prog{margin:44px auto 0;max-width:520px}
-.prog-bar{height:10px;border-radius:999px;background:var(--brand-soft);overflow:hidden}
-.prog-bar i{display:block;height:100%;width:18%;border-radius:999px;background:linear-gradient(90deg,var(--brand),var(--green-400))}
-.prog-txt{display:flex;justify-content:space-between;margin-top:10px;font-size:13.5px;font-weight:700;color:var(--muted)}
-
-.plan{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px;text-align:left}
-.plan .card-pad{display:flex;flex-direction:column;gap:10px}
-.plan .st{font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-deep)}
-
-.contact-box{margin-top:56px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-lg);
-  box-shadow:var(--shadow-sm);padding:34px 30px;text-align:left}
-.contact-box .row{display:flex;align-items:flex-start;gap:12px;padding:11px 0;font-size:15.5px;color:var(--body)}
-.contact-box .row svg{width:19px;height:19px;color:var(--brand-deep);flex:none;margin-top:3px}
-.contact-box .row b{color:var(--ink)}
-
-@media (max-width:880px){ .plan{grid-template-columns:1fr} }
-@media (max-width:680px){ .soon{padding:64px 0 76px} }
+.coop-hero{background:var(--md-sys-color-primary-container);padding:88px 0 96px;overflow:hidden}
+.coop-hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+.coop-hero h1{font-size:clamp(38px,5vw,64px);line-height:1.13;max-width:660px;margin:18px 0 24px}
+.coop-hero .lead{max-width:600px}
+.coop-hero .btn-row{margin-top:34px}
+.coop-hero-art{min-height:410px;border-radius:var(--radius-xl);background:var(--md-sys-color-surface);padding:34px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--shadow)}
+.coop-hero-art .art-top{display:flex;justify-content:space-between;gap:12px;align-items:start;color:var(--brand-deep);font-size:14px;font-weight:700}
+.coop-hero-art .art-mark{font-size:clamp(70px,11vw,150px);line-height:1;letter-spacing:-.13em;color:var(--brand);font-weight:800;text-align:center}
+.coop-hero-art .art-bottom{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:18px;font-size:15px;color:var(--muted)}
+.coop-intro{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start}
+.coop-intro .lead{margin-top:16px}
+.coop-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.coop-value{padding:28px;background:var(--md-sys-color-surface-container-low);border-radius:var(--radius-lg)}
+.coop-value b{display:block;color:var(--brand-deep);margin-bottom:8px}
+.coop-value p{font-size:15px}
+.coop-services{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.coop-service{display:flex;flex-direction:column;padding:34px;background:var(--md-sys-color-surface);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)}
+.coop-service .badge{align-self:start;margin-bottom:22px}
+.coop-service h3{font-size:clamp(23px,2.2vw,30px);margin-bottom:14px}
+.coop-service p{margin-bottom:20px}
+.coop-service ul{padding-left:1.25em;margin:auto 0 0;font-size:15px}
+.coop-service li+li{margin-top:6px}
+.coop-activities{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.coop-activities article{background:var(--md-sys-color-surface-container);border-radius:var(--radius-lg);padding:26px}
+.coop-activities h3{font-size:19px;margin-bottom:8px}
+.coop-activities p{font-size:15px}
+.coop-contact{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;padding:42px;background:var(--md-sys-color-primary-container);border-radius:var(--radius-xl)}
+.coop-contact p{margin-top:12px}
+.coop-source{font-size:13px;color:var(--muted);margin-top:28px}
+@media(max-width:900px){.coop-hero-inner,.coop-intro{grid-template-columns:1fr;gap:36px}.coop-hero-art{min-height:250px}.coop-activities{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:680px){.coop-hero{padding:58px 0 64px}.coop-values,.coop-services,.coop-activities,.coop-contact{grid-template-columns:1fr}.coop-contact{padding:30px}.coop-hero-art{min-height:220px}.coop-hero-art .art-mark{font-size:80px}}
 </style>
 </head>
 <body>
 <main id="main">
-<section class="soon">
-  <div class="soon-bg"><span class="b b1"></span><span class="b b2"></span><span class="grain"></span></div>
-  <div class="container">
-    <div class="soon-inner">
-      <span class="badge reveal">사회적협동조합 두리손잡고</span>
-      <h1 class="reveal" data-delay=".05s">홈페이지를<br><span class="hl">준비하고 있습니다</span></h1>
-      <p class="lead reveal" data-delay=".1s">
-        사회적협동조합의 소개와 참여 안내를 담은 별도 홈페이지를 만들고 있습니다.
-        준비가 끝나는 대로 이곳에서 만나뵙겠습니다.
-      </p>
-
-      <div class="prog reveal" data-delay=".15s">
-        <div class="prog-bar" role="img" aria-label="홈페이지 준비 진행률 약 18%"><i></i></div>
-        <div class="prog-txt"><span>기획·자료 정리 단계</span><span>약 18%</span></div>
-      </div>
-
-      <div class="plan">
-        <div class="card card-pad reveal" data-delay=".2s">
-          <span class="st">step 01</span>
-          <h3 class="h3">조합 소개 · 운영 안내</h3>
-          <p class="muted" style="font-size:15px">조합의 설립 목적, 조합원 구성과 운영 체계를 정리합니다.</p>
-        </div>
-        <div class="card card-pad reveal" data-delay=".26s">
-          <span class="st">step 02</span>
-          <h3 class="h3">사업 안내</h3>
-          <p class="muted" style="font-size:15px">조합이 운영하는 사업과 연대 활동을 사업별로 안내합니다.</p>
-        </div>
-        <div class="card card-pad reveal" data-delay=".32s">
-          <span class="st">step 03</span>
-          <h3 class="h3">신청 · 문의</h3>
-          <p class="muted" style="font-size:15px">조합원 가입과 참여 문의 창구를 온라인으로 엽니다.</p>
+  <section class="coop-hero" aria-labelledby="coop-title">
+    <div class="container coop-hero-inner">
+      <div>
+        <span class="eyebrow">두리손잡고 사회적협동조합</span>
+        <h1 id="coop-title">의미 있는 하루,<br>함께 만드는 지역사회</h1>
+        <p class="lead">발달장애인과 청소년이 자신의 바람을 담은 활동에 참여하고, 지역사회와 관계를 넓혀 갈 수 있도록 함께합니다.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary btn-lg" href="#services">사업 알아보기</a>
+          <a class="btn btn-outline btn-lg" href="#contact">이용 문의</a>
         </div>
       </div>
-
-      <div class="contact-box reveal" data-delay=".38s">
-        <h3 class="h3" style="margin-bottom:8px">준비되기 전 문의는 이렇게</h3>
-        <p class="muted" style="font-size:15px;margin-bottom:10px">전화로 먼저 상담해 주시면 담당자가 안내드립니다.</p>
-        <div class="row" id="cRow1"></div>
-        <div class="row" id="cRow2"></div>
-        <div class="btn-row" style="margin-top:22px">
-          <a class="btn btn-primary" href="tel:031-853-3359">전화로 문의하기</a>
-          <a class="btn btn-outline" href="index.html">직업재활센터 홈페이지 보기</a>
-        </div>
+      <div class="coop-hero-art" aria-label="두리손잡고 사회적협동조합의 활동 방향">
+        <div class="art-top"><span>두리손잡고</span><span>함께하는 하루</span></div>
+        <div class="art-mark" aria-hidden="true">○○</div>
+        <div class="art-bottom"><span>참여</span><span>관계</span><span>자립</span></div>
       </div>
     </div>
-  </div>
-</section>
-</main>
+  </section>
 
+  <section class="section section--paper" id="about" aria-labelledby="about-title">
+    <div class="container coop-intro">
+      <div>
+        <span class="eyebrow">조합 소개</span>
+        <h2 class="h2" id="about-title">사람과 지역사회를<br>잇습니다</h2>
+        <p class="lead">두리손잡고 사회적협동조합은 장애인의 사회참여와 지역사회 중심의 활동을 지향합니다.</p>
+      </div>
+      <div class="coop-values">
+        <div class="coop-value"><b>자기 선택</b><p>참여자의 욕구를 반영한 활동을 중요하게 생각합니다.</p></div>
+        <div class="coop-value"><b>의미 있는 하루</b><p>일상 속 경험과 배움으로 하루를 채웁니다.</p></div>
+        <div class="coop-value"><b>지역사회 참여</b><p>지역사회 안에서 사람과 활동을 만납니다.</p></div>
+        <div class="coop-value"><b>함께하는 관계</b><p>이용자와 가족, 지역사회가 함께하는 방향을 추구합니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint" id="services" aria-labelledby="services-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">주요 사업</span>
+        <h2 class="h2" id="services-title">각자의 하루에 맞는 활동</h2>
+        <p>제공된 사업소개 자료에 명시된 두 가지 서비스를 안내합니다.</p>
+      </div>
+      <div class="coop-services">
+        <article class="coop-service">
+          <span class="badge">성인 발달장애인</span>
+          <h3>발달장애인 주간활동서비스</h3>
+          <p>낮 시간에 자신의 욕구를 반영한 지역사회 기반 활동에 참여하며 자립 생활과 사회참여를 넓혀 갑니다.</p>
+          <ul><li>의미 있는 하루를 위한 활동</li><li>지역사회 참여 경험</li><li>자립 생활 지원</li></ul>
+        </article>
+        <article class="coop-service">
+          <span class="badge">청소년 발달장애인</span>
+          <h3>방과후활동서비스</h3>
+          <p>그룹형 활동으로 의미 있는 여가와 성인기 자립 준비를 돕고, 방과후 돌봄의 빈틈을 줄이는 데 기여합니다.</p>
+          <ul><li>다양한 참여 프로그램</li><li>여가 활동과 자립 준비</li><li>가족의 사회·경제적 활동 지원</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper" id="activities" aria-labelledby="activities-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">활동 예시</span>
+        <h2 class="h2" id="activities-title">소개 자료 속 다양한 경험</h2>
+        <p>아래는 조합 홍보 자료에 소개된 활동 예시입니다. 실제 참여 내용과 일정은 문의해 주세요.</p>
+      </div>
+      <div class="coop-activities">
+        <article><h3>일상생활</h3><p>안전·위생 교육, 요리와 생활 활동</p></article>
+        <article><h3>배움과 표현</h3><p>인권 교육, 미술·음악·신체 활동</p></article>
+        <article><h3>지역사회 경험</h3><p>지역사회 활동, 체험과 나들이</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream" id="contact" aria-labelledby="contact-title">
+    <div class="container">
+      <div class="coop-contact">
+        <div>
+          <span class="eyebrow">이용 문의</span>
+          <h2 class="h2" id="contact-title">함께할 방법을 문의해 주세요</h2>
+          <p>전화 <span class="nb">031-853-3359</span> · 경기도 의정부시 오목로 225번길 100, CY타워 3층</p>
+        </div>
+        <a class="btn btn-primary btn-lg" href="tel:031-853-3359">전화 문의하기</a>
+      </div>
+      <p class="coop-source">내용 출처: 제공된 「두리손잡고 사회적협동조합 사업소개」, 「두리사협홍보」 및 「두리손잡고 사회적협동조합」 자료. 서비스 대상·이용 절차는 전화로 확인해 주세요.</p>
+    </div>
+  </section>
+</main>
 <script src="assets/site.js"></script>
-<script>
-/* 연락처 아이콘은 site.js 의 ICON 세트를 재사용한다(중복 SVG 방지) */
-(function(){
-  var I = (window.DURI && window.DURI.ICON) || {};
-  var r1 = document.getElementById("cRow1"), r2 = document.getElementById("cRow2");
-  if(r1) r1.innerHTML = (I.phone||"") + '<span><b>주간센터</b> <span class="nb">031-853-3359</span> · <b>직업재활센터</b> <span class="nb">031-853-3360</span></span>';
-  if(r2) r2.innerHTML = (I.pin||"") + '<span>경기도 의정부시 오목로 225번길 100, 3층 (민락동, CY타워)</span>';
-})();
-</script>
 </body>
 </html>

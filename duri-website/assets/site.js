@@ -10,9 +10,9 @@
   const SITE = document.documentElement.getAttribute("data-site") === "rehab" ? "rehab" : "coop";
   const SITES = {
     coop: {
-      full:"사회적협동조합 두리손잡고", short:"조합", line1:"두리손잡고", line2:"사회적협동조합",
+      full:"두리손잡고 사회적협동조합", short:"사회적협동조합", line1:"두리손잡고", line2:"사회적협동조합",
       home:"coop.html", key:"#2a8159",
-      desc:"<span class=\"nb\">직업재활·주간보호</span> 프로그램과<br>이용·실습 안내"
+      desc:"발달장애인 주간활동과<br>청소년 방과후활동서비스"
     },
     rehab:{
       full:"두리손잡고 직업재활센터", short:"직업재활센터", line1:"두리손잡고", line2:"직업재활센터",
@@ -69,9 +69,11 @@
     ]}
   ];
 
-  /* 조합 메뉴 — 페이지가 준비되면 NAV_REHAB 와 같은 형태로 채운다.
-     비어 있으면 헤더가 메뉴 없는 축약형으로 렌더된다. (rules/30-content.md 1절) */
-  const NAV_COOP = [];
+  const NAV_COOP = [
+    { label:"조합 소개", href:"coop.html#about", sub:[["조합 소개","coop.html#about"],["활동 방향","coop.html#about"]] },
+    { label:"주요 사업", href:"coop.html#services", sub:[["주간활동서비스","coop.html#services"],["방과후활동서비스","coop.html#services"],["활동 예시","coop.html#activities"]] },
+    { label:"이용 문의", href:"coop.html#contact", sub:[["전화·위치","coop.html#contact"]] }
+  ];
 
   const MENU = SITE === "rehab" ? NAV_REHAB : NAV_COOP;
 
@@ -114,7 +116,7 @@
     <div class="container nav-inner">
       <a class="wm" href="${ME.home}" aria-label="${ME.full} 홈">
         ${MARK}
-        <span class="wm-text">두리<b>손잡고</b>${SITE==="rehab"?' <span class="wm-sub">직업재활센터</span>':""}</span>
+        <span class="wm-text">두리<b>손잡고</b><span class="wm-sub">${SITE === "rehab" ? "직업재활센터" : "사회적협동조합"}</span></span>
       </a>
       ${hasMenu ? `<nav class="nav-main" aria-label="주 메뉴">
         ${MENU.map(m=>`
@@ -185,13 +187,13 @@
           <p style="max-width:300px;line-height:1.7">서로의 손을 맞잡고 함께 나아가는 길. 모두가 존중받는 따뜻한 공동체를 만들어갑니다.</p>
           <div class="foot-contact" style="margin-top:22px">
             <div class="row">${ICON.pin}<span>경기도 의정부시 오목로 225번길 100, 3층 (민락동, CY타워)</span></div>
-            <div class="row">${ICON.phone}<span><span class="nb">주간센터 031-853-3359</span> · <span class="nb">직업재활센터 031-853-3360</span></span></div>
+            <div class="row">${ICON.phone}<span>${SITE === "coop" ? "<span class=\"nb\">문의 031-853-3359</span>" : "<span class=\"nb\">주간센터 031-853-3359</span> · <span class=\"nb\">직업재활센터 031-853-3360</span>"}</span></div>
           </div>
         </div>`;
   const FOOT_BOTTOM = `
       <div class="foot-bottom">
-        <span>© 2026 사회적협동조합 두리손잡고. All rights reserved.</span>
-        <span>시설장 유선희 · 설립 2018년 10월 · 중증장애인생산품 생산시설</span>
+        <span>© 2026 두리손잡고 사회적협동조합. All rights reserved.</span>
+        ${SITE === "rehab" ? "<span>시설장 유선희 · 설립 2018년 10월 · 중증장애인생산품 생산시설</span>" : "<span>발달장애인 주간활동 · 청소년 방과후활동</span>"}
         <a class="foot-reset" href="index.html?gate=1" id="reopenGate">처음 선택 화면 다시 보기</a>
       </div>`;
 
@@ -203,9 +205,11 @@
       <div class="foot-top">
         ${FOOT_BRAND}
         <div class="foot-col">
-          <h2>사회적협동조합 두리손잡고</h2>
+          <h2>두리손잡고 사회적협동조합</h2>
           <ul>
-            <li><a href="coop.html">조합 소개 (준비중)</a></li>
+            <li><a href="coop.html#about">조합 소개</a></li>
+            <li><a href="coop.html#services">주요 사업</a></li>
+            <li><a href="coop.html#contact">이용 문의</a></li>
             <li><a href="index.html">직업재활센터 홈페이지</a></li>
           </ul>
         </div>
@@ -419,6 +423,7 @@
     btns.forEach((b,i)=>{
       if(b.getAttribute("type") === null) b.type = "button"; // 그룹 버튼이 폼을 제출하지 않도록
       b.addEventListener("click", ()=>{
+        if(b.dataset.unavailable){ showOk(b.dataset.unavailable, "정기후원은 현재 이용할 수 없습니다. 일시후원은 전화로 문의해 주세요."); return; }
         btns.forEach(x=>x.classList.remove("active"));
         b.classList.add("active");
         sync();

@@ -88,7 +88,7 @@ async function load(name, opts = {}) {
 {
   const { page } = await load("family");
   const r = await page.evaluate(() => {
-    const g = document.querySelector(".amt-row");
+    const g = document.querySelector(".seg");
     const btns = [...g.querySelectorAll("button")];
     return {
       role: g.getAttribute("role"),
@@ -98,7 +98,7 @@ async function load(name, opts = {}) {
       total: btns.length
     };
   });
-  ok("5.2.1", "후원 금액 버튼 그룹이 radiogroup + aria-checked 로 상태 전달",
+  ok("5.2.1", "후원 방식 버튼 그룹이 radiogroup + aria-checked 로 상태 전달",
     r.role === "radiogroup" && r.labelled && r.radios === r.total && r.checked === 1,
     `role=${r.role} 라벨=${r.labelled} radio ${r.radios}/${r.total} checked=${r.checked}`);
 }
