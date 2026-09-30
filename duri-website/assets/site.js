@@ -11,15 +11,15 @@
   const SITES = {
     coop: {
       full:"사회적협동조합 두리손잡고", short:"조합", line1:"두리손잡고", line2:"사회적협동조합",
-      home:"index.html", key:"#2a8159",
-      // 줄바꿈 위치를 쉼표로 고정한다. 자동 줄바꿈에 맡기면 "…함께하는 / 길" 처럼
-      // 한 음절만 남는다(1100·900px 실측). 문구를 고칠 때 <br> 를 함께 옮길 것.
-      desc:"임가공 사업과 친환경 화장지 생산,<br>후원·자원봉사로 함께하는 길"
+      home:"coop.html", key:"#2a8159",
+      desc:"<span class=\"nb\">직업재활·주간보호</span> 프로그램과<br>이용·실습 안내"
     },
     rehab:{
       full:"두리손잡고 직업재활센터", short:"직업재활센터", line1:"두리손잡고", line2:"직업재활센터",
-      home:"rehab.html", key:"#1f6f9e",
-      desc:"<span class=\"nb\">직업재활·주간보호</span> 프로그램과<br>이용·실습 안내"
+      home:"index.html", key:"#1f6f9e",
+      // 줄바꿈 위치를 쉼표로 고정한다. 자동 줄바꿈에 맡기면 "…함께하는 / 길" 처럼
+      // 한 음절만 남는다(1100·900px 실측). 문구를 고칠 때 <br> 를 함께 옮길 것.
+      desc:"임가공 사업과 친환경 화장지 생산,<br>후원·자원봉사로 함께하는 길"
     }
   };
   const ME = SITES[SITE];
@@ -49,7 +49,8 @@
     <circle cx="26" cy="14" r="9.5" fill="none" stroke="var(--accent)" stroke-width="4.4"/>
   </svg>`;
 
-  const NAV = [
+  /* 직업재활센터 메뉴 — 홈(index)과 14쪽 전부가 이 갈래다. (2026-09-30 조합↔센터 맞바꿈) */
+  const NAV_REHAB = [
     { label:"두리손잡고 소개", href:"about.html", sub:[
       ["인사말","about.html"],["운영현황","operation.html"],["조직도","org.html"],
       ["사업안내 및 비전","business.html"],["연혁","history.html"],["오시는 길","operation.html#location"]
@@ -68,11 +69,11 @@
     ]}
   ];
 
-  /* 직업재활센터 메뉴 — 페이지가 준비되면 NAV 와 같은 형태로 채운다.
+  /* 조합 메뉴 — 페이지가 준비되면 NAV_REHAB 와 같은 형태로 채운다.
      비어 있으면 헤더가 메뉴 없는 축약형으로 렌더된다. (rules/30-content.md 1절) */
-  const NAV_REHAB = [];
+  const NAV_COOP = [];
 
-  const MENU = SITE === "rehab" ? NAV_REHAB : NAV;
+  const MENU = SITE === "rehab" ? NAV_REHAB : NAV_COOP;
 
   const ICON = {
     pin:'<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
@@ -104,7 +105,7 @@
 
   /* ---------- header ---------- */
   const hasMenu = MENU.length > 0;
-  const donateBtn = SITE === "coop"
+  const donateBtn = SITE === "rehab"
     ? `<a class="btn btn-accent" href="family.html">${ICON.heart}<span>후원하기</span></a>` : "";
 
   const header = document.createElement("header");
@@ -113,7 +114,7 @@
     <div class="container nav-inner">
       <a class="wm" href="${ME.home}" aria-label="${ME.full} 홈">
         ${MARK}
-        <span class="wm-text">두리<b>손잡고</b>${SITE==="rehab"?' <span style="font-size:15px;font-weight:700;color:var(--brand-deep);letter-spacing:-.02em">직업재활센터</span>':""}</span>
+        <span class="wm-text">두리<b>손잡고</b>${SITE==="rehab"?' <span class="wm-sub">직업재활센터</span>':""}</span>
       </a>
       ${hasMenu ? `<nav class="nav-main" aria-label="주 메뉴">
         ${MENU.map(m=>`
@@ -197,15 +198,15 @@
   const footer = document.createElement("footer");
   footer.className = "site-footer";
   footer.setAttribute("aria-label", "사이트 정보");
-  footer.innerHTML = SITE === "rehab" ? `
+  footer.innerHTML = SITE === "coop" ? `
     <div class="container">
       <div class="foot-top">
         ${FOOT_BRAND}
         <div class="foot-col">
-          <h2>두리손잡고 직업재활센터</h2>
+          <h2>사회적협동조합 두리손잡고</h2>
           <ul>
-            <li><a href="rehab.html">센터 소개 (준비중)</a></li>
-            <li><a href="index.html">사회적협동조합 홈페이지</a></li>
+            <li><a href="coop.html">조합 소개 (준비중)</a></li>
+            <li><a href="index.html">직업재활센터 홈페이지</a></li>
           </ul>
         </div>
       </div>
@@ -539,8 +540,8 @@
 
   /* ============================================================
      진입 게이트 — 첫 방문 시 전체화면 좌/우 50% 분기
-     - 조합 홈(index)에서만, 그리고 선택 이력이 없을 때만 뜬다
-     - 조합 선택 → 제자리에서 닫힘 / 직업재활센터 선택 → rehab.html
+     - 직업재활센터 홈(index)에서만, 그리고 선택 이력이 없을 때만 뜬다
+     - 직업재활센터 선택 → 제자리에서 닫힘 / 조합 선택 → coop.html
      - JS 가 이 블록까지 오지 못하면 게이트가 없는 상태로 보인다(콘텐츠를 가두지 않음)
      규칙: rules/00-core.md 4절 · rules/20-design.md
      ============================================================ */
@@ -570,8 +571,8 @@
       a.addEventListener("click", e=>{
         const pick = a.getAttribute("data-site-pick");
         rememberSite(pick);
-        if(pick === "rehab") return;          // rehab.html 로 그대로 이동
-        e.preventDefault();                    // 조합은 이 페이지가 이미 목적지
+        if(pick === "coop") return;           // coop.html 로 그대로 이동
+        e.preventDefault();                    // 직업재활센터는 이 페이지가 이미 목적지
         document.body.style.overflow = "";
         gate.remove();
         // 주소창에 남은 ?gate=1 / #gate 를 지워 새로고침 시 다시 뜨지 않게 한다
@@ -600,7 +601,7 @@
   }
 
   const onHome = (here === "index.html" || here === "");
-  if(SITE === "coop" && onHome){
+  if(SITE === "rehab" && onHome){
     if(gateRequested()) openGate(true);        // 다시 보기 — 닫기 가능
     else if(!storedSite()) openGate(false);    // 첫 방문 — 선택이 곧 진행
   }
@@ -615,5 +616,5 @@
   }
 
   // expose site info + icons + auth + modal helpers for pages
-  window.DURI = { SITE, SITES, ICON, NAV, Auth, openLogin, openModal, closeModal, wireModal };
+  window.DURI = { SITE, SITES, ICON, NAV:MENU, Auth, openLogin, openModal, closeModal, wireModal };
 })();

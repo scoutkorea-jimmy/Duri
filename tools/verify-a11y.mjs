@@ -17,7 +17,7 @@ import puppeteer from "puppeteer-core";
 const BASE = "http://localhost:5599";
 const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const PAGES = ["index", "about", "operation", "org", "business", "history", "work",
-  "products", "notice", "gallery", "family", "internship", "volunteer", "market", "rehab"];
+  "products", "notice", "gallery", "family", "internship", "volunteer", "market", "coop"];
 
 const results = [];
 const ok = (item, name, pass, extra = "") => {

@@ -321,6 +321,7 @@ p{margin:0}
 .wm-mark{flex:none}
 .wm-text{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.03em}
 .wm-text b{color:var(--brand-deep);font-weight:800}
+.wm-sub{font-size:15px;font-weight:700;color:var(--brand-deep);letter-spacing:-.02em}
 
 .nav-main{display:flex;align-items:center;gap:2px;height:100%}
 .nav-item{position:relative;height:100%;display:flex;align-items:center}
@@ -384,6 +385,7 @@ p{margin:0}
   .wm{gap:8px}
   .wm-mark{width:32px;height:23px}
   .wm-text{font-size:17px}
+  .wm-sub{display:none}   /* 360px 가로 넘침 방지 — 갈래 이름은 전환 바·aria-label 에 있음 */
 }
 @media (max-width:520px){
   .nav-cta .btn-accent span{display:none}
@@ -609,9 +611,14 @@ html[data-site="rehab"]{
   --line-strong:#ccd7e0;
 
   /* 그린 스케일을 직접 참조하는 잔여 컴포넌트가 어긋나지 않도록 매핑 */
+  --green-50:var(--blue-50);
+  --green-100:var(--blue-100);
   --green-200:var(--blue-200);
+  --green-300:var(--blue-300);
   --green-400:var(--blue-400);
   --green-500:var(--blue-500);
+  --green-600:var(--blue-600);
+  --green-700:var(--blue-700);
   --green-800:var(--blue-800);
   --green-900:var(--blue-900);
 }

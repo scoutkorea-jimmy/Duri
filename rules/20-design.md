@@ -254,7 +254,7 @@ green-700→600 그라데이션 배경 + 방사형 오버레이, 글자 흰색. 
 - 상단에 `.gate-head`(로고 + "어느 곳을 찾으시나요?"), 하단에 `.gate-foot`(상단 바로 언제든 이동 가능하다는 안내).
 - ≤760px에서 `flex-direction:column` → **상하 50/50** 분할, hover 확대 비활성.
 - `prefers-reduced-motion` 시 확대·페이드 전환 없음.
-- 선택하면 `.gate`에 `.out`이 붙어 페이드아웃 후 DOM에서 제거됩니다. 조합 선택은 제자리, 직업재활센터 선택은 `rehab.html`로 이동.
+- 선택하면 `.gate`에 `.out`이 붙어 페이드아웃 후 DOM에서 제거됩니다. 직업재활센터 선택은 제자리(`index.html`), 조합 선택은 `coop.html`로 이동.
 
 > ⚠️ 게이트는 **JS가 삽입**합니다. 절대 HTML에 정적으로 넣지 마세요. JS가 실패했을 때 콘텐츠를 영구히 가리게 됩니다.
 
@@ -279,10 +279,11 @@ green-700→600 그라데이션 배경 + 방사형 오버레이, 글자 흰색. 
 
 ## 6. 헤더 / 푸터 / 네비게이션
 
-- **전부 [assets/site.js](../duri-website/assets/site.js)가 주입**합니다. 각 HTML에 직접 넣지 마세요. 메뉴는 `NAV` 배열로 관리.
+- **전부 [assets/site.js](../duri-website/assets/site.js)가 주입**합니다. 각 HTML에 직접 넣지 마세요. 메뉴는 `NAV_REHAB` / `NAV_COOP` 배열로 관리.
 - **최상단은 사이트 전환 바 `.site-switch`** 입니다. 헤더는 그 아래에 `top:var(--switch-h)`로 붙습니다. 헤더 `top`을 `0`으로 되돌리면 전환 바가 가려집니다.
 - 헤더 `.site-header`: sticky, 반투명+블러 배경, 스크롤 시 `.scrolled`(흰 배경+보더). 높이 78px.
-- `data-site="rehab"` 페이지에서는 헤더가 **메뉴 없는 축약형**(로고 + 계정 컨트롤)으로, 푸터는 간략형으로 주입됩니다. 직업재활센터 메뉴가 생기면 `site.js`의 `NAV_REHAB`를 채우면 됩니다.
+- `data-site="coop"` 페이지(`coop.html`)에서는 헤더가 **메뉴 없는 축약형**(로고 + 계정 컨트롤)으로, 푸터는 간략형으로 주입됩니다. 조합 메뉴가 생기면 `site.js`의 `NAV_COOP`를 채우면 됩니다.
+- 헤더 로고 옆 "직업재활센터"(`.wm-sub`)는 400px 이하에서 숨깁니다(360px 가로 넘침 방지).
 - 메뉴 `.nav-top`(현재 페이지 `.active` → 그린 + 하단 밑줄), hover 시 메가드롭다운 `.mega`(흰 패널). 라벨은 **줄바꿈 금지**(`white-space:nowrap`).
 - **반응형**: `max-width:1260px`에서 데스크탑 메뉴 → 버거(`.nav-burger`)+풀스크린 `.mobile-nav`로 전환. (로그인 계정 컨트롤까지 한 줄에 들어가도록 1080→1260으로 상향됨)
 - 푸터 `.site-footer`: green-900 배경, 4열(브랜드/소개/사업·소식/함께하기).

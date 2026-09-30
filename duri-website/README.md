@@ -25,7 +25,8 @@
 
 ```
 .
-├─ index.html            메인 홈
+├─ index.html            직업재활센터 메인 홈 (+ 진입 게이트)
+├─ coop.html             사회적협동조합 — 준비중
 ├─ about.html            소개 - 인사말 / 주요사업
 ├─ operation.html        소개 - 운영현황 (시설·설비·오시는 길)  ※ #location
 ├─ org.html              소개 - 조직도
@@ -55,7 +56,7 @@
 
 ## 헤더 / 푸터 수정
 
-메뉴 구성, 연락처, 푸터 링크는 모두 `assets/site.js` 상단의 `NAV` 배열과 footer HTML에서 한 곳에서 관리합니다.
+메뉴 구성, 연락처, 푸터 링크는 모두 `assets/site.js` 상단의 `NAV_REHAB` 배열과 footer HTML에서 한 곳에서 관리합니다.
 
 ## 교체가 필요한 항목 (기획안 기준)
 

@@ -15,8 +15,9 @@
 │  └─ WORKLOG.md            지시·개선 이력(성공/실패 사유)
 ├─ .github/workflows/deploy.yml
 └─ duri-website/            ★ 배포 산출물
-   ├─ index.html            조합 메인(히어로/소식/제품/프로그램/CTA/파트너 마퀴) + 진입 게이트
-   ├─ rehab.html            직업재활센터 — 준비중 페이지 (data-site="rehab")
+   ├─ index.html            직업재활센터 메인(히어로/소식/제품/프로그램/CTA/파트너) + 진입 게이트
+   ├─ coop.html             사회적협동조합 — 준비중 페이지 (data-site="coop")
+   │  ※ 아래 13쪽과 index 는 전부 data-site="rehab" (2026-09-30 맞바꿈)
    ├─ about · operation · org · business · history   소개 계열
    ├─ work · products                                사업안내
    ├─ notice.html           공지 게시판  ← board.js 사용
@@ -41,7 +42,7 @@
 | 사이트 판별 | `<html data-site>` 를 읽어 `SITE` = `"coop"` \| `"rehab"` 결정. favicon도 갈래 색으로 주입 |
 | 진입 게이트 | `SITE==="coop"` 이고 `localStorage["duri.site.v1"]`가 비었을 때만 전체화면 `.gate` 삽입 |
 | 상단 전환 바 | `.site-switch` 를 `<body>` 최상단에 삽입. 현재 갈래에 `.on` |
-| 헤더·메가메뉴 | `NAV` / `NAV_REHAB` 배열로 마크업 생성·주입. 버거 메뉴, 스크롤 시 `.scrolled` |
+| 헤더·메가메뉴 | `NAV_REHAB` / `NAV_COOP` 배열로 마크업 생성·주입. 버거 메뉴, 스크롤 시 `.scrolled` |
 | 푸터 | 갈래별 푸터 주입 (`rehab`은 간략형) |
 | 인증 `Auth` | `admin/admin` 데모 로그인. 상태 `localStorage["duri.auth.v1"]`. 변경 시 `document`에 **`duri:auth`** 이벤트 발생 |
 | 모달 헬퍼 | `openModal` / `closeModal` / `wireModal` (ESC·배경 클릭 닫힘) |
@@ -50,10 +51,10 @@
 
 **노출 API**
 ```js
-window.DURI = { SITE, ICON, NAV, Auth, openLogin, openModal, closeModal, wireModal }
+window.DURI = { SITE, SITES, ICON, NAV /* 현재 갈래 메뉴 */, Auth, openLogin, openModal, closeModal, wireModal }
 ```
 
-> 메뉴·연락처·푸터는 `site.js`의 `NAV` 배열과 footer HTML만 고치면 **전 페이지에 반영**됩니다.
+> 메뉴·연락처·푸터는 `site.js`의 `NAV_REHAB` 배열과 footer HTML만 고치면 **전 페이지에 반영**됩니다.
 
 ### localStorage 키 목록
 
@@ -85,8 +86,8 @@ window.DURI = { SITE, ICON, NAV, Auth, openLogin, openModal, closeModal, wireMod
 2. `<head>`에 `<link rel="stylesheet" href="assets/styles.css">` — **상대경로**.
 3. `<body>` 끝에 `<script src="assets/site.js"></script>`.
 4. **헤더·푸터·전환 바는 자동 주입**되므로 본문(`<main>` 상당 영역)만 작성합니다.
-5. 직업재활센터 쪽 페이지라면 `<html lang="ko" data-site="rehab">`.
-6. 메뉴에 노출하려면 `site.js`의 `NAV`(조합) 또는 `NAV_REHAB`(직업재활센터) 배열에 추가 → [30-content.md](30-content.md)
+5. 직업재활센터 쪽 페이지는 `<html lang="ko" data-site="rehab">`, 조합 쪽은 `data-site="coop"`.
+6. 메뉴에 노출하려면 `site.js`의 `NAV_REHAB`(직업재활센터) 또는 `NAV_COOP`(조합) 배열에 추가 → [30-content.md](30-content.md)
 7. 페이지 전용 CSS는 해당 HTML의 `<style>` 블록에 둡니다. **2개 이상 페이지가 쓰는 순간 `styles.css`로 승격**시키세요.
 
 ---

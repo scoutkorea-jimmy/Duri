@@ -4,7 +4,7 @@
    준비:  cd /tmp && npm i puppeteer-core
    실행:  python3 -m http.server 5599 --directory duri-website &
           NODE_PATH=/tmp/node_modules node tools/verify-headless.mjs
-   검사: 진입 게이트 / 사이트 전환 바 / rehab 테마 / 접근성 버그 2건
+   검사: 진입 게이트 / 사이트 전환 바 / 갈래 테마(홈=직업재활센터·블루, coop.html=조합·그린) / 접근성 버그 2건
          / 게시판 로그인·글쓰기·삭제 / 폼 검증 / 콘솔 에러 0
    ============================================================ */
 import puppeteer from "puppeteer-core";
@@ -53,42 +53,51 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
   ok("게이트: 첫 방문 시 표시", !!g);
   ok("게이트: 좌우 2분할 50/50", g && g.count === 2 && Math.abs(g.widths[0] - g.widths[1]) <= 1 && Math.abs(g.widths[0] - g.vw / 2) <= 1, g && `폭 ${g.widths} / 뷰포트 ${g.vw}`);
   ok("게이트: 전체화면 높이", g && g.full);
-  ok("게이트: 좌=조합 / 우=직업재활센터", g && /사회적협동조합/.test(g.names[0]) && /직업재활센터/.test(g.names[1]) && g.hrefs[1] === "rehab.html", g && g.hrefs.join(" | "));
+  ok("게이트: 좌=조합(coop.html) / 우=직업재활센터(index.html)", g && /사회적협동조합/.test(g.names[0]) && /직업재활센터/.test(g.names[1]) && g.hrefs[0] === "coop.html" && g.hrefs[1] === "index.html", g && g.hrefs.join(" | "));
   ok("게이트: 진입 시 첫 선택지에 포커스(키보드 접근)", g && /gate-half/.test(g.focused || ""), g && `activeElement=${g.focused}`);
   ok("게이트 페이지: 콘솔 에러 0", errors.length === 0, errors.join(" / "));
   await page.close();
 }
 
-/* ---------- 2. 좌측(조합) 선택 → 게이트 소멸 + 재방문 미노출 ---------- */
+/* ---------- 2. 우측(직업재활센터) 선택 → 제자리에서 게이트 소멸 + 오션 블루 + 재방문 미노출 ---------- */
 {
   const { page, errors } = await fresh("/index.html");
   await page.evaluate(() => localStorage.clear());
   await page.reload({ waitUntil: "networkidle2" });
-  await page.evaluate(() => document.querySelector(".gate-half.coop").click());
+  await page.evaluate(() => document.querySelector(".gate-half.rehab").click());
   await new Promise(r => setTimeout(r, 500));
   const after = await page.evaluate(() => ({
     gate: !!document.querySelector(".gate"),
     stored: localStorage.getItem("duri.site.v1"),
-    overflow: document.body.style.overflow
+    overflow: document.body.style.overflow,
+    nav: !!document.querySelector(".nav-main"),
+    donate: !!document.querySelector('.nav-cta a[href="family.html"]'),
+    switchOn: (document.querySelector(".site-switch .sw-item.on") || {}).textContent,
+    footerBg: getComputedStyle(document.querySelector(".site-footer")).backgroundColor,
+    primaryBg: getComputedStyle(document.querySelector(".btn-primary")).backgroundColor
   }));
-  ok("조합 선택: 게이트 DOM 제거", after.gate === false);
-  ok("조합 선택: localStorage 에 coop 저장", after.stored === "coop", `저장값=${after.stored}`);
-  ok("조합 선택: 스크롤 잠금 해제", after.overflow === "", `overflow="${after.overflow}"`);
+  ok("직업재활센터 선택: 게이트 DOM 제거", after.gate === false);
+  ok("직업재활센터 선택: localStorage 에 rehab 저장", after.stored === "rehab", `저장값=${after.stored}`);
+  ok("직업재활센터 선택: 스크롤 잠금 해제", after.overflow === "", `overflow="${after.overflow}"`);
+  ok("rehab 홈: 프라이머리 버튼 실제 렌더색 = rgb(31,111,158)", after.primaryBg.replace(/\s/g, "") === "rgb(31,111,158)", after.primaryBg);
+  ok("rehab 홈: 푸터가 블루 딥으로 렌더", after.footerBg.replace(/\s/g, "") === "rgb(13,44,64)", after.footerBg);
+  ok("rehab 홈: 메뉴·후원 버튼 주입", after.nav && after.donate);
+  ok("rehab 홈: 전환 바 활성 항목이 직업재활센터", /직업재활센터/.test(after.switchOn || ""), after.switchOn);
   await page.reload({ waitUntil: "networkidle2" });
   const revisit = await page.evaluate(() => !!document.querySelector(".gate"));
   ok("재방문: 게이트 다시 뜨지 않음", revisit === false);
-  ok("조합 홈: 콘솔 에러 0", errors.length === 0, errors.join(" / "));
+  ok("직업재활센터 홈: 콘솔 에러 0", errors.length === 0, errors.join(" / "));
   await page.close();
 }
 
-/* ---------- 3. 우측(직업재활센터) 선택 → rehab.html 이동 + 오션 블루 ---------- */
+/* ---------- 3. 좌측(조합) 선택 → coop.html 이동 + 그린 ---------- */
 {
   const { page, errors } = await fresh("/index.html");
   await page.evaluate(() => localStorage.clear());
   await page.reload({ waitUntil: "networkidle2" });
   await Promise.all([
     page.waitForNavigation({ waitUntil: "networkidle2" }),
-    page.click(".gate-half.rehab")
+    page.click(".gate-half.coop")
   ]);
   const r = await page.evaluate(() => {
     const cs = getComputedStyle(document.documentElement);
@@ -105,15 +114,14 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
       primaryBg: getComputedStyle(document.querySelector(".btn-primary")).backgroundColor
     };
   });
-  ok("직업재활센터 선택: rehab.html 로 이동", /rehab\.html$/.test(r.url), r.url);
-  ok("직업재활센터 선택: localStorage 에 rehab 저장", r.stored === "rehab", `저장값=${r.stored}`);
-  ok("rehab: --brand 가 오션 블루로 계산", /#1f6f9e/i.test(r.brand) || r.brand === "var(--blue-600)", `--brand=${r.brand} / 버튼 실제색=${r.primaryBg}`);
-  ok("rehab: 프라이머리 버튼 실제 렌더색 = rgb(31,111,158)", r.primaryBg.replace(/\s/g, "") === "rgb(31,111,158)", r.primaryBg);
-  ok("rehab: 푸터가 블루 딥으로 렌더", r.footerBg.replace(/\s/g, "") === "rgb(13,44,64)", r.footerBg);
-  ok("rehab: 조합 메뉴 미주입", r.nav === false);
-  ok("rehab: 후원 버튼 미주입", r.donate === false);
-  ok("rehab: 전환 바 활성 항목이 직업재활센터", /직업재활센터/.test(r.switchOn || ""), r.switchOn);
-  ok("rehab: 콘솔 에러 0", errors.length === 0, errors.join(" / "));
+  ok("조합 선택: coop.html 로 이동", /coop\.html$/.test(r.url), r.url);
+  ok("조합 선택: localStorage 에 coop 저장", r.stored === "coop", `저장값=${r.stored}`);
+  ok("coop: 갈래 속성 = coop", r.site === "coop", r.site);
+  ok("coop: 프라이머리 버튼 실제 렌더색 = rgb(42,129,89)", r.primaryBg.replace(/\s/g, "") === "rgb(42,129,89)", r.primaryBg);
+  ok("coop: 메뉴 미주입(준비중)", r.nav === false);
+  ok("coop: 후원 버튼 미주입", r.donate === false);
+  ok("coop: 전환 바 활성 항목이 조합", /조합/.test(r.switchOn || ""), r.switchOn);
+  ok("coop: 콘솔 에러 0", errors.length === 0, errors.join(" / "));
   await page.close();
 }
 
@@ -173,7 +181,7 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
     inline.gate && !/gate=1/.test(inline.url), `${inline.url}`);
   await page.goto(BASE + "/index.html?gate=1", { waitUntil: "networkidle2" });
   const cleaned = await page.evaluate(async () => {
-    document.querySelector(".gate-half.coop").click();
+    document.querySelector(".gate-half.rehab").click();
     await new Promise(r => setTimeout(r, 300));
     return location.search;
   });
@@ -194,7 +202,7 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
 
 /* ---------- 4. 전환 바 — 전 페이지 존재 / 높이 / 헤더 겹침 ---------- */
 {
-  const pages = ["/index.html", "/about.html", "/notice.html", "/gallery.html", "/market.html", "/rehab.html"];
+  const pages = ["/index.html", "/about.html", "/notice.html", "/gallery.html", "/market.html", "/coop.html"];
   let allPresent = true, detail = [];
   for (const p of pages) {
     const { page } = await fresh(p);
@@ -234,7 +242,7 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
 /* ---------- 4-1. 한글 줄바꿈 — 반드시 단어(어절) 단위 ---------- */
 {
   const PAGES = ["index", "about", "operation", "org", "business", "history", "work",
-    "products", "notice", "gallery", "family", "internship", "volunteer", "market", "rehab"];
+    "products", "notice", "gallery", "family", "internship", "volunteer", "market", "coop"];
   const bad = [], overflow = [];
   for (const n of PAGES) {
     const { page } = await fresh(`/${n}.html`);
@@ -324,7 +332,7 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
       if (cur.trim()) out.push(cur.trim());
       return out.filter(Boolean);
     }
-    const d = document.querySelector(".gate-half.coop .gate-desc");
+    const d = document.querySelector(".gate-half.rehab .gate-desc");
     return { html: d.innerHTML, lines: lines(d), br: d.querySelectorAll("br").length };
   });
   ok("게이트 설명이 쉼표에서 2줄로 고정",
@@ -334,7 +342,7 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
 }
 {
   const bad = [];
-  for (const n of ["index", "about", "family", "notice", "gallery", "rehab"]) {
+  for (const n of ["index", "about", "family", "notice", "gallery", "coop"]) {
     const { page } = await fresh(`/${n}.html`);
     await page.evaluate(() => localStorage.clear());
     await page.reload({ waitUntil: "networkidle2" });
