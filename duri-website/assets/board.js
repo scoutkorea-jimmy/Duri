@@ -18,29 +18,7 @@
   // 분류 라벨(탭) → 게시글 category
   const TAB_MAP = { "전체":null, "공지사항":"공지", "새소식":"새소식", "언론보도":"언론보도" };
 
-  /* ---------- seed (예시 게시물) ---------- */
-  const SEED = [
-    { id:"s24", cat:"공지", pinned:true,  date:"2025.05.12", title:"2025년 사회복지현장실습생 모집 안내",
-      body:"두리손잡고에서 2025년 사회복지현장실습생을 모집합니다.\n\n· 모집기간: 2025년 5월 한 달간\n· 실습분야: 직업재활, 주간보호\n· 신청방법: 홈페이지 ‘실습 신청하기’ 메뉴\n\n자세한 사항은 직업재활센터(031-853-3360)로 문의 바랍니다." },
-    { id:"s23", cat:"공지", pinned:true,  date:"2025.04.28", title:"두리손잡고 점보롤 · 페이퍼타올 신규 입고 안내",
-      body:"두리손잡고 근로자들이 직접 생산한 친환경 점보롤·페이퍼타올이 신규 입고되었습니다.\n‘두리손잡고 마켓’에서 만나보실 수 있습니다." },
-    { id:"s22", cat:"새소식", pinned:false, date:"2025.04.15", title:"CHALLENGE 체육교실 봄학기 활동 후기",
-      body:"봄학기 CHALLENGE 체육교실 활동이 마무리되었습니다. 함께해 주신 모든 분들께 감사드립니다." },
-    { id:"s21", cat:"공지", pinned:false, date:"2025.03.30", title:"2025년 상반기 자원봉사자 모집 안내",
-      body:"두리손잡고와 함께할 자원봉사자를 모집합니다. ‘자원봉사 신청하기’ 메뉴를 통해 신청해 주세요." },
-    { id:"s20", cat:"언론보도", pinned:false, date:"2025.03.11", title:"중증장애인생산품 생산시설 지정 기념 소식",
-      body:"두리손잡고가 중증장애인생산품 생산시설로 지정되었습니다." },
-    { id:"s19", cat:"공지", pinned:false, date:"2025.02.20", title:"두리손잡고 후원의 밤 행사 안내",
-      body:"따뜻한 나눔의 자리, 두리손잡고 후원의 밤에 여러분을 초대합니다." },
-    { id:"s18", cat:"새소식", pinned:false, date:"2025.02.05", title:"두리손잡고 가족 나들이 · 숲체험 활동 안내",
-      body:"두리손잡고 가족들과 함께하는 숲체험 나들이를 진행합니다." },
-    { id:"s17", cat:"공지", pinned:false, date:"2025.01.22", title:"2025년 설 연휴 운영 안내",
-      body:"설 연휴 기간 운영 일정을 안내드립니다." },
-    { id:"s16", cat:"새소식", pinned:false, date:"2025.01.08", title:"경기도 장애인복지시설 재활프로그램 진행 결과",
-      body:"경기도 장애인복지시설 재활프로그램이 성공적으로 진행되었습니다." },
-    { id:"s15", cat:"공지", pinned:false, date:"2024.12.18", title:"기부금영수증 발급 안내",
-      body:"연말정산용 기부금영수증 발급 안내입니다." }
-  ];
+  const SEED = []; // 확인되지 않은 예시 공지는 공개하지 않는다.
 
   /* ---------- storage ---------- */
   function load(){ try{ return JSON.parse(localStorage.getItem(POSTS_KEY)) || []; }catch(e){ return []; } }
@@ -103,7 +81,7 @@
     const slice = list.slice(start, start + PER_PAGE);
 
     if(slice.length === 0){
-      boardEl.innerHTML = `<div class="board-empty">검색 결과가 없습니다.</div>`;
+      boardEl.innerHTML = `<div class="board-empty">등록된 공지사항이 없습니다.</div>`;
     } else {
       boardEl.innerHTML = slice.map(p=>{
         const no = p.pinned

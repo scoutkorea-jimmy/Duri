@@ -19,7 +19,7 @@
       home:"index.html", key:"#1f6f9e",
       // 줄바꿈 위치를 쉼표로 고정한다. 자동 줄바꿈에 맡기면 "…함께하는 / 길" 처럼
       // 한 음절만 남는다(1100·900px 실측). 문구를 고칠 때 <br> 를 함께 옮길 것.
-      desc:"임가공 사업과 친환경 화장지 생산,<br>후원·자원봉사로 함께하는 길"
+      desc:"직업재활과 점보롤·핸드타월 생산,<br>후원·자원봉사로 함께하는 길"
     }
   };
   const ME = SITES[SITE];
@@ -56,7 +56,7 @@
       ["사업안내 및 비전","business.html"],["연혁","history.html"],["오시는 길","operation.html#location"]
     ]},
     { label:"사업안내", href:"work.html", sub:[
-      ["임가공 사업","work.html"],["생산 공정","work.html#process"],["두리손잡고 화장지","products.html"],["친환경 인증","products.html#cert"]
+      ["임가공 사업","work.html"],["생산 공정","work.html#process"],["두리손잡고 화장지","products.html"],["생산시설 지정","products.html#cert"]
     ]},
     { label:"두리손잡고 소식", href:"notice.html", sub:[
       ["공지사항","notice.html"],["사진갤러리","gallery.html"]
@@ -65,7 +65,7 @@
       ["후원·가족되기","family.html"],["실습 신청하기","internship.html"],["자원봉사 신청하기","volunteer.html"]
     ]},
     { label:"두리손잡고 마켓", href:"market.html", sub:[
-      ["점보롤 화장지","market.html"],["페이퍼타올","market.html"],["각티슈","market.html"]
+      ["점보롤 화장지","market.html"],["핸드타월","market.html"]
     ]}
   ];
 
@@ -185,14 +185,14 @@
           <div class="wm" >${MARK}<span>두리<b style="color:var(--green-400)">손잡고</b></span></div>
           <p style="max-width:300px;line-height:1.7">서로의 손을 맞잡고 함께 나아가는 길. 모두가 존중받는 따뜻한 공동체를 만들어갑니다.</p>
           <div class="foot-contact" style="margin-top:22px">
-            <div class="row">${ICON.pin}<span>경기도 의정부시 오목로 225번길 100, 3층 (민락동, CY타워)</span></div>
-            <div class="row">${ICON.phone}<span>${SITE === "coop" ? "<span class=\"nb\">문의 031-853-3359</span>" : "<span class=\"nb\">주간센터 031-853-3359</span> · <span class=\"nb\">직업재활센터 031-853-3360</span>"}</span></div>
+            <div class="row">${ICON.pin}<span>${SITE === "coop" ? "경기도 의정부시 오목로225번길 100, CY타워 3층" : "경기도 의정부시 오목로205번길 21, 골든프라자 3차 503~505호"}</span></div>
+            <div class="row">${ICON.phone}<span>${SITE === "coop" ? "<span class=\"nb\">문의 031-853-3359</span>" : "직업재활센터 031-878-3366"}</span></div>
           </div>
         </div>`;
   const FOOT_BOTTOM = `
       <div class="foot-bottom">
         <span>© 2026 두리손잡고 사회적협동조합. All rights reserved.</span>
-        ${SITE === "rehab" ? "<span>시설장 유선희 · 설립 2018년 10월 · 중증장애인생산품 생산시설</span>" : "<span>발달장애인 주간활동 · 청소년 방과후활동</span>"}
+        ${SITE === "rehab" ? "<span>시설장 유선희 · 장애인근로사업장 · 중증장애인생산품 생산시설</span>" : "<span>발달장애인 주간활동 · 청소년 방과후활동</span>"}
         <a class="foot-reset" href="index.html?gate=1" id="reopenGate">처음 선택 화면 다시 보기</a>
       </div>`;
 
@@ -443,43 +443,6 @@
   }
   document.querySelectorAll(".seg, .amt-row").forEach(g=>makeToggleGroup(g));
 
-  /* ---------- gallery: filter + lightbox ---------- */
-  const masonry = document.querySelector(".masonry");
-  if(masonry){
-    const tiles = Array.prototype.slice.call(masonry.querySelectorAll(".tile"));
-    const fr = document.querySelector(".filter-row");
-    if(fr) makeToggleGroup(fr, b=>{
-      const cat = b.textContent.trim();
-      tiles.forEach(t=>{ t.style.display = (cat==="전체" || t.dataset.cat===cat) ? "" : "none"; });
-      if(window.__revealRescan) window.__revealRescan();
-    });
-    const gModal = document.createElement("div");
-    gModal.className = "modal";
-    gModal.innerHTML = `
-      <div class="modal-backdrop" data-close></div>
-      <div class="modal-card lg" style="padding:0;overflow:hidden">
-        <button class="m-close" data-close aria-label="닫기" style="background:rgba(255,255,255,.85)">${ICON.x}</button>
-        <div id="gPhoto" style="height:330px;position:relative"></div>
-        <div style="padding:22px 28px">
-          <h3 class="m-title" id="gCap" style="font-size:20px;margin:0"></h3>
-          <p class="m-sub" id="gMeta" style="margin:6px 0 0"></p>
-        </div>
-      </div>`;
-    document.body.appendChild(gModal);
-    wireModal(gModal);
-    tiles.forEach(t=>t.addEventListener("keydown", e=>{
-      if(e.key === "Enter" || e.key === " "){ e.preventDefault(); t.click(); }
-    }));
-    tiles.forEach(t=>t.addEventListener("click", ()=>{
-      const ph = t.querySelector(".ph"), cap = t.querySelector(".cap"), yr = t.querySelector(".yr");
-      const grad = ph ? Array.prototype.slice.call(ph.classList).find(c=>/^g\d$/.test(c)) : "";
-      gModal.querySelector("#gPhoto").innerHTML = `<div class="ph ${grad||""}" style="position:absolute;inset:0"></div>`;
-      gModal.querySelector("#gCap").textContent = cap ? cap.textContent : "두리손잡고 갤러리";
-      gModal.querySelector("#gMeta").textContent = (yr ? yr.textContent + " · " : "") + "실제 사진은 추후 교체됩니다.";
-      openModal(gModal);
-    }));
-  }
-
   /* ---------- application / inquiry forms ---------- */
   Array.prototype.slice.call(document.querySelectorAll("form")).forEach(form=>{
     if(form.id === "loginForm" || form.id === "writeForm") return;
@@ -525,6 +488,7 @@
   });
 
   /* ---------- scroll reveal (rAF-based; robust w/o IntersectionObserver) ---------- */
+  if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion-ready");
   let ticking = false;
   function check(){
     ticking = false;

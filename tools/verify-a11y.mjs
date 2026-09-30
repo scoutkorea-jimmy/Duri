@@ -209,21 +209,14 @@ async function load(name, opts = {}) {
 {
   const { page } = await load("gallery");
   const r = await page.evaluate(() => {
-    const t = [...document.querySelectorAll(".tile")];
-    return { total: t.length,
-             kb: t.filter(x => x.getAttribute("role") === "button" && x.getAttribute("tabindex") === "0").length,
-             named: t.filter(x => x.getAttribute("aria-label")).length };
+    return {
+      placeholders: document.querySelectorAll(".tile").length,
+      explanation: document.querySelector(".editorial-lead")?.textContent || "",
+      links: [...document.querySelectorAll(".editorial-body a")].map(a => a.getAttribute("href"))
+    };
   });
-  ok("6.1.1", "갤러리 타일이 키보드로 조작 가능 (role=button · tabindex=0 · 이름)",
-    r.total > 0 && r.kb === r.total && r.named === r.total, `${r.kb}/${r.total} 조작가능, ${r.named} 이름있음`);
-  const opened = await page.evaluate(async () => {
-    const t = document.querySelector(".tile");
-    t.focus();
-    t.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
-    await new Promise(r => setTimeout(r, 250));
-    return !!document.querySelector(".modal.open");
-  });
-  ok("6.1.1", "갤러리 타일 Enter 키로 확대 보기 열림", opened);
+  ok("5.4.1", "미확인 사진을 갤러리로 제시하지 않음", r.placeholders === 0 && /사진을 준비/.test(r.explanation));
+  ok("6.1.1", "사진이 없어도 사업·문의 링크로 이동 가능", r.links.includes("business.html") && r.links.includes("operation.html#location"));
 }
 
 /* ============================================================

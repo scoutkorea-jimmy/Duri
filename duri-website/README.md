@@ -28,12 +28,12 @@
 ├─ index.html            직업재활센터 메인 홈 (+ 진입 게이트)
 ├─ coop.html             두리손잡고 사회적협동조합 — 소개·사업 안내
 ├─ about.html            소개 - 인사말 / 주요사업
-├─ operation.html        소개 - 운영현황 (시설·설비·오시는 길)  ※ #location
-├─ org.html              소개 - 조직도
+├─ operation.html        소개 - 운영현황·이용절차·오시는 길  ※ #location
+├─ org.html              소개 - 운영 체계
 ├─ business.html         소개 - 사업안내 및 비전
 ├─ history.html          소개 - 연혁 (타임라인)
 ├─ work.html             사업안내 - 임가공 사업 / 생산공정  ※ #process
-├─ products.html         사업안내 - 두리손잡고 화장지 / 친환경 인증  ※ #cert
+├─ products.html         사업안내 - 생산품 / 중증장애인생산품 시설 지정  ※ #cert
 ├─ notice.html           소식 - 공지사항 게시판
 ├─ gallery.html          소식 - 사진갤러리
 ├─ family.html           가족되기 - 후원·가족되기  ※ #donate
@@ -41,14 +41,15 @@
 ├─ volunteer.html        가족되기 - 자원봉사 신청하기
 ├─ market.html           두리손잡고 마켓
 └─ assets/
-   ├─ styles.css         디자인 시스템 (전 페이지 공유)
+   ├─ styles.css         기존 기능·레이아웃 구조 (전 페이지 공유)
+   ├─ m3.css             M3 시각 시스템·모션 (전 페이지 공유)
    └─ site.js            헤더(메가메뉴)·푸터·스크롤 인터랙션 (전 페이지 공유)
 ```
 
 ## 디자인 시스템
 
 - **서체**: Pretendard (CDN). 오프라인 배포 시 로컬 폰트로 교체 권장.
-- **컬러**: `assets/styles.css`의 공통 `--md-sys-color-*` 역할과 갈래별 `--brand` 토큰으로 관리.
+- **컬러**: `assets/m3.css`의 공통 `--md-sys-color-*` 역할과 갈래별 `--brand` 토큰으로 관리.
   - 핵심 토큰: `--brand`, `--brand-deep`, `--brand-soft`, `--brand-tint`, `--accent`
 - **팔레트**: 조합 그린·센터 오션 블루를 유지하고 M3 표면·모양·버튼을 공통 적용합니다. (구 "디자인 옵션" 토글은 제거됨)
 - **게시판/로그인**: 공지사항 게시판 글 작성은 관리자 로그인(임시 계정 `admin`/`admin`) 후 가능하며, 데이터는 브라우저 `localStorage` 에 저장됩니다.

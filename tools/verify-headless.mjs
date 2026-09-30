@@ -84,8 +84,8 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
   ok("직업재활센터 선택: 게이트 DOM 제거", after.gate === false);
   ok("직업재활센터 선택: localStorage 에 rehab 저장", after.stored === "rehab", `저장값=${after.stored}`);
   ok("직업재활센터 선택: 스크롤 잠금 해제", after.overflow === "", `overflow="${after.overflow}"`);
-  ok("rehab 홈: 프라이머리 버튼 실제 렌더색 = rgb(31,111,158)", after.primaryBg.replace(/\s/g, "") === "rgb(31,111,158)", after.primaryBg);
-  ok("rehab 홈: 푸터가 블루 딥으로 렌더", after.footerBg.replace(/\s/g, "") === "rgb(13,44,64)", after.footerBg);
+  ok("rehab 홈: 프라이머리 버튼 실제 렌더색 = rgb(28,95,128)", after.primaryBg.replace(/\s/g, "") === "rgb(28,95,128)", after.primaryBg);
+  ok("rehab 홈: 푸터가 블루 딥으로 렌더", after.footerBg.replace(/\s/g, "") === "rgb(14,48,69)", after.footerBg);
   ok("rehab 홈: 메뉴·후원 버튼 주입", after.nav && after.donate);
   ok("rehab 홈: 전환 바 활성 항목이 직업재활센터", /직업재활센터/.test(after.switchOn || ""), after.switchOn);
   await page.reload({ waitUntil: "networkidle2" });
@@ -127,7 +127,7 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
     return document.title.includes("두리손잡고 사회적협동조합") &&
       text.includes("발달장애인 주간활동서비스") && text.includes("방과후활동서비스");
   }));
-  ok("coop: 프라이머리 버튼 실제 렌더색 = rgb(42,129,89)", r.primaryBg.replace(/\s/g, "") === "rgb(42,129,89)", r.primaryBg);
+  ok("coop: 프라이머리 버튼 실제 렌더색 = rgb(37,94,70)", r.primaryBg.replace(/\s/g, "") === "rgb(37,94,70)", r.primaryBg);
   ok("coop: 조합 메뉴 표시", r.nav === true);
   ok("coop: 후원 버튼 미주입", r.donate === false);
   ok("coop: 중복 드롭다운·임시 로그인 버튼 없음", await page.evaluate(() => !document.querySelector('.nav-main .mega, #loginBtn')));
@@ -163,7 +163,7 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
     selected: document.querySelector(".seg button.active")?.textContent.trim(),
     title: document.querySelector("#okTitle")?.textContent.trim(),
     modal: document.querySelector(".modal.open") !== null,
-    phone: document.querySelector('#donate a[href="tel:031-853-3359"]') !== null,
+    phone: document.querySelector('#donate a[href="tel:031-878-3366"]') !== null,
     fakeAccount: document.querySelector(".donate-acct") !== null
   }));
   ok("정기후원: 준비중 안내, 일시후원 선택 유지", donation.modal && donation.title === "서비스 운영 준비중" && donation.selected === "일시후원");
