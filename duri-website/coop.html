@@ -12,10 +12,14 @@
 .coop-hero h1{font-size:clamp(38px,5vw,64px);line-height:1.13;max-width:660px;margin:18px 0 24px}
 .coop-hero .lead{max-width:600px}
 .coop-hero .btn-row{margin-top:34px}
-.coop-hero-art{min-height:410px;border-radius:var(--radius-xl);background:var(--md-sys-color-surface);padding:34px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--shadow)}
-.coop-hero-art .art-top{display:flex;justify-content:space-between;gap:12px;align-items:start;color:var(--brand-deep);font-size:14px;font-weight:700}
-.coop-hero-art .art-mark{font-size:clamp(70px,11vw,150px);line-height:1;letter-spacing:-.13em;color:var(--brand);font-weight:800;text-align:center}
-.coop-hero-art .art-bottom{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:18px;font-size:15px;color:var(--muted)}
+.coop-hero-art{min-height:410px;border-radius:var(--radius-xl);background:var(--md-sys-color-surface);padding:34px;display:flex;flex-direction:column;gap:26px;box-shadow:var(--shadow)}
+.coop-hero-art .art-top{color:var(--brand-deep);font-size:14px;font-weight:700}
+.coop-hero-art h2{font-size:clamp(29px,3vw,42px);line-height:1.25}
+.coop-hero-art .art-path{display:grid;gap:12px;margin-top:auto}
+.coop-hero-art .art-path div{display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:var(--radius);background:var(--md-sys-color-surface-container-low)}
+.coop-hero-art .art-path strong{display:block;color:var(--brand-deep)}
+.coop-hero-art .art-path span{font-size:14px;color:var(--muted)}
+.coop-hero-art .art-dot{width:38px;height:38px;flex:none;border-radius:50%;background:var(--md-sys-color-primary-container);display:grid;place-items:center;color:var(--brand-deep);font-weight:800}
 .coop-intro{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start}
 .coop-intro .lead{margin-top:16px}
 .coop-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
@@ -30,13 +34,20 @@
 .coop-service ul{padding-left:1.25em;margin:auto 0 0;font-size:15px}
 .coop-service li+li{margin-top:6px}
 .coop-activities{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.coop-activities article{background:var(--md-sys-color-surface-container);border-radius:var(--radius-lg);padding:26px}
+.coop-activities article{background:var(--md-sys-color-surface-container-low);border-radius:var(--radius-lg);padding:28px;min-height:180px}
+.coop-activities .number{display:block;color:var(--brand-deep);font-size:13px;font-weight:800;margin-bottom:20px}
 .coop-activities h3{font-size:19px;margin-bottom:8px}
 .coop-activities p{font-size:15px}
-.coop-contact{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;padding:42px;background:var(--md-sys-color-primary-container);border-radius:var(--radius-xl)}
+.coop-contact{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:42px;background:var(--md-sys-color-primary-container);border-radius:var(--radius-xl)}
 .coop-contact p{margin-top:12px}
+.coop-contact-info{display:grid;gap:12px}
+.coop-contact-info div{padding:18px 20px;background:var(--md-sys-color-surface);border-radius:var(--radius)}
+.coop-contact-info strong{display:block;color:var(--brand-deep);margin-bottom:5px}
+.coop-contact-info address{font-style:normal}
+.coop-contact-info a:not(.btn){color:var(--brand-deep);text-decoration:underline;text-underline-offset:3px}
+.coop-contact-info .btn{justify-self:start;margin-top:6px}
 @media(max-width:900px){.coop-hero-inner,.coop-intro{grid-template-columns:1fr;gap:36px}.coop-hero-art{min-height:250px}.coop-activities{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:680px){.coop-hero{padding:58px 0 64px}.coop-values,.coop-services,.coop-activities,.coop-contact{grid-template-columns:1fr}.coop-contact{padding:30px}.coop-hero-art{min-height:220px}.coop-hero-art .art-mark{font-size:80px}}
+@media(max-width:680px){.coop-hero{padding:58px 0 64px}.coop-values,.coop-services,.coop-activities,.coop-contact{grid-template-columns:1fr}.coop-contact{padding:30px}.coop-hero-art{min-height:220px}}
 </style>
 </head>
 <body>
@@ -53,9 +64,13 @@
         </div>
       </div>
       <div class="coop-hero-art" aria-label="두리손잡고 사회적협동조합의 활동 방향">
-        <div class="art-top"><span>두리손잡고</span><span>함께하는 하루</span></div>
-        <div class="art-mark" aria-hidden="true">○○</div>
-        <div class="art-bottom"><span>참여</span><span>관계</span><span>자립</span></div>
+        <span class="art-top">두리손잡고의 하루</span>
+        <h2>선택하고, 경험하고,<br>이웃과 연결되는 시간</h2>
+        <div class="art-path">
+          <div><span class="art-dot" aria-hidden="true">1</span><p><strong>나의 관심에서 시작</strong><span>하고 싶은 활동을 함께 찾아갑니다.</span></p></div>
+          <div><span class="art-dot" aria-hidden="true">2</span><p><strong>일상에서 배우고 표현</strong><span>생활·문화·여가 경험을 넓힙니다.</span></p></div>
+          <div><span class="art-dot" aria-hidden="true">3</span><p><strong>지역사회와 만나기</strong><span>동네 안에서 관계를 이어갑니다.</span></p></div>
+        </div>
       </div>
     </div>
   </section>
@@ -103,14 +118,17 @@
   <section class="section section--paper" id="activities" aria-labelledby="activities-title">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">활동 예시</span>
-        <h2 class="h2" id="activities-title">일상과 지역사회에서 만나는 경험</h2>
-        <p>참여자의 관심과 필요를 바탕으로 일상생활, 배움, 지역사회 활동을 함께합니다.</p>
+        <span class="eyebrow">활동 영역</span>
+        <h2 class="h2" id="activities-title">활동으로 채우는 하루</h2>
+        <p>조합이 소개하는 활동을 일상, 표현, 지역사회 경험으로 살펴보세요. 세부 활동은 서비스와 참여자의 필요에 따라 달라집니다.</p>
       </div>
       <div class="coop-activities">
-        <article><h3>일상생활</h3><p>안전·위생 교육, 요리와 생활 활동</p></article>
-        <article><h3>배움과 표현</h3><p>인권 교육, 미술·음악·신체 활동</p></article>
-        <article><h3>지역사회 경험</h3><p>지역사회 활동, 체험과 나들이</p></article>
+        <article><span class="number">01 · 생활</span><h3>하루를 꾸리는 힘</h3><p>안전·위생, 기본 생활과 요리 활동을 통해 일상 속 경험을 쌓습니다.</p></article>
+        <article><span class="number">02 · 권리</span><h3>나를 알고 표현하기</h3><p>인권 교육과 자기 표현 활동으로 자신의 생각과 선택을 나눕니다.</p></article>
+        <article><span class="number">03 · 창작</span><h3>손으로 만들고 표현하기</h3><p>미술·공예와 음악을 통해 새로운 방식으로 표현합니다.</p></article>
+        <article><span class="number">04 · 움직임</span><h3>몸과 마음 돌보기</h3><p>신체 활동과 심리 안정 활동으로 몸과 마음을 살핍니다.</p></article>
+        <article><span class="number">05 · 지역사회</span><h3>동네에서 만나는 경험</h3><p>지역사회 활동, 체험과 나들이로 익숙한 공간을 넓혀 갑니다.</p></article>
+        <article><span class="number">06 · 진로 체험</span><h3>새로운 일에 도전하기</h3><p>제과제빵·바리스타·직업 체험 등 관심 있는 일을 만나 봅니다.</p></article>
       </div>
     </div>
   </section>
@@ -121,9 +139,13 @@
         <div>
           <span class="eyebrow">이용 문의</span>
           <h2 class="h2" id="contact-title">함께할 방법을 문의해 주세요</h2>
-          <p>전화 <span class="nb">031-853-3359</span> · 경기도 의정부시 오목로 225번길 100, CY타워 3층</p>
+          <p>주간활동과 방과후활동 중 어떤 서비스가 궁금한지 말씀해 주세요. 활동 내용과 이용에 관한 질문을 전화로 안내합니다.</p>
         </div>
-        <a class="btn btn-primary btn-lg" href="tel:031-853-3359">전화 문의하기</a>
+        <div class="coop-contact-info">
+          <div><strong>전화</strong><a class="nb" href="tel:031-853-3359">031-853-3359</a></div>
+          <div><strong>오시는 길</strong><address>경기도 의정부시 오목로 225번길 100, CY타워 3층</address></div>
+          <a class="btn btn-primary btn-lg" href="tel:031-853-3359">전화 문의하기</a>
+        </div>
       </div>
     </div>
   </section>

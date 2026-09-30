@@ -401,16 +401,17 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
   const { page } = await fresh("/market.html");
   await page.evaluate(() => localStorage.setItem("duri.site.v1", "coop"));
   await page.reload({ waitUntil: "networkidle2" });
-  const sel = await page.evaluate(() => {
+  const sel = await page.evaluate(async () => {
     const s = document.querySelector(".field select");
     if (!s) return null;
     const base = getComputedStyle(s).boxShadow;
     s.focus();
+    await new Promise(r => setTimeout(r, 300));
     const focused = getComputedStyle(s).boxShadow;
     return { base, focused, count: document.querySelectorAll(".field select").length };
   });
   ok("버그A: 셀렉트 기본 상태에 포커스 링 없음", sel && sel.base === "none", sel && `기본 box-shadow="${sel.base}"`);
-  ok("버그A: 셀렉트 포커스 시에만 링 표시", sel && sel.focused !== "none", sel && `포커스 box-shadow="${sel.focused}"`);
+  ok("버그A: 셀렉트 포커스 시에만 링 표시", sel && /4px$/.test(sel.focused), sel && `포커스 box-shadow="${sel.focused}"`);
   await page.close();
 }
 {
@@ -427,10 +428,14 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
     m.querySelector("a").focus();
     await new Promise(r => setTimeout(r, 400));
     const afterInner = getComputedStyle(m).visibility;
-    return { before, afterTop, afterInner };
+    const outerStyle = getComputedStyle(m);
+    const innerStyle = getComputedStyle(m.querySelector(".mega-inner"));
+    return { before, afterTop, afterInner, outerBg: outerStyle.backgroundColor,
+             outerShadow: outerStyle.boxShadow, innerBg: innerStyle.backgroundColor };
   });
   ok("버그B: 포커스 전에는 메가메뉴 숨김", mega.before === "hidden", mega.before);
   ok("버그B: 키보드 포커스로 메가메뉴 열림", mega.afterTop === "visible" && mega.afterInner === "visible", `상단링크=${mega.afterTop} 내부링크=${mega.afterInner}`);
+  ok("메가메뉴: 바깥 사각 표면 없이 내부 카드 하나만 표시", mega.outerBg === "rgba(0, 0, 0, 0)" && mega.outerShadow === "none" && mega.innerBg !== "rgba(0, 0, 0, 0)");
   const fv = await page.evaluate(() => {
     const a = document.querySelector(".nav-top");
     a.focus();

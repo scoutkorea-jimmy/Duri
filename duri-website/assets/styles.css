@@ -764,7 +764,8 @@ body{background:var(--md-sys-color-surface-container-low)}
 .site-header{background:var(--md-sys-color-surface);border-bottom:1px solid var(--line)}
 html[data-site="rehab"] .site-header{background:var(--md-sys-color-surface)}
 .site-header.scrolled{background:var(--md-sys-color-surface);box-shadow:var(--shadow-sm)}
-.mega,.mobile-nav,.modal-card{background:var(--md-sys-color-surface);box-shadow:var(--shadow-lg)}
+.mobile-nav,.modal-card{background:var(--md-sys-color-surface);box-shadow:var(--shadow-lg)}
+.mega-inner{background:var(--md-sys-color-surface);border-color:transparent}
 .page-hero{background:var(--brand-deep)}
 .board-row:hover{background:var(--md-sys-color-surface-container)}
 .gate-half.coop{background:#1f6242}
