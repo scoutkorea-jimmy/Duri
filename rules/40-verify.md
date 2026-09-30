@@ -69,7 +69,9 @@ node tools/check-links.mjs
 - [ ] 탭 전환 · 검색 · 페이지네이션이 각각 동작하고 개수 표시가 맞다
 - [ ] 로그아웃 → 글쓰기 버튼이 즉시 사라진다
 
-### 폼 (family / internship / volunteer / market)
+### 폼 (internship / volunteer / market)
+
+`family.html`은 후원 폼 대신 일시후원 전화 문의와 정기후원 준비중 대화상자를 사용합니다.
 - [ ] 필수(`.req`) 항목을 비우고 제출 → 오류 박스 표시 + 해당 필드로 스크롤·포커스
 - [ ] 전부 채우고 제출 → "접수 완료" 모달, 폼 리셋
 - [ ] ESC·배경 클릭으로 모달이 닫힌다

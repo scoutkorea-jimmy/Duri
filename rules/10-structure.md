@@ -22,7 +22,7 @@
    ├─ work · products                                사업안내
    ├─ notice.html           공지 게시판  ← board.js 사용
    ├─ gallery.html          사진갤러리(필터 + 라이트박스)
-   ├─ family · internship · volunteer                가족되기(후원·신청 폼)
+   ├─ family · internship · volunteer                가족되기(일시후원 전화 안내·실습/봉사 신청 폼)
    ├─ market.html           마켓(구매 문의 폼)
    ├─ assets/
    │  ├─ styles.css         디자인 시스템 + 공유 컴포넌트  → 규칙은 20-design.md
