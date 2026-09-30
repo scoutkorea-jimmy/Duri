@@ -70,9 +70,9 @@
   ];
 
   const NAV_COOP = [
-    { label:"조합 소개", href:"coop.html#about", sub:[["조합 소개","coop.html#about"],["활동 방향","coop.html#about"]] },
-    { label:"주요 사업", href:"coop.html#services", sub:[["주간활동서비스","coop.html#services"],["방과후활동서비스","coop.html#services"],["활동 예시","coop.html#activities"]] },
-    { label:"이용 문의", href:"coop.html#contact", sub:[["전화·위치","coop.html#contact"]] }
+    { label:"조합 소개", href:"coop.html#about", sub:[] },
+    { label:"주요 사업", href:"coop.html#services", sub:[] },
+    { label:"이용 문의", href:"coop.html#contact", sub:[] }
   ];
 
   const MENU = SITE === "rehab" ? NAV_REHAB : NAV_COOP;
@@ -122,15 +122,15 @@
         ${MENU.map(m=>`
           <div class="nav-item">
             <a class="nav-top${m.href.toLowerCase()===here?" active":""}" href="${m.href}">${m.label}</a>
-            <div class="mega">
+            ${m.sub.length ? `<div class="mega">
               <div class="mega-inner">
                 ${m.sub.map(s=>`<a href="${s[1]}">${s[0]}<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>`).join("")}
               </div>
-            </div>
+            </div>` : ""}
           </div>`).join("")}
       </nav>` : ""}
       <div class="nav-cta">
-        <div class="acct" id="acct"></div>
+        ${SITE === "rehab" ? '<div class="acct" id="acct"></div>' : ""}
         ${donateBtn}
         ${hasMenu ? `<button class="nav-burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>` : ""}
       </div>
@@ -139,7 +139,7 @@
       ${MENU.map(m=>`
         <div class="m-group">
           <a class="m-top" href="${m.href}">${m.label}</a>
-          <div class="m-sub">${m.sub.map(s=>`<a href="${s[1]}">${s[0]}</a>`).join("")}</div>
+          ${m.sub.length ? `<div class="m-sub">${m.sub.map(s=>`<a href="${s[1]}">${s[0]}</a>`).join("")}</div>` : ""}
         </div>`).join("")}
       ${donateBtn ? `<a class="btn btn-accent btn-lg" style="margin-top:20px;width:100%" href="family.html">${ICON.heart}<span>후원하기</span></a>` : ""}
     </nav>` : ""}`;
@@ -151,14 +151,13 @@
   switcher.setAttribute("aria-label", "사이트 선택");
   switcher.innerHTML = ["coop","rehab"].map(k=>{
     const s = SITES[k], on = k === SITE;
-    return `<a class="sw-item${on?" on":""}" href="${s.home}"${on?' aria-current="page"':""}>`+
-             ICON[k]+
-             `<span class="sw-full">${s.full}</span><span class="sw-short">${s.short}</span>`+
-           `</a>`;
+    const content = ICON[k]+`<span class="sw-full">${s.full}</span><span class="sw-short">${s.short}</span>`;
+    return on ? `<span class="sw-item on" aria-current="page">${content}</span>` :
+      `<a class="sw-item" href="${s.home}" data-site-pick="${k}">${content}</a>`;
   }).join("");
   // 전환 바로 이동할 때도 선택을 기억해 게이트가 다시 뜨지 않게 한다
-  switcher.querySelectorAll(".sw-item").forEach((a,i)=>{
-    a.addEventListener("click", ()=>rememberSite(i===0 ? "coop" : "rehab"));
+  switcher.querySelectorAll("a.sw-item").forEach(a=>{
+    a.addEventListener("click", ()=>rememberSite(a.getAttribute("data-site-pick")));
   });
   document.body.insertBefore(switcher, header);
   document.body.insertBefore(skip, document.body.firstChild);
@@ -271,6 +270,7 @@
 
   const acctEl = header.querySelector("#acct");
   function renderAcct(){
+    if(!acctEl) return;
     const u = Auth.user();
     if(u){
       acctEl.innerHTML =
@@ -552,7 +552,7 @@
      ============================================================ */
   function openGate(reopened){
     const gate = document.createElement("div");
-    gate.className = "gate";
+    gate.className = reopened ? "gate" : "gate awaiting-input";
     gate.setAttribute("role", "dialog");
     gate.setAttribute("aria-modal", "true");
     gate.setAttribute("aria-labelledby", "gateTitle");
@@ -601,6 +601,10 @@
       gate.addEventListener("keydown", e=>{ if(e.key === "Escape") dismiss(); });
     }
     // 게이트가 열려 있는 동안 Tab 이 배경으로 나가지 않게 한다
+    if(!reopened){
+      gate.addEventListener("keydown", ()=>gate.classList.remove("awaiting-input"), {once:true});
+      gate.addEventListener("pointerdown", ()=>gate.classList.remove("awaiting-input"), {once:true});
+    }
     gate.addEventListener("keydown", e=>trapTab(gate, e));
     setTimeout(()=>{ const f = gate.querySelector(".gate-half"); if(f) f.focus(); }, 60);
   }

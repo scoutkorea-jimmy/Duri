@@ -47,7 +47,8 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
       names: halves.map(h => h.querySelector(".gate-name").textContent),
       hrefs: halves.map(h => h.getAttribute("href")),
       vw: window.innerWidth,
-      focused: document.activeElement && document.activeElement.className
+      focused: document.activeElement && document.activeElement.className,
+      outline: document.activeElement && getComputedStyle(document.activeElement).outlineStyle
     };
   });
   ok("게이트: 첫 방문 시 표시", !!g);
@@ -55,6 +56,10 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
   ok("게이트: 전체화면 높이", g && g.full);
   ok("게이트: 좌=조합(coop.html) / 우=직업재활센터(index.html)", g && /사회적협동조합/.test(g.names[0]) && /직업재활센터/.test(g.names[1]) && g.hrefs[0] === "coop.html" && g.hrefs[1] === "index.html", g && g.hrefs.join(" | "));
   ok("게이트: 진입 시 첫 선택지에 포커스(키보드 접근)", g && /gate-half/.test(g.focused || ""), g && `activeElement=${g.focused}`);
+  ok("게이트: 아무 입력 전에는 자동 초점 외곽선 없음", g && g.outline === "none", g && `outline=${g.outline}`);
+  await page.keyboard.press("Tab");
+  const keyboardFocus = await page.evaluate(() => ({ second: document.activeElement?.classList.contains("rehab"), outline: getComputedStyle(document.activeElement).outlineStyle }));
+  ok("게이트: Tab 이동 후에는 키보드 초점 외곽선 표시", keyboardFocus.second && keyboardFocus.outline === "solid", JSON.stringify(keyboardFocus));
   ok("게이트 페이지: 콘솔 에러 0", errors.length === 0, errors.join(" / "));
   await page.close();
 }
@@ -125,9 +130,27 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
   ok("coop: 프라이머리 버튼 실제 렌더색 = rgb(42,129,89)", r.primaryBg.replace(/\s/g, "") === "rgb(42,129,89)", r.primaryBg);
   ok("coop: 조합 메뉴 표시", r.nav === true);
   ok("coop: 후원 버튼 미주입", r.donate === false);
+  ok("coop: 중복 드롭다운·임시 로그인 버튼 없음", await page.evaluate(() => !document.querySelector('.nav-main .mega, #loginBtn')));
+  ok("coop: 상단 메뉴는 각 실제 섹션으로 이동", await page.evaluate(() => [...document.querySelectorAll('.nav-main .nav-top')].map(a => a.getAttribute('href')).join('|') === 'coop.html#about|coop.html#services|coop.html#contact'));
   ok("coop: 전환 바 활성 항목이 조합", /조합/.test(r.switchOn || ""), r.switchOn);
   ok("coop: 콘솔 에러 0", errors.length === 0, errors.join(" / "));
   await page.close();
+}
+
+/* ---------- 두 갈래 오시는 길은 실제 OpenStreetMap 지도를 표시 ---------- */
+{
+  const paths = ["/coop.html", "/operation.html"];
+  for (const path of paths) {
+    const { page } = await fresh(path);
+    const map = await page.evaluate(() => {
+      const frame = document.querySelector('.osm-map iframe');
+      const link = document.querySelector('.osm-map figcaption a');
+      return !!frame && !!link && /openstreetmap\.org\/export\/embed\.html/.test(frame.src) &&
+        /openstreetmap\.org/.test(link.href) && !!frame.title;
+    });
+    ok(`${path}: OpenStreetMap 지도·큰 지도 링크`, map);
+    await page.close();
+  }
 }
 
 /* ---------- 일시후원만 선택 가능, 정기후원은 준비중 안내 ---------- */
@@ -243,6 +266,8 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
         headerTop: Math.round(hd.top), items,
         onCount: sw.querySelectorAll(".sw-item.on").length,
         ariaCurrent: sw.querySelectorAll('[aria-current="page"]').length,
+        currentTag: sw.querySelector(".sw-item.on")?.tagName,
+        otherTag: sw.querySelector(".sw-item:not(.on)")?.tagName,
         firstEl: document.body.firstElementChild.className,
         secondEl: document.body.children[1] ? document.body.children[1].className : ""
       };
@@ -257,6 +282,7 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
       ok("전환 바: 헤더가 바 아래에 붙음(겹침 없음)", s.headerTop >= s.h - 1, `headerTop=${s.headerTop} barH=${s.h}`);
       ok("전환 바: 두 항목 균등 분할", Math.abs(s.items[0] - s.items[1]) <= 1, `${s.items}`);
       ok("전환 바: 현재 갈래 1개만 활성 + aria-current", s.onCount === 1 && s.ariaCurrent === 1, `on=${s.onCount} aria=${s.ariaCurrent}`);
+      ok("전환 바: 현재 갈래는 빈 링크가 아닌 표시", s.currentTag === "SPAN" && s.otherTag === "A", `${s.currentTag}/${s.otherTag}`);
     }
     await page.close();
   }

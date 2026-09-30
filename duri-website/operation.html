@@ -16,11 +16,6 @@
 .fac-body .addr svg{width:16px;height:16px}
 .equip{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
 .loc-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:stretch}
-.loc-map{border-radius:var(--radius-lg);overflow:hidden;min-height:380px;position:relative;
-  background:linear-gradient(135deg,var(--green-200),var(--green-400))}
-.loc-map .pin{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px}
-.loc-map .pin .dot{width:26px;height:26px;border-radius:50% 50% 50% 0;background:var(--accent);transform:rotate(-45deg);box-shadow:0 6px 16px rgba(0,0,0,.25)}
-.loc-map .pin .lbl{background:#fff;padding:7px 14px;border-radius:999px;font-weight:700;font-size:14px;color:var(--ink);box-shadow:var(--shadow)}
 .transit{display:flex;flex-direction:column;gap:18px}
 .transit .t-item{display:flex;gap:16px}
 .transit .t-ic{width:46px;height:46px;border-radius:12px;background:var(--brand-soft);color:var(--brand-deep);display:grid;place-items:center;flex:none}
@@ -114,9 +109,10 @@
       <p class="muted">경기도 의정부시 오목로 225번길 100, 3층 (민락동, CY타워)</p>
     </div>
     <div class="loc-wrap">
-      <div class="loc-map reveal">
-        <div class="pin"><span class="dot"></span><span class="lbl">두리손잡고</span></div>
-      </div>
+      <figure class="osm-map reveal">
+        <iframe title="두리손잡고 직업재활센터 위치 지도, OpenStreetMap" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=127.0928%2C37.7455%2C127.0966%2C37.7478&amp;layer=mapnik&amp;marker=37.74667%2C127.094685"></iframe>
+        <figcaption><a href="https://www.openstreetmap.org/?mlat=37.74667&amp;mlon=127.094685#map=18/37.74667/127.094685" target="_blank" rel="noopener noreferrer">OpenStreetMap에서 크게 보기</a></figcaption>
+      </figure>
       <div class="transit reveal" data-delay=".08s">
         <div class="t-item">
           <div class="t-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 6v6M16 6v6M2 12h19M7 18h.01M17 18h.01"/><rect x="3" y="4" width="16" height="16" rx="2"/></svg></div>
