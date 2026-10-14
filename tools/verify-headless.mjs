@@ -336,10 +336,11 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
   // 전화번호·고유명사처럼 쪼개면 안 되는 덩어리가 실제로 두 줄로 갈라지지 않는지
   const split = [];
   for (const n of PAGES) {
+    const { page } = await fresh(`/${n}.html`);
+    await page.evaluate(() => localStorage.setItem("duri.site.v1", "coop"));
+    await page.reload({ waitUntil: "networkidle2" });
     for (const w of [1440, 900, 600, 390, 320]) {
-      const { page } = await fresh(`/${n}.html`, w, 900);
-      await page.evaluate(() => localStorage.setItem("duri.site.v1", "coop"));
-      await page.reload({ waitUntil: "networkidle2" });
+      await page.setViewport({ width: w, height: 900 });
       const bads = await page.evaluate(() => {
         const out = [];
         document.querySelectorAll(".nb").forEach(el => {
@@ -349,8 +350,8 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
         return out;
       });
       for (const b of bads) split.push(`${n}@${w}: "${b}"`);
-      await page.close();
     }
+    await page.close();
   }
   ok("한글 줄바꿈: .nb(전화번호·고유명사) 덩어리가 갈라지지 않음", split.length === 0,
     split.length ? split.slice(0, 5).join(" | ") : "15페이지 × 5폭 위반 0건");
@@ -540,6 +541,37 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
   const errShown = await page.evaluate(() => !!document.querySelector("form .form-err.show"));
   ok("폼: 필수 미입력 시 오류 표시", errShown);
   ok("폼 페이지: 콘솔 에러 0", errors.length === 0, errors.join(" / "));
+  await page.close();
+}
+
+/* ---------- 9. 공식 CI: 자산 로드·대체 텍스트·헤더 배치 ---------- */
+for (const [path, logo] of [["/coop.html", "duri-coop-logo.svg"], ["/index.html", "duri-logo.svg"]]) {
+  const { page } = await fresh(path);
+  for (const user of path === "/index.html" ? ["guest", "admin"] : ["guest"]) {
+    await page.evaluate(user => user === "admin" ? window.DURI.Auth.login("admin", "admin") : window.DURI.Auth.logout(), user);
+    for (const width of [1440, 521, 360, 320]) {
+      await page.setViewport({ width, height: 900 });
+      const ci = await page.evaluate(() => {
+        const images = [...document.querySelectorAll(".wm-logo")];
+        const brand = document.querySelector(".site-header .wm").getBoundingClientRect();
+        const controls = document.querySelector(".nav-cta").getBoundingClientRect();
+        return {
+          sources: images.map(i => i.getAttribute("src")),
+          loaded: images.length === 2 && images.every(i => i.complete && i.naturalWidth > 0 && i.alt.trim()),
+          fits: brand.right <= controls.left && brand.left >= 0 && controls.right <= innerWidth && document.documentElement.scrollWidth <= innerWidth,
+          favicon: document.querySelector('link[rel="icon"]').getAttribute("href"),
+          accountNamed: [...document.querySelectorAll(".acct button")].every(b => b.getAttribute("aria-label") && b.getBoundingClientRect().width >= 44)
+        };
+      });
+      ok(`공식 CI: ${path} ${user} ${width}px 로드·명칭·헤더 배치`, ci.loaded && ci.fits && ci.accountNamed && ci.sources.every(s => s === `assets/logos/${logo}`) && ci.favicon === "assets/logos/duri-symbol.svg", JSON.stringify(ci));
+    }
+  }
+  if (path === "/index.html") {
+    await page.evaluate(() => localStorage.clear());
+    await page.reload({ waitUntil: "networkidle2" });
+    const gateCI = await page.evaluate(() => [...document.querySelectorAll(".gate img")].map(i => ({ loaded: i.complete && i.naturalWidth > 0, alt: i.alt, source: i.getAttribute("src") })));
+    ok("공식 CI: 선택 화면 로고·심벌 로드와 대체 텍스트", gateCI.length === 3 && gateCI.every(i => i.loaded) && gateCI[0].alt === "두리손잡고" && gateCI.slice(1).every(i => i.alt === "" && i.source === "assets/logos/duri-symbol.svg"));
+  }
   await page.close();
 }
 

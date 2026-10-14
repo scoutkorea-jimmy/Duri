@@ -39,7 +39,7 @@
 
 | 블록 | 하는 일 |
 |---|---|
-| 사이트 판별 | `<html data-site>` 를 읽어 `SITE` = `"coop"` \| `"rehab"` 결정. favicon도 갈래 색으로 주입 |
+| 사이트 판별 | `<html data-site>` 를 읽어 `SITE` = `"coop"` \| `"rehab"` 결정. favicon은 공통 공식 CI 심벌 |
 | 진입 게이트 | `SITE==="coop"` 이고 `localStorage["duri.site.v1"]`가 비었을 때만 전체화면 `.gate` 삽입 |
 | 상단 전환 바 | `.site-switch` 를 `<body>` 최상단에 삽입. 현재 갈래에 `.on` |
 | 헤더·메가메뉴 | `NAV_REHAB` / `NAV_COOP` 배열로 마크업 생성·주입. 버거 메뉴, 스크롤 시 `.scrolled` |

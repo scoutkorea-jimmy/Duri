@@ -272,6 +272,7 @@ green-700→600 그라데이션 배경 + 방사형 오버레이, 글자 흰색. 
 ## 6. 헤더 / 푸터 / 네비게이션
 
 - **전부 [assets/site.js](../duri-website/assets/site.js)가 주입**합니다. 각 HTML에 직접 넣지 마세요. 메뉴는 `NAV_REHAB` / `NAV_COOP` 배열로 관리.
+- **공식 CI(2026-10-14)**: `assets/logos/duri-coop-logo.svg`는 조합 명칭 포함, `duri-logo.svg`는 기본 로고, `duri-symbol.svg`는 나무 심벌입니다. 원본의 벡터·색·비율을 유지하고 조합·센터 표기를 섞지 않습니다. `m3.css`의 `.wm-logo`·`.gate-mark`·`.gate-logo`에서 크기를 관리하고 푸터·게이트에는 흰 배경을 사용합니다. 좁은 헤더에서도 이미지 비율과 44px 컨트롤을 보존합니다.
 - **최상단은 사이트 전환 바 `.site-switch`** 입니다. 헤더는 그 아래에 `top:var(--switch-h)`로 붙습니다. 헤더 `top`을 `0`으로 되돌리면 전환 바가 가려집니다.
 - 헤더 `.site-header`: sticky, 반투명+블러 배경, 스크롤 시 `.scrolled`(흰 배경+보더). 높이 78px.
 - `data-site="coop"` 페이지(`coop.html`)에서는 헤더가 **메뉴 없는 축약형**(로고 + 계정 컨트롤)으로, 푸터는 간략형으로 주입됩니다. 조합 메뉴가 생기면 `site.js`의 `NAV_COOP`를 채우면 됩니다.
