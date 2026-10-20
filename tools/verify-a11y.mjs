@@ -17,7 +17,7 @@ import puppeteer from "puppeteer-core";
 const BASE = "http://localhost:5599";
 const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const PAGES = ["index", "about", "operation", "org", "business", "history", "work",
-  "products", "notice", "gallery", "family", "internship", "volunteer", "market", "coop"];
+  "products", "notice", "gallery", "family", "internship", "volunteer", "market", "coop", "coop-history", "coop-notice", "coop-board", "coop-gallery", "coop-calendar", "coop-family", "coop-volunteer"];
 
 const results = [];
 const ok = (item, name, pass, extra = "") => {
@@ -183,7 +183,7 @@ async function load(name, opts = {}) {
     await page.close();
   }
   ok("5.3.1", "텍스트 명도 대비 (일반 4.5:1 / 큰 텍스트 3:1)", bad.length === 0,
-    bad.length ? bad.slice(0, 8).join(" | ") + (bad.length > 8 ? ` …외 ${bad.length - 8}건` : "") : "단색 배경 위 텍스트 15페이지 위반 0건");
+    bad.length ? bad.slice(0, 8).join(" | ") + (bad.length > 8 ? ` …외 ${bad.length - 8}건` : "") : "단색 배경 위 텍스트 22페이지 위반 0건");
   console.log(`     ↳ 자동 판정 불가(그라데이션·이미지 배경) ${manual.size}종 — 사람이 확인해야 함`);
 }
 
@@ -264,7 +264,7 @@ async function load(name, opts = {}) {
     if (anim.length) bad.push(`${n}: ${anim.join(", ")}`);
     await page.close();
   }
-  ok("6.2.2", "무한 반복 자동 애니메이션 없음", bad.length === 0, bad.join(" | ") || "15페이지 0건");
+  ok("6.2.2", "무한 반복 자동 애니메이션 없음", bad.length === 0, bad.join(" | ") || "22페이지 0건");
 }
 
 /* ============================================================
@@ -299,7 +299,7 @@ async function load(name, opts = {}) {
   ok("6.4.2", "페이지마다 <main> 1개 · <title> 존재 · <h1> 1개",
     bad.main.length === 0 && bad.title.length === 0 && bad.h1.length === 0,
     [bad.main.length ? "main:" + bad.main.join(",") : "", bad.title.length ? "title:" + bad.title.join(",") : "",
-     bad.h1.length ? "h1:" + bad.h1.join(",") : ""].filter(Boolean).join(" / ") || "15페이지 정상");
+     bad.h1.length ? "h1:" + bad.h1.join(",") : ""].filter(Boolean).join(" / ") || "22페이지 정상");
 }
 
 /* ============================================================
@@ -322,7 +322,7 @@ async function load(name, opts = {}) {
     if (r.length) bad.push(`${n}: ${r.join(", ")}`);
     await page.close();
   }
-  ok("6.5.3", "모든 링크·버튼에 읽히는 이름이 있음", bad.length === 0, bad.join(" | ") || "15페이지 0건");
+  ok("6.5.3", "모든 링크·버튼에 읽히는 이름이 있음", bad.length === 0, bad.join(" | ") || "22페이지 0건");
 }
 
 /* ============================================================
@@ -367,7 +367,7 @@ async function load(name, opts = {}) {
     if (r.length) bad.push(`${n}: ${r.join(", ")}`);
     await page.close();
   }
-  ok("7.4.1", "모든 입력 컨트롤에 결속된 레이블", bad.length === 0, bad.join(" | ") || "15페이지 0건");
+  ok("7.4.1", "모든 입력 컨트롤에 결속된 레이블", bad.length === 0, bad.join(" | ") || "22페이지 0건");
 }
 
 /* ============================================================
@@ -458,7 +458,7 @@ async function load(name, opts = {}) {
     if (errors.length) bad.push(`${n}: ${errors.join(" ")}`);
     await page.close();
   }
-  ok("8.1.1", "전 페이지 콘솔 에러 0", bad.length === 0, bad.join(" | ") || "15페이지 0건");
+  ok("8.1.1", "전 페이지 콘솔 에러 0", bad.length === 0, bad.join(" | ") || "22페이지 0건");
 }
 
 await browser.close();

@@ -177,3 +177,8 @@ node tools/verify-a11y.mjs      # 접근성 23건
 
 ---
 © 두리손잡고 사회적협동조합
+
+## 2026-10-19 피드백 회귀검사
+`node tools/verify-feedback.mjs`: 조합 공지·게시판·시설 저장 분리, 달력 월 이동·윤년, 조합 실습 링크 제외·팩스, 1440/360/320px 및 콘솔 오류 검사. 스크린샷은 work/gpt-feedback-20261019에 저장합니다.
+
+`node tools/verify-copy.mjs`: 시설/조합 연혁 일치, 4개 예시 양식 비전송·입력 보존·기관별 전화·POST 없음, 22페이지 설명·반응형 검증. 화면 증거는 `work/gpt-copy-final-20261019/`.

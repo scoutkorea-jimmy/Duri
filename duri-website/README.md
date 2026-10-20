@@ -25,7 +25,7 @@
 
 ```
 .
-├─ index.html            직업재활센터 메인 홈 (+ 진입 게이트)
+├─ index.html            직업재활시설 메인 홈 (+ 진입 게이트)
 ├─ coop.html             두리손잡고 사회적협동조합 — 소개·사업 안내
 ├─ about.html            소개 - 인사말 / 주요사업
 ├─ operation.html        소개 - 운영현황·이용절차·오시는 길  ※ #location
@@ -48,7 +48,7 @@
 
 ## 디자인 시스템
 
-- **서체**: Pretendard (CDN). 오프라인 배포 시 로컬 폰트로 교체 권장.
+- **서체**: Wanted Sans Variable (원티드 산스, v1.0.1 CDN). 오프라인 배포 시 로컬 폰트로 교체 권장.
 - **컬러**: `assets/m3.css`의 공통 `--md-sys-color-*` 역할과 갈래별 `--brand` 토큰으로 관리.
   - 핵심 토큰: `--brand`, `--brand-deep`, `--brand-soft`, `--brand-tint`, `--accent`
 - **팔레트**: 조합 그린·센터 오션 블루를 유지하고 M3 표면·모양·버튼을 공통 적용합니다. (구 "디자인 옵션" 토글은 제거됨)

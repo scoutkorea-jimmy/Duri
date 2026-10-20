@@ -12,14 +12,14 @@
     coop: {
       full:"두리손잡고 사회적협동조합", short:"사회적협동조합", line1:"두리손잡고", line2:"사회적협동조합",
       home:"coop.html", key:"#2a8159", logo:"assets/logos/duri-coop-logo.svg",
-      desc:"발달장애인 주간활동과<br>청소년 방과후활동서비스"
+      desc:"발달장애인지원사업으로<br>내가 고르는 하루를 함께"
     },
     rehab:{
-      full:"두리손잡고 직업재활센터", short:"직업재활센터", line1:"두리손잡고", line2:"직업재활센터",
+      full:"두리손잡고 직업재활시설", short:"직업재활시설", line1:"두리손잡고", line2:"직업재활시설",
       home:"index.html", key:"#1f6f9e", logo:"assets/logos/duri-logo.svg",
       // 줄바꿈 위치를 쉼표로 고정한다. 자동 줄바꿈에 맡기면 "…함께하는 / 길" 처럼
       // 한 음절만 남는다(1100·900px 실측). 문구를 고칠 때 <br> 를 함께 옮길 것.
-      desc:"직업재활과 점보롤·핸드타월 생산,<br>후원·자원봉사로 함께하는 길"
+      desc:"직업재활과 생산 활동,<br>점보롤·핸드타월·복사용지"
     }
   };
   const ME = SITES[SITE];
@@ -39,17 +39,17 @@
     document.head.appendChild(fav);
   }
   const LOGO = `<img class="wm-logo" src="${ME.logo}" alt="${SITE === "coop" ? ME.full : "두리손잡고"}" width="187" height="${SITE === "coop" ? 59 : 57}">`;
-  const CENTER_NAME = SITE === "rehab" ? '<span class="wm-sub">직업재활센터</span>' : "";
+  const CENTER_NAME = SITE === "rehab" ? '<span class="wm-sub">직업재활시설</span>' : "";
   const SYMBOL = '<img class="gate-mark" src="assets/logos/duri-symbol.svg" alt="" width="80" height="80">';
 
-  /* 직업재활센터 메뉴 — 홈(index)과 14쪽 전부가 이 갈래다. (2026-09-30 조합↔센터 맞바꿈) */
+  /* 직업재활시설 메뉴 — 홈(index)과 14쪽 전부가 이 갈래다. (2026-09-30 조합↔센터 맞바꿈) */
   const NAV_REHAB = [
     { label:"두리손잡고 소개", href:"about.html", sub:[
       ["인사말","about.html"],["운영현황","operation.html"],["조직도","org.html"],
       ["사업안내 및 비전","business.html"],["연혁","history.html"],["오시는 길","operation.html#location"]
     ]},
     { label:"사업안내", href:"work.html", sub:[
-      ["임가공 사업","work.html"],["생산 공정","work.html#process"],["두리손잡고 화장지","products.html"],["생산시설 지정","products.html#cert"]
+      ["임가공 사업","work.html"],["생산 공정","work.html#process"],["생산품 안내","products.html"],["생산시설 지정","products.html#cert"]
     ]},
     { label:"두리손잡고 소식", href:"notice.html", sub:[
       ["공지사항","notice.html"],["사진갤러리","gallery.html"]
@@ -58,14 +58,15 @@
       ["후원·가족되기","family.html"],["실습 신청하기","internship.html"],["자원봉사 신청하기","volunteer.html"]
     ]},
     { label:"두리손잡고 마켓", href:"market.html", sub:[
-      ["점보롤 화장지","market.html"],["핸드타월","market.html"]
+      ["점보롤 화장지","market.html#jumbo-300"],["핸드타월","market.html#handtowel-premium"],["미용티슈","market.html#facial-tissue"],["복사용지","market.html#copy-a4-80"]
     ]}
   ];
 
   const NAV_COOP = [
-    { label:"조합 소개", href:"coop.html#about", sub:[] },
-    { label:"주요 사업", href:"coop.html#services", sub:[] },
-    { label:"이용 문의", href:"coop.html#contact", sub:[] }
+    { label:"조합 소개", href:"coop.html#about", sub:[["조합 소개","coop.html#about"],["연혁","coop-history.html"],["오시는 길·문의","coop.html#contact"]] },
+    { label:"발달장애인지원사업", href:"coop.html#services", sub:[] },
+    { label:"조합 소식", href:"coop-notice.html", sub:[["공지사항","coop-notice.html"],["게시판","coop-board.html"],["갤러리","coop-gallery.html"],["일정표(달력)","coop-calendar.html"]] },
+    { label:"함께하기", href:"coop-family.html", sub:[["후원 안내","coop-family.html"],["자원봉사 신청","coop-volunteer.html"]] }
   ];
 
   const MENU = SITE === "rehab" ? NAV_REHAB : NAV_COOP;
@@ -100,8 +101,8 @@
 
   /* ---------- header ---------- */
   const hasMenu = MENU.length > 0;
-  const donateBtn = SITE === "rehab"
-    ? `<a class="btn btn-accent" href="family.html">${ICON.heart}<span>후원하기</span></a>` : "";
+  const donateHref = SITE === "coop" ? "coop-family.html" : "family.html";
+  const donateBtn = `<a class="btn btn-accent" href="${donateHref}">${ICON.heart}<span>후원하기</span></a>`;
 
   const header = document.createElement("header");
   header.className = "site-header";
@@ -122,7 +123,7 @@
           </div>`).join("")}
       </nav>` : ""}
       <div class="nav-cta">
-        ${SITE === "rehab" ? '<div class="acct" id="acct"></div>' : ""}
+        <div class="acct" id="acct"></div>
         ${donateBtn}
         ${hasMenu ? `<button class="nav-burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>` : ""}
       </div>
@@ -133,7 +134,7 @@
           <a class="m-top" href="${m.href}">${m.label}</a>
           ${m.sub.length ? `<div class="m-sub">${m.sub.map(s=>`<a href="${s[1]}">${s[0]}</a>`).join("")}</div>` : ""}
         </div>`).join("")}
-      ${donateBtn ? `<a class="btn btn-accent btn-lg" style="margin-top:20px;width:100%" href="family.html">${ICON.heart}<span>후원하기</span></a>` : ""}
+      ${donateBtn ? `<a class="btn btn-accent btn-lg" style="margin-top:20px;width:100%" href="${donateHref}">${ICON.heart}<span>후원하기</span></a>` : ""}
     </nav>` : ""}`;
   document.body.insertBefore(header, document.body.firstChild);
 
@@ -175,16 +176,16 @@
   const FOOT_BRAND = `
         <div class="foot-brand">
           <div class="wm">${LOGO}${CENTER_NAME}</div>
-          <p style="max-width:300px;line-height:1.7">서로의 손을 맞잡고 함께 나아가는 길. 모두가 존중받는 따뜻한 공동체를 만들어갑니다.</p>
+          <p style="max-width:300px;line-height:1.7">나에게 맞는 활동과 일할 기회를 만나세요. 두리손잡고가 사람과 일상을 잇습니다.</p>
           <div class="foot-contact" style="margin-top:22px">
             <div class="row">${ICON.pin}<span>${SITE === "coop" ? "경기도 의정부시 오목로225번길 100, CY타워 3층" : "경기도 의정부시 오목로205번길 21, 골든프라자 3차 503~505호"}</span></div>
-            <div class="row">${ICON.phone}<span>${SITE === "coop" ? "<span class=\"nb\">문의 031-853-3359</span>" : "직업재활센터 031-878-3366"}</span></div>
+            <div class="row">${ICON.phone}<span>${SITE === "coop" ? "<span class=\"nb\">문의 031-853-3359</span>" : "직업재활시설 031-878-3366"}</span></div>
           </div>
         </div>`;
   const FOOT_BOTTOM = `
       <div class="foot-bottom">
         <span>© 2026 두리손잡고 사회적협동조합. All rights reserved.</span>
-        ${SITE === "rehab" ? "<span>시설장 유선희 · 장애인근로사업장 · 중증장애인생산품 생산시설</span>" : "<span>발달장애인 주간활동 · 청소년 방과후활동</span>"}
+        ${SITE === "rehab" ? "<span>시설장 유선희 · 장애인근로사업장 · 중증장애인생산품 생산시설</span>" : "<span>발달장애인지원사업</span>"}
         <a class="foot-reset" href="index.html?gate=1" id="reopenGate">처음 선택 화면 다시 보기</a>
       </div>`;
 
@@ -199,9 +200,14 @@
           <h2>두리손잡고 사회적협동조합</h2>
           <ul>
             <li><a href="coop.html#about">조합 소개</a></li>
-            <li><a href="coop.html#services">주요 사업</a></li>
+            <li><a href="coop.html#services">발달장애인지원사업</a></li>
+            <li><a href="coop-history.html">연혁</a></li>
+            <li><a href="coop-notice.html">공지사항</a> · <a href="coop-board.html">게시판</a></li>
+            <li><a href="coop-gallery.html">갤러리</a> · <a href="coop-calendar.html">일정표</a></li>
+            <li><a href="coop-family.html">후원 안내</a> · <a href="coop-volunteer.html">자원봉사</a></li>
+            <li>팩스 <span class="nb">031-853-3360</span></li>
             <li><a href="coop.html#contact">이용 문의</a></li>
-            <li><a href="index.html">직업재활센터 홈페이지</a></li>
+            <li><a href="index.html">직업재활시설 홈페이지</a></li>
           </ul>
         </div>
       </div>
@@ -224,7 +230,7 @@
           <h2>사업·소식</h2>
           <ul>
             <li><a href="work.html">임가공 사업</a></li>
-            <li><a href="products.html">두리손잡고 화장지</a></li>
+            <li><a href="products.html">생산품 안내</a></li>
             <li><a href="notice.html">공지사항</a></li>
             <li><a href="gallery.html">사진갤러리</a></li>
             <li><a href="market.html">두리손잡고 마켓</a></li>
@@ -390,7 +396,7 @@
       <div style="width:58px;height:58px;border-radius:16px;background:var(--brand-soft);color:var(--brand-deep);display:grid;place-items:center;margin-bottom:18px">
         <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
       </div>
-      <h3 class="m-title" id="okTitle">접수 완료</h3>
+      <h3 class="m-title" id="okTitle">안내</h3>
       <p class="m-sub" id="okMsg" style="white-space:pre-line"></p>
       <div class="modal-actions"><button class="btn btn-primary" data-close>확인</button></div>
     </div>`;
@@ -472,10 +478,8 @@
         return;
       }
       err.classList.remove("show");
-      const btn = form.querySelector('button[type="submit"], button:not([type])');
-      const label = (btn ? btn.textContent : "신청").trim();
-      form.reset();
-      showOk("접수 완료", `'${label}' 요청이 정상적으로 접수되었습니다.\n빠른 시일 내 담당자가 연락드리겠습니다.\n\n※ 데모 환경으로, 실제 전송은 운영 서버 연동 시 처리됩니다.`);
+      const phone = SITE === "coop" ? "031-853-3359" : "031-878-3366";
+      showOk("작성 예시 확인", `입력한 항목을 확인했습니다.\n이 양식은 기관에 전송되지 않았습니다.\n실제 신청·상담은 전화 ${phone}로 문의해 주세요.`);
     });
   });
 
@@ -501,8 +505,8 @@
 
   /* ============================================================
      진입 게이트 — 첫 방문 시 전체화면 좌/우 50% 분기
-     - 직업재활센터 홈(index)에서만, 그리고 선택 이력이 없을 때만 뜬다
-     - 직업재활센터 선택 → 제자리에서 닫힘 / 조합 선택 → coop.html
+     - 직업재활시설 홈(index)에서만, 그리고 선택 이력이 없을 때만 뜬다
+     - 직업재활시설 선택 → 제자리에서 닫힘 / 조합 선택 → coop.html
      - JS 가 이 블록까지 오지 못하면 게이트가 없는 상태로 보인다(콘텐츠를 가두지 않음)
      규칙: rules/00-core.md 4절 · rules/20-design.md
      ============================================================ */
@@ -533,7 +537,7 @@
         const pick = a.getAttribute("data-site-pick");
         rememberSite(pick);
         if(pick === "coop") return;           // coop.html 로 그대로 이동
-        e.preventDefault();                    // 직업재활센터는 이 페이지가 이미 목적지
+        e.preventDefault();                    // 직업재활시설은 이 페이지가 이미 목적지
         document.body.style.overflow = "";
         gate.remove();
         // 주소창에 남은 ?gate=1 / #gate 를 지워 새로고침 시 다시 뜨지 않게 한다

@@ -133,7 +133,7 @@ html[data-site="rehab"]{ --brand:#1f6f9e; ... }   /* styles.css 하단 */
 > "…함께하는 / 길" 로 끊겼음). **의미 단위(쉼표·조사 경계)에 `<br>` 을 넣어 고정**하고,
 > 문구를 고칠 때 `<br>` 도 함께 옮기세요.
 
-- **서체**: `Pretendard Variable`(CDN), 폴백 `Apple SD Gothic Neo / Noto Sans KR / system-ui`.
+- **서체**: `Wanted Sans Variable`(CDN), 폴백 `Apple SD Gothic Neo / Noto Sans KR / system-ui`.
 - **본문 기본**: 17px / line-height 1.72 / letter-spacing −0.01em, 색 `--body`.
 - **제목**: `color:--ink`, line-height 1.25, letter-spacing −0.025em, weight 700~800.
 

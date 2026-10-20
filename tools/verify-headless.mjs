@@ -4,7 +4,7 @@
    준비:  cd /tmp && npm i puppeteer-core
    실행:  python3 -m http.server 5599 --directory duri-website &
           NODE_PATH=/tmp/node_modules node tools/verify-headless.mjs
-   검사: 진입 게이트 / 사이트 전환 바 / 갈래 테마(홈=직업재활센터·블루, coop.html=조합·그린) / 접근성 버그 2건
+   검사: 진입 게이트 / 사이트 전환 바 / 갈래 테마(홈=직업재활시설·블루, coop.html=조합·그린) / 접근성 버그 2건
          / 게시판 로그인·글쓰기·삭제 / 폼 검증 / 콘솔 에러 0
    ============================================================ */
 import puppeteer from "puppeteer-core";
@@ -54,7 +54,7 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
   ok("게이트: 첫 방문 시 표시", !!g);
   ok("게이트: 좌우 2분할 50/50", g && g.count === 2 && Math.abs(g.widths[0] - g.widths[1]) <= 1 && Math.abs(g.widths[0] - g.vw / 2) <= 1, g && `폭 ${g.widths} / 뷰포트 ${g.vw}`);
   ok("게이트: 전체화면 높이", g && g.full);
-  ok("게이트: 좌=조합(coop.html) / 우=직업재활센터(index.html)", g && /사회적협동조합/.test(g.names[0]) && /직업재활센터/.test(g.names[1]) && g.hrefs[0] === "coop.html" && g.hrefs[1] === "index.html", g && g.hrefs.join(" | "));
+  ok("게이트: 좌=조합(coop.html) / 우=직업재활시설(index.html)", g && /사회적협동조합/.test(g.names[0]) && /직업재활시설/.test(g.names[1]) && g.hrefs[0] === "coop.html" && g.hrefs[1] === "index.html", g && g.hrefs.join(" | "));
   ok("게이트: 진입 시 첫 선택지에 포커스(키보드 접근)", g && /gate-half/.test(g.focused || ""), g && `activeElement=${g.focused}`);
   ok("게이트: 아무 입력 전에는 자동 초점 외곽선 없음", g && g.outline === "none", g && `outline=${g.outline}`);
   await page.keyboard.press("Tab");
@@ -64,7 +64,7 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
   await page.close();
 }
 
-/* ---------- 2. 우측(직업재활센터) 선택 → 제자리에서 게이트 소멸 + 오션 블루 + 재방문 미노출 ---------- */
+/* ---------- 2. 우측(직업재활시설) 선택 → 제자리에서 게이트 소멸 + 오션 블루 + 재방문 미노출 ---------- */
 {
   const { page, errors } = await fresh("/index.html");
   await page.evaluate(() => localStorage.clear());
@@ -81,17 +81,17 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
     footerBg: getComputedStyle(document.querySelector(".site-footer")).backgroundColor,
     primaryBg: getComputedStyle(document.querySelector(".btn-primary")).backgroundColor
   }));
-  ok("직업재활센터 선택: 게이트 DOM 제거", after.gate === false);
-  ok("직업재활센터 선택: localStorage 에 rehab 저장", after.stored === "rehab", `저장값=${after.stored}`);
-  ok("직업재활센터 선택: 스크롤 잠금 해제", after.overflow === "", `overflow="${after.overflow}"`);
+  ok("직업재활시설 선택: 게이트 DOM 제거", after.gate === false);
+  ok("직업재활시설 선택: localStorage 에 rehab 저장", after.stored === "rehab", `저장값=${after.stored}`);
+  ok("직업재활시설 선택: 스크롤 잠금 해제", after.overflow === "", `overflow="${after.overflow}"`);
   ok("rehab 홈: 프라이머리 버튼 실제 렌더색 = rgb(28,95,128)", after.primaryBg.replace(/\s/g, "") === "rgb(28,95,128)", after.primaryBg);
   ok("rehab 홈: 푸터가 블루 딥으로 렌더", after.footerBg.replace(/\s/g, "") === "rgb(14,48,69)", after.footerBg);
   ok("rehab 홈: 메뉴·후원 버튼 주입", after.nav && after.donate);
-  ok("rehab 홈: 전환 바 활성 항목이 직업재활센터", /직업재활센터/.test(after.switchOn || ""), after.switchOn);
+  ok("rehab 홈: 전환 바 활성 항목이 직업재활시설", /직업재활시설/.test(after.switchOn || ""), after.switchOn);
   await page.reload({ waitUntil: "networkidle2" });
   const revisit = await page.evaluate(() => !!document.querySelector(".gate"));
   ok("재방문: 게이트 다시 뜨지 않음", revisit === false);
-  ok("직업재활센터 홈: 콘솔 에러 0", errors.length === 0, errors.join(" / "));
+  ok("직업재활시설 홈: 콘솔 에러 0", errors.length === 0, errors.join(" / "));
   await page.close();
 }
 
@@ -113,7 +113,7 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
       brandDeep: cs.getPropertyValue("--brand-deep").trim(),
       stored: localStorage.getItem("duri.site.v1"),
       nav: !!document.querySelector(".nav-main"),
-      donate: !!document.querySelector('.nav-cta a[href="family.html"]'),
+      donate: !!document.querySelector('.nav-cta a[href="coop-family.html"]'),
       switchOn: (document.querySelector(".site-switch .sw-item.on") || {}).textContent,
       footerBg: getComputedStyle(document.querySelector(".site-footer")).backgroundColor,
       primaryBg: getComputedStyle(document.querySelector(".btn-primary")).backgroundColor
@@ -129,9 +129,9 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
   }));
   ok("coop: 프라이머리 버튼 실제 렌더색 = rgb(37,94,70)", r.primaryBg.replace(/\s/g, "") === "rgb(37,94,70)", r.primaryBg);
   ok("coop: 조합 메뉴 표시", r.nav === true);
-  ok("coop: 후원 버튼 미주입", r.donate === false);
-  ok("coop: 중복 드롭다운·임시 로그인 버튼 없음", await page.evaluate(() => !document.querySelector('.nav-main .mega, #loginBtn')));
-  ok("coop: 상단 메뉴는 각 실제 섹션으로 이동", await page.evaluate(() => [...document.querySelectorAll('.nav-main .nav-top')].map(a => a.getAttribute('href')).join('|') === 'coop.html#about|coop.html#services|coop.html#contact'));
+  ok("coop: 조합 후원 버튼", r.donate === true);
+  ok("coop: 확장 메뉴·게시판 로그인 표시", await page.evaluate(() => !!document.querySelector('.nav-main .mega') && !!document.querySelector('#loginBtn')));
+  ok("coop: 상단 메뉴는 각 실제 섹션으로 이동", await page.evaluate(() => [...document.querySelectorAll('.nav-main .nav-top')].map(a => a.getAttribute('href')).join('|') === 'coop.html#about|coop.html#services|coop-notice.html|coop-family.html'));
   ok("coop: 전환 바 활성 항목이 조합", /조합/.test(r.switchOn || ""), r.switchOn);
   ok("coop: 콘솔 에러 0", errors.length === 0, errors.join(" / "));
   await page.close();
@@ -292,7 +292,7 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
 /* ---------- 4-1. 한글 줄바꿈 — 반드시 단어(어절) 단위 ---------- */
 {
   const PAGES = ["index", "about", "operation", "org", "business", "history", "work",
-    "products", "notice", "gallery", "family", "internship", "volunteer", "market", "coop"];
+    "products", "notice", "gallery", "family", "internship", "volunteer", "market", "coop", "coop-history", "coop-notice", "coop-board", "coop-gallery", "coop-calendar", "coop-family", "coop-volunteer"];
   const bad = [], overflow = [];
   for (const n of PAGES) {
     const { page } = await fresh(`/${n}.html`);
@@ -329,9 +329,9 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
     }
   }
   ok("한글 줄바꿈: 모든 한글 텍스트에 word-break:keep-all 적용", bad.length === 0,
-    bad.length ? bad.slice(0, 5).join(" | ") : "15페이지 위반 0건");
+    bad.length ? bad.slice(0, 5).join(" | ") : "22페이지 위반 0건");
   ok("한글 줄바꿈: keep-all 로 인한 가로 스크롤 없음(360px · 320px)", overflow.length === 0,
-    overflow.length ? overflow.slice(0, 6).join(" | ") : "15페이지 × 2폭 위반 0건");
+    overflow.length ? overflow.slice(0, 6).join(" | ") : "22페이지 × 2폭 위반 0건");
 
   // 전화번호·고유명사처럼 쪼개면 안 되는 덩어리가 실제로 두 줄로 갈라지지 않는지
   const split = [];
@@ -354,7 +354,7 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
     await page.close();
   }
   ok("한글 줄바꿈: .nb(전화번호·고유명사) 덩어리가 갈라지지 않음", split.length === 0,
-    split.length ? split.slice(0, 5).join(" | ") : "15페이지 × 5폭 위반 0건");
+    split.length ? split.slice(0, 5).join(" | ") : "22페이지 × 5폭 위반 0건");
 }
 
 /* ---------- 4-2. 게이트 설명 줄바꿈 · 투명 카드 외곽선 없음 ---------- */
@@ -387,7 +387,7 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
     return { html: d.innerHTML, lines: lines(d), br: d.querySelectorAll("br").length };
   });
   ok("게이트 설명이 쉼표에서 2줄로 고정",
-    r.lines.length === 2 && /생산,$/.test(r.lines[0]) && r.br === 1,
+    r.lines.length === 2 && /활동,$/.test(r.lines[0]) && r.br === 1,
     JSON.stringify(r.lines));
   await page.close();
 }
@@ -531,7 +531,7 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
   await page.close();
 }
 
-/* ---------- 8. 폼 회귀 (필수 검증 → 접수 완료) ---------- */
+/* ---------- 8. 폼 회귀 (필수 검증 → 작성 예시 확인) ---------- */
 {
   const { page, errors } = await fresh("/volunteer.html");
   await page.evaluate(() => localStorage.setItem("duri.site.v1", "coop"));
@@ -547,7 +547,7 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
 /* ---------- 9. 공식 CI: 자산 로드·대체 텍스트·헤더 배치 ---------- */
 for (const [path, logo] of [["/coop.html", "duri-coop-logo.svg"], ["/index.html", "duri-logo.svg"]]) {
   const { page } = await fresh(path);
-  for (const user of path === "/index.html" ? ["guest", "admin"] : ["guest"]) {
+  for (const user of ["guest", "admin"]) {
     await page.evaluate(user => user === "admin" ? window.DURI.Auth.login("admin", "admin") : window.DURI.Auth.logout(), user);
     for (const width of [1440, 521, 360, 320]) {
       await page.setViewport({ width, height: 900 });

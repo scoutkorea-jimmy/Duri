@@ -8,7 +8,9 @@
   const D = window.DURI || {};
   const ICON = D.ICON || {};
   const Auth = D.Auth;
-  const POSTS_KEY = "duri.posts.v1";
+  const POSTS_KEY = D.SITE === "coop"
+    ? (document.documentElement.dataset.board === "community" ? "duri.coop.board.v1" : "duri.coop.posts.v1")
+    : "duri.posts.v1";
   const PER_PAGE = 10;
 
   const MEGA = `<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3zM11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>`;
@@ -81,7 +83,7 @@
     const slice = list.slice(start, start + PER_PAGE);
 
     if(slice.length === 0){
-      boardEl.innerHTML = `<div class="board-empty">등록된 공지사항이 없습니다.</div>`;
+      boardEl.innerHTML = `<div class="board-empty">등록된 게시물이 없습니다.</div>`;
     } else {
       boardEl.innerHTML = slice.map(p=>{
         const no = p.pinned
@@ -151,7 +153,7 @@
     <div class="modal-card lg">
       <button class="m-close" data-close aria-label="닫기">${ICON.x||"×"}</button>
       <h3 class="m-title">새 게시글 작성</h3>
-      <p class="m-sub">작성한 글은 공지사항 목록에 즉시 등록됩니다.</p>
+      <p class="m-sub">작성 예시로 저장되며 이 브라우저에서만 볼 수 있습니다. 기관에 전달되거나 공개되지 않습니다.</p>
       <div class="form-err" id="writeErr">제목과 내용을 모두 입력해 주세요.</div>
       <form id="writeForm" novalidate>
         <div class="field">

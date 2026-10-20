@@ -15,7 +15,7 @@
 │  └─ WORKLOG.md            지시·개선 이력(성공/실패 사유)
 ├─ .github/workflows/deploy.yml
 └─ duri-website/            ★ 배포 산출물
-   ├─ index.html            직업재활센터 메인(히어로/소식/제품/프로그램/CTA/파트너) + 진입 게이트
+   ├─ index.html            직업재활시설 메인(히어로/소식/제품/프로그램/CTA/파트너) + 진입 게이트
    ├─ coop.html             사회적협동조합 — 자료 기반 소개·사업·문의 페이지 (data-site="coop")
    │  ※ 아래 13쪽과 index 는 전부 data-site="rehab" (2026-09-30 맞바꿈)
    ├─ about · operation · org · business · history   소개 계열
@@ -46,7 +46,7 @@
 | 푸터 | 갈래별 푸터 주입 (`rehab`은 간략형) |
 | 인증 `Auth` | `admin/admin` 데모 로그인. 상태 `localStorage["duri.auth.v1"]`. 변경 시 `document`에 **`duri:auth`** 이벤트 발생 |
 | 모달 헬퍼 | `openModal` / `closeModal` / `wireModal` (ESC·배경 클릭 닫힘) |
-| 공통 UI 와이어링 | 토글 그룹(`.seg`/`.amt-row`/`.filter-row`), 갤러리 필터(`data-cat`)+라이트박스, 폼 제출 → 접수 완료 모달(필수 `.req` 검증) |
+| 공통 UI 와이어링 | 토글 그룹(`.seg`/`.amt-row`/`.filter-row`), 갤러리 필터(`data-cat`)+라이트박스, 폼 제출 → 작성 예시 확인 모달(기관에 전송하지 않음)(필수 `.req` 검증) |
 | 스크롤 reveal | `.reveal` → `.in`. 동적 렌더 후 `window.__revealRescan()` 호출 |
 
 **노출 API**
@@ -86,8 +86,8 @@ window.DURI = { SITE, SITES, ICON, NAV /* 현재 갈래 메뉴 */, Auth, openLog
 2. `<head>`에 `<link rel="stylesheet" href="assets/styles.css">` — **상대경로**.
 3. `<body>` 끝에 `<script src="assets/site.js"></script>`.
 4. **헤더·푸터·전환 바는 자동 주입**되므로 본문(`<main>` 상당 영역)만 작성합니다.
-5. 직업재활센터 쪽 페이지는 `<html lang="ko" data-site="rehab">`, 조합 쪽은 `data-site="coop"`.
-6. 메뉴에 노출하려면 `site.js`의 `NAV_REHAB`(직업재활센터) 또는 `NAV_COOP`(조합) 배열에 추가 → [30-content.md](30-content.md)
+5. 직업재활시설 쪽 페이지는 `<html lang="ko" data-site="rehab">`, 조합 쪽은 `data-site="coop"`.
+6. 메뉴에 노출하려면 `site.js`의 `NAV_REHAB`(직업재활시설) 또는 `NAV_COOP`(조합) 배열에 추가 → [30-content.md](30-content.md)
 7. 페이지 전용 CSS는 해당 HTML의 `<style>` 블록에 둡니다. **2개 이상 페이지가 쓰는 순간 `styles.css`로 승격**시키세요.
 
 ---
@@ -101,3 +101,6 @@ window.DURI = { SITE, SITES, ICON, NAV /* 현재 갈래 메뉴 */, Auth, openLog
 
 ---
 © 두리손잡고 사회적협동조합
+
+## 2026-10-19 추가 구조
+조합 전용 `coop-history/notice/board/gallery/calendar/family/volunteer.html` 7쪽 추가. 공유 헤더·푸터는 site.js, 게시판은 board.js, 월간 달력은 calendar.js를 사용합니다. 조합 공지 키 `duri.coop.posts.v1`, 게시판 키 `duri.coop.board.v1`은 기존 시설 키를 변경하거나 지우지 않습니다.

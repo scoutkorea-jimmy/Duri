@@ -1,9 +1,9 @@
 /* ============================================================
    두리손잡고 — Design System (Nature Green)
-   Pretendard / warm, hopeful, human
+   Wanted Sans / warm, hopeful, human
    ============================================================ */
 
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css");
+@import url("https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css");
 
 :root{
   /* Green core */
@@ -77,7 +77,7 @@ html{scroll-behavior:smooth}
 body{
   margin:0;
   word-break:keep-all;overflow-wrap:break-word;
-  font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;
+  font-family:"Wanted Sans Variable",-apple-system,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;
   color:var(--body);
   background:var(--cream);
   font-size:17px;
@@ -526,7 +526,7 @@ p{margin:0}
   padding:40px 26px;text-align:center;color:#fff;
 }
 .gate-half.coop{background:#1f6242}   /* 사회적협동조합 — 그린 (흰 글자 7.3:1) */
-.gate-half.rehab{background:#17567b}  /* 직업재활센터 — 오션 블루 (흰 글자 7.9:1) */
+.gate-half.rehab{background:#17567b}  /* 직업재활시설 — 오션 블루 (흰 글자 7.9:1) */
 .gate-half + .gate-half{border-left:3px solid #fff}
 .gate-half:hover{background-color:#164b33}
 .gate-half.rehab:hover{background-color:#11405d}
@@ -578,7 +578,7 @@ p{margin:0}
 }
 
 /* ============================================================
-   갈래별 테마 — 두리손잡고 직업재활센터 (오션 블루)
+   갈래별 테마 — 두리손잡고 직업재활시설 (오션 블루)
    컴포넌트 CSS 를 새로 만들지 말고 이 토큰만 재정의한다.
    → 규칙: rules/20-design.md 1-1절
    ============================================================ */
