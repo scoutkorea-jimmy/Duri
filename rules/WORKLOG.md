@@ -396,3 +396,12 @@
 - **재개**: rules/HANDOFF.md 확인, 변경 시 `node tools/verify-market.mjs`, 승인된 릴리스 시 명시 파일 stage→커밋→푸시→Pages→라이브 확인. 증거 `work/gpt-market-20261020/`.
 
 - **최종 표준 검증**: 기능 87/87, 접근성 23/23 통과. 콘솔 오류 0. Wanted Sans/font·쇼핑 전용 검사와 링크 검사도 통과. 공개 배포/VoiceOver 실사용은 미실행.
+
+## 2026-10-20 — 승인된 커밋·푸시·공개 배포 완료
+- **승인**: 사용자 “배포해줘”, “커밋도 해주고”. 기존 완료 대기 중이던 조합 페이지/연혁/문구 및 쇼핑 제품자료/시설 명칭/Wanted Sans 변경을 함께 릴리스.
+- **커밋/원격**: `38272fb7b65ba3d499db69819a50e8f76fed9594`, main→origin/main 푸시 확인. 49파일, workspace 제외. Pages run `39399247860` completed/success.
+- **검증 재사용**: 직전 기능 87/87, 접근성 23/23, 쇼핑/폰트/22페이지 반응형 검사 통과 결과를 재사용. stage 후 whitespace-only 1줄 제거, diff --cached --check 및 링크 22페이지 통과.
+- **라이브**: https://scoutkorea-jimmy.github.io/Duri/ 공개 HTML/CSS/JS/WebP/SVG 37파일이 로컬 릴리스와 바이트 일치. 실제 브라우저에서 22페이지 Wanted Sans 폰트 face 로드·요소 상속, 1440/360/320px 가로 넘침 없음, 옛 시설 명칭 없음, 7제품 이미지 decode·규격·문의 선택지·가격 비노출, pageerror 0 통과. 쇼핑/생산품/조합/시설 데스크톱·모바일 화면 증거 저장.
+- **근거**: `work/gpt-release-20261020/live-files.json`, `browser.log`, `*.png`. 이전 조합·연혁·최종 문구의 배포 대기도 종료. 후속 기록 커밋은 배포 산출물을 바꾸지 않음.
+- **잔여/보존**: `duri-website/Duri.code-workspace` 미추적 보존. 온라인 양식은 전송 없는 작성 예시, 로그인/게시판은 브라우저 로컬. VoiceOver 실사용 미검증. 외부 서체 CDN 연결 의존성은 유지.
+- **다음 작업**: `rules/HANDOFF.md` 확인. 변경 시 `node tools/check-links.mjs`, `node tools/verify-market.mjs` 및 영향받는 기존 검사 실행. 미승인 기능 개선/백엔드/결제 작업은 시작하지 않음.

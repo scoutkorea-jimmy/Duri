@@ -37,3 +37,9 @@
 - Release: no commit/push/deploy; preserve all pre-existing changes. Resume at `rules/HANDOFF.md`, run `node tools/verify-market.mjs` if source changes, and obtain release approval under parent AGENTS before committing.
 
 - Final standard suites (2026-10-20): functional 87/87 and accessibility 23/23 passed. `headless.log`, `a11y.log`, `verify-market.log` in `work/gpt-market-20261020/`. No public release.
+
+## Production release (2026-10-20)
+- User authorized commit/push/deployment. All 2026-10-19 local cooperative/history/copy work plus 2026-10-20 catalog/Wanted Sans updates deployed in `38272fb`; Pages run `39399247860` succeeded.
+- Published 37 HTML/CSS/JS/WebP/SVG files match release bytes. Live browser checks passed actual Wanted Sans load/inheritance on all 22 pages at 1440/360/320px, 7 product photos/specifications/options, no prices/legacy names/overflow/page errors. Evidence: `work/gpt-release-20261020/`.
+- Earlier local-only/release-pending entries above are historical and superseded by this production record. Only unrelated untracked `duri-website/Duri.code-workspace` remains preserved. Follow-up record commit changes documentation only.
+- Next: read `rules/HANDOFF.md`; use `node tools/verify-market.mjs` for later product/font edits. Online form transmission/payment/backend and VoiceOver real-use remain outside this release.
