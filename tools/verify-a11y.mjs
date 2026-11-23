@@ -64,6 +64,7 @@ async function load(name, opts = {}) {
    ============================================================ */
 {
   const bad = [];
+  const missingPhotoInfo = [];
   for (const n of PAGES) {
     const { page } = await load(n);
     const r = await page.evaluate(() => {
@@ -74,12 +75,19 @@ async function load(name, opts = {}) {
         if (s.getAttribute("aria-hidden") !== "true" && !named) out.svg++;
       });
       document.querySelectorAll("img").forEach(i => { if (!i.hasAttribute("alt")) out.img++; });
+      const photos = [...document.querySelectorAll('main img[src^="assets/editorial/"], main img[src^="assets/linked-employment/"]')];
+      out.photosLabelled = photos.length > 0 && photos.every(img => {
+        const caption = img.closest("figure")?.querySelector("figcaption");
+        return img.alt.trim() && caption?.checkVisibility() && caption.textContent.includes("AI 생성 이미지");
+      });
       return out;
     });
     if (r.svg || r.img) bad.push(`${n}(svg ${r.svg}, img ${r.img})`);
+    if (!r.photosLabelled) missingPhotoInfo.push(n);
     await page.close();
   }
   ok("5.1.1", "장식 SVG·이미지에 대체 텍스트 처리 누락 없음", bad.length === 0, bad.join(" "));
+  ok("5.1.1", "페이지별 생성 사진에 장면 설명과 보이는 출처 표기", missingPhotoInfo.length === 0, missingPhotoInfo.join(" "));
 }
 
 /* ============================================================

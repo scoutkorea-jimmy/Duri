@@ -7,18 +7,18 @@
 <link rel="stylesheet" href="assets/styles.css">
 <style>
 .greet-wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:start}
-.greet-visual{position:relative;border-radius:var(--radius-xl);overflow:hidden;aspect-ratio:3/4;
-  background:linear-gradient(160deg,var(--green-400),var(--green-700));box-shadow:var(--shadow-lg);position:sticky;top:110px}
-.greet-visual::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 25% 15%,rgba(255,255,255,.45),transparent 60%),radial-gradient(50% 50% at 90% 95%,var(--amber-500),transparent 55%);mix-blend-mode:soft-light;opacity:.85}
-.greet-visual::after{content:"";position:absolute;inset:0;opacity:.4;mix-blend-mode:overlay;background-image:radial-gradient(rgba(255,255,255,.7) 1px,transparent 1.4px);background-size:15px 15px}
-.greet-visual .q{position:absolute;left:34px;right:34px;bottom:36px;z-index:2;color:#fff}
+/* The existing greeting and its photograph share the left column. */
+.greet-visual{position:sticky;top:140px;overflow:hidden;border-radius:var(--radius-xl)}
+.greet-visual .editorial-photo img{border-radius:0}
+.greet-visual .editorial-photo figcaption{margin:0;padding:8px 18px 0;color:#fff}
+.greet-visual .q{padding:26px 28px 30px;color:#fff}
 .greet-visual .q b{font-size:26px;font-weight:800;letter-spacing:-.02em;display:block;line-height:1.4}
-.greet-visual .q span{opacity:.85;font-weight:600;margin-top:10px;display:block}
+.greet-visual .q span{margin-top:10px;display:block;font-weight:600}
 .greet-body p{margin-bottom:22px;color:var(--body)}
 .greet-body .hello{font-size:clamp(26px,2.6vw,34px);font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1.35;margin-bottom:30px}
 .greet-body .hello b{color:var(--brand-deep)}
 .sign{margin-top:36px;padding-top:24px;border-top:1px solid var(--line);font-weight:800;color:var(--ink);font-size:19px}
-@media (max-width:880px){.greet-wrap{grid-template-columns:1fr;gap:36px}.greet-visual{position:relative;top:0;aspect-ratio:4/3;max-height:340px}}
+@media (max-width:880px){.greet-wrap{grid-template-columns:1fr;gap:36px}.greet-visual{position:static}}
 </style>
 <link rel="stylesheet" href="assets/m3.css">
 </head>
@@ -39,6 +39,7 @@
   <div class="container">
     <div class="greet-wrap">
       <div class="greet-visual reveal">
+        <figure class="editorial-photo"><img src="assets/editorial/about.webp" width="1080" height="720" loading="lazy" decoding="async" alt="휴식 시간에 동료 세 사람이 둥근 탁자에 둘러앉아 이야기를 나누는 모습"><figcaption>함께 일하는 동료들과 나누는 대화 · AI 생성 이미지</figcaption></figure>
         <div class="q"><b>가능성을 발견하고,<br>함께 일하는 길</b><span>두리손잡고 일동</span></div>
       </div>
       <div class="greet-body reveal" data-delay=".08s">

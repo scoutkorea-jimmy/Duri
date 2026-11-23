@@ -51,18 +51,7 @@ const NAV_REHAB = [   // 직업재활센터(14쪽) 메뉴
 
 ## 3. 사진 갤러리
 
-`gallery.html`의 `.masonry` 안에 타일을 추가합니다.
-
-```html
-<div class="tile" data-cat="행사">
-  <div class="ph g3"></div>
-  <div class="cap">사진 설명</div>
-  <div class="yr">2026</div>
-</div>
-```
-
-- `data-cat` 값은 상단 `.filter-row` 버튼의 **텍스트와 정확히 일치**해야 필터가 동작합니다.
-- `.ph`의 `g1`~`g5`는 그라데이션 플레이스홀더. 실제 사진으로 교체할 때는 `.ph` 자리에 `<img>`를 넣고 **`alt`를 반드시 작성**합니다.
+`gallery.html`과 `coop-gallery.html`은 실제 활동 사진을 준비 중이라는 안내, 관련 사업 링크와 대표 이미지를 표시합니다. 기관이 공개할 활동 사진을 제공하면 해당 기관의 페이지에 장면 설명과 함께 추가합니다. AI 대표 이미지의 제작 표기는 아래 6절을 따릅니다.
 
 ---
 
@@ -104,7 +93,8 @@ grep -rn "031-853" duri-website/
 - 넣을 위치: `duri-website/assets/` 아래. 경로는 **상대경로**.
 - `alt`는 예외 없이 작성합니다. 장식용이면 `alt=""`.
 - 큰 사진은 넣기 전에 압축(웹용 저장). 이 저장소는 그대로 GitHub Pages로 올라갑니다.
-- 공식 CI는 `assets/logos/`의 SVG로 표시합니다(2026-10-14). 기관 사진은 아직 제공되지 않아 미디어 영역은 플레이스홀더입니다 → [50-roadmap.md](50-roadmap.md)
+- 공식 CI는 `assets/logos/`의 SVG를, 제품 규격과 포장은 제공받은 `assets/products/` 사진을 사용합니다. 각 페이지의 활동·업무를 설명하는 AI 생성 사진은 `assets/editorial/`에, 연계고용 대표 이미지는 `assets/linked-employment/`에 둡니다.
+- 생성 사진은 보이는 캡션에 ‘AI 생성 이미지’라고 표시하고, 대체 텍스트에는 장면을 설명합니다. 기관 행사·연혁의 기록 사진과 실제 인물·시설 소개에는 확인된 원본을 사용합니다.
 
 ---
 © 두리손잡고 사회적협동조합

@@ -148,6 +148,13 @@ h1,h2,h3,h4{color:var(--md-sys-color-on-surface);letter-spacing:-.045em}
 /* Editorial pattern: ordered content replaces repeated cards on the business and facility pages. */
 .editorial-grid{display:grid;grid-template-columns:minmax(220px,.68fr) minmax(0,1.32fr);gap:clamp(36px,8vw,120px)}
 .editorial-aside{position:relative}.editorial-aside h2{font-size:clamp(32px,4vw,56px);line-height:1.16;margin-top:20px}.editorial-aside p{margin-top:20px}
+.editorial-photo{margin:0;min-width:0}
+.editorial-photo img{width:100%;height:auto;max-height:480px;object-fit:cover;border-radius:var(--md-sys-shape-small)}
+.editorial-photo figcaption{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.5}
+.editorial-photo--compact{max-width:36rem}
+.editorial-photo--compact img{aspect-ratio:2/1}
+.pager ~ .editorial-photo{margin-inline:auto}
+:is(h2,h3,p,.btn-row,.prog-actions,.editorial-row,.area-grid) + .editorial-photo{margin-top:24px}
 .editorial-lead{font-size:clamp(21px,2.4vw,30px);font-weight:600;line-height:1.45;color:var(--ink);margin-bottom:38px}
 .editorial-row{display:grid;grid-template-columns:56px 1fr;gap:20px;padding:27px 0;border-top:1px solid var(--md-sys-color-outline-variant)}
 .editorial-row:last-child{border-bottom:1px solid var(--md-sys-color-outline-variant)}
@@ -194,6 +201,10 @@ h1,h2,h3,h4{color:var(--md-sys-color-on-surface);letter-spacing:-.045em}
 }
 @media(max-width:900px){.editorial-grid{grid-template-columns:1fr;gap:32px}.feature-strip{grid-template-columns:1fr;gap:18px}}
 @media(max-width:680px){.page-hero{padding-block:76px 64px}.page-hero--editorial{min-height:390px}.editorial-row{grid-template-columns:38px 1fr;gap:12px}.editorial-row h3{font-size:20px}.section{padding-block:72px}.contact-panel{padding:28px}}
+@media(max-width:680px){
+  .history-page .editorial-row{grid-template-columns:max-content minmax(0,1fr)}
+  .history-page .editorial-no{white-space:nowrap}
+}
 
 /* Home: expressive M3 typography and surfaces replace decorative blobs and floating cards. */
 .hero{background:var(--md-sys-color-primary-container)}
