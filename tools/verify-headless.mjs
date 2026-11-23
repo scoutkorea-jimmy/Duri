@@ -131,7 +131,7 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
   ok("coop: 조합 메뉴 표시", r.nav === true);
   ok("coop: 조합 후원 버튼", r.donate === true);
   ok("coop: 확장 메뉴·게시판 로그인 표시", await page.evaluate(() => !!document.querySelector('.nav-main .mega') && !!document.querySelector('#loginBtn')));
-  ok("coop: 상단 메뉴는 각 실제 섹션으로 이동", await page.evaluate(() => [...document.querySelectorAll('.nav-main .nav-top')].map(a => a.getAttribute('href')).join('|') === 'coop.html#about|coop.html#services|coop-notice.html|coop-family.html'));
+  ok("coop: 상단 메뉴는 각 실제 섹션으로 이동", await page.evaluate(() => [...document.querySelectorAll('.nav-main .nav-top')].map(a => a.getAttribute('href')).join('|') === 'coop.html#about|coop.html#services|coop-linked-employment.html|coop-notice.html|coop-family.html'));
   ok("coop: 전환 바 활성 항목이 조합", /조합/.test(r.switchOn || ""), r.switchOn);
   ok("coop: 콘솔 에러 0", errors.length === 0, errors.join(" / "));
   await page.close();
@@ -292,7 +292,7 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
 /* ---------- 4-1. 한글 줄바꿈 — 반드시 단어(어절) 단위 ---------- */
 {
   const PAGES = ["index", "about", "operation", "org", "business", "history", "work",
-    "products", "notice", "gallery", "family", "internship", "volunteer", "market", "coop", "coop-history", "coop-notice", "coop-board", "coop-gallery", "coop-calendar", "coop-family", "coop-volunteer"];
+    "products", "notice", "gallery", "family", "internship", "volunteer", "market", "coop", "coop-history", "coop-notice", "coop-board", "coop-gallery", "coop-calendar", "coop-family", "coop-volunteer", "linked-employment", "coop-linked-employment"];
   const bad = [], overflow = [];
   for (const n of PAGES) {
     const { page } = await fresh(`/${n}.html`);
@@ -329,9 +329,9 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
     }
   }
   ok("한글 줄바꿈: 모든 한글 텍스트에 word-break:keep-all 적용", bad.length === 0,
-    bad.length ? bad.slice(0, 5).join(" | ") : "22페이지 위반 0건");
+    bad.length ? bad.slice(0, 5).join(" | ") : "24페이지 위반 0건");
   ok("한글 줄바꿈: keep-all 로 인한 가로 스크롤 없음(360px · 320px)", overflow.length === 0,
-    overflow.length ? overflow.slice(0, 6).join(" | ") : "22페이지 × 2폭 위반 0건");
+    overflow.length ? overflow.slice(0, 6).join(" | ") : "24페이지 × 2폭 위반 0건");
 
   // 전화번호·고유명사처럼 쪼개면 안 되는 덩어리가 실제로 두 줄로 갈라지지 않는지
   const split = [];
@@ -354,7 +354,7 @@ async function fresh(path = "/index.html", w = 1440, h = 900) {
     await page.close();
   }
   ok("한글 줄바꿈: .nb(전화번호·고유명사) 덩어리가 갈라지지 않음", split.length === 0,
-    split.length ? split.slice(0, 5).join(" | ") : "22페이지 × 5폭 위반 0건");
+    split.length ? split.slice(0, 5).join(" | ") : "24페이지 × 5폭 위반 0건");
 }
 
 /* ---------- 4-2. 게이트 설명 줄바꿈 · 투명 카드 외곽선 없음 ---------- */

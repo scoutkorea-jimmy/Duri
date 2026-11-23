@@ -42,7 +42,7 @@
   const CENTER_NAME = SITE === "rehab" ? '<span class="wm-sub">직업재활시설</span>' : "";
   const SYMBOL = '<img class="gate-mark" src="assets/logos/duri-symbol.svg" alt="" width="80" height="80">';
 
-  /* 직업재활시설 메뉴 — 홈(index)과 14쪽 전부가 이 갈래다. (2026-09-30 조합↔센터 맞바꿈) */
+  /* 직업재활시설 메뉴 */
   const NAV_REHAB = [
     { label:"두리손잡고 소개", href:"about.html", sub:[
       ["인사말","about.html"],["운영현황","operation.html"],["조직도","org.html"],
@@ -51,6 +51,7 @@
     { label:"사업안내", href:"work.html", sub:[
       ["임가공 사업","work.html"],["생산 공정","work.html#process"],["생산품 안내","products.html"],["생산시설 지정","products.html#cert"]
     ]},
+    { label:"연계고용", href:"linked-employment.html", sub:[] },
     { label:"두리손잡고 소식", href:"notice.html", sub:[
       ["공지사항","notice.html"],["사진갤러리","gallery.html"]
     ]},
@@ -65,6 +66,7 @@
   const NAV_COOP = [
     { label:"조합 소개", href:"coop.html#about", sub:[["조합 소개","coop.html#about"],["연혁","coop-history.html"],["오시는 길·문의","coop.html#contact"]] },
     { label:"발달장애인지원사업", href:"coop.html#services", sub:[] },
+    { label:"연계고용", href:"coop-linked-employment.html", sub:[] },
     { label:"조합 소식", href:"coop-notice.html", sub:[["공지사항","coop-notice.html"],["게시판","coop-board.html"],["갤러리","coop-gallery.html"],["일정표(달력)","coop-calendar.html"]] },
     { label:"함께하기", href:"coop-family.html", sub:[["후원 안내","coop-family.html"],["자원봉사 신청","coop-volunteer.html"]] }
   ];
@@ -102,7 +104,7 @@
   /* ---------- header ---------- */
   const hasMenu = MENU.length > 0;
   const donateHref = SITE === "coop" ? "coop-family.html" : "family.html";
-  const donateBtn = `<a class="btn btn-accent" href="${donateHref}">${ICON.heart}<span>후원하기</span></a>`;
+  const donateBtn = `<a class="btn btn-accent" href="${donateHref}" aria-label="후원하기">${ICON.heart}<span>후원하기</span></a>`;
 
   const header = document.createElement("header");
   header.className = "site-header";
@@ -114,7 +116,7 @@
       ${hasMenu ? `<nav class="nav-main" aria-label="주 메뉴">
         ${MENU.map(m=>`
           <div class="nav-item">
-            <a class="nav-top${m.href.toLowerCase()===here?" active":""}" href="${m.href}">${m.label}</a>
+            <a class="nav-top${m.href.toLowerCase()===here?" active":""}" href="${m.href}"${m.href.toLowerCase()===here ? ' aria-current="page"' : ""}>${m.label}</a>
             ${m.sub.length ? `<div class="mega">
               <div class="mega-inner">
                 ${m.sub.map(s=>`<a href="${s[1]}">${s[0]}<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>`).join("")}
@@ -131,7 +133,7 @@
     ${hasMenu ? `<nav class="mobile-nav" id="mobileNav" aria-label="주 메뉴(모바일)" hidden>
       ${MENU.map(m=>`
         <div class="m-group">
-          <a class="m-top" href="${m.href}">${m.label}</a>
+          <a class="m-top" href="${m.href}"${m.href.toLowerCase()===here ? ' aria-current="page"' : ""}>${m.label}</a>
           ${m.sub.length ? `<div class="m-sub">${m.sub.map(s=>`<a href="${s[1]}">${s[0]}</a>`).join("")}</div>` : ""}
         </div>`).join("")}
       ${donateBtn ? `<a class="btn btn-accent btn-lg" style="margin-top:20px;width:100%" href="${donateHref}">${ICON.heart}<span>후원하기</span></a>` : ""}
@@ -159,12 +161,37 @@
   const burger = header.querySelector(".nav-burger");
   const mnav = header.querySelector(".mobile-nav");
   if(burger && mnav){
-    burger.addEventListener("click", ()=>{
-      const open = header.classList.toggle("menu-open");
+    function setMenuOpen(open){
+      header.classList.toggle("menu-open", open);
+      document.body.classList.toggle("nav-open", open);
       mnav.hidden = !open;
       burger.setAttribute("aria-expanded", open ? "true" : "false");
       burger.setAttribute("aria-label", open ? "메뉴 닫기" : "메뉴 열기");
-      document.body.style.overflow = open ? "hidden" : "";
+      if(open) mnav.scrollTop = 0;
+    }
+    burger.addEventListener("click", ()=>setMenuOpen(mnav.hidden));
+    document.addEventListener("keydown", e=>{
+      if(e.key !== "Escape" || mnav.hidden) return;
+      setMenuOpen(false);
+      burger.focus();
+    });
+    document.addEventListener("focusin", e=>{
+      if(!mnav.hidden && !mnav.contains(e.target) && e.target !== burger) setMenuOpen(false);
+    });
+    mnav.addEventListener("click", e=>{
+      const link = e.target.closest("a[href]");
+      if(!link || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+      setMenuOpen(false);
+      if(link.pathname !== location.pathname || link.search !== location.search || !link.hash) return;
+      const target = document.getElementById(link.hash.slice(1));
+      if(target){
+        if(!target.hasAttribute("tabindex") && target.tabIndex < 0) target.setAttribute("tabindex", "-1");
+        target.focus({preventScroll:true});
+      }
+    });
+    window.matchMedia("(max-width:1260px)").addEventListener("change", ()=>setMenuOpen(false));
+    window.addEventListener("pageshow", e=>{
+      if(e.persisted) setMenuOpen(false);
     });
   }
 
@@ -178,8 +205,8 @@
           <div class="wm">${LOGO}${CENTER_NAME}</div>
           <p style="max-width:300px;line-height:1.7">나에게 맞는 활동과 일할 기회를 만나세요. 두리손잡고가 사람과 일상을 잇습니다.</p>
           <div class="foot-contact" style="margin-top:22px">
-            <div class="row">${ICON.pin}<span>${SITE === "coop" ? "경기도 의정부시 오목로225번길 100, CY타워 3층" : "경기도 의정부시 오목로205번길 21, 골든프라자 3차 503~505호"}</span></div>
-            <div class="row">${ICON.phone}<span>${SITE === "coop" ? "<span class=\"nb\">문의 031-853-3359</span>" : "직업재활시설 031-878-3366"}</span></div>
+            <a class="row" href="${SITE === "coop" ? "coop.html#contact" : "operation.html#location"}">${ICON.pin}<span>${SITE === "coop" ? "경기도 의정부시 오목로225번길 100, CY타워 3층" : "경기도 의정부시 오목로205번길 21, 골든프라자 3차 503~505호"}</span></a>
+            <a class="row" href="tel:${SITE === "coop" ? "031-853-3359" : "031-878-3366"}">${ICON.phone}<span>${SITE === "coop" ? "문의 " : "직업재활시설 "}<span class="nb">${SITE === "coop" ? "031-853-3359" : "031-878-3366"}</span></span></a>
           </div>
         </div>`;
   const FOOT_BOTTOM = `
@@ -201,6 +228,7 @@
           <ul>
             <li><a href="coop.html#about">조합 소개</a></li>
             <li><a href="coop.html#services">발달장애인지원사업</a></li>
+            <li><a href="coop-linked-employment.html">연계고용</a></li>
             <li><a href="coop-history.html">연혁</a></li>
             <li><a href="coop-notice.html">공지사항</a> · <a href="coop-board.html">게시판</a></li>
             <li><a href="coop-gallery.html">갤러리</a> · <a href="coop-calendar.html">일정표</a></li>
@@ -230,6 +258,7 @@
           <h2>사업·소식</h2>
           <ul>
             <li><a href="work.html">임가공 사업</a></li>
+            <li><a href="linked-employment.html">연계고용</a></li>
             <li><a href="products.html">생산품 안내</a></li>
             <li><a href="notice.html">공지사항</a></li>
             <li><a href="gallery.html">사진갤러리</a></li>
@@ -442,7 +471,7 @@
   document.querySelectorAll(".seg, .amt-row").forEach(g=>makeToggleGroup(g));
 
   /* ---------- application / inquiry forms ---------- */
-  Array.prototype.slice.call(document.querySelectorAll("form")).forEach(form=>{
+  Array.prototype.slice.call(document.querySelectorAll("form:not([data-mail-inquiry])")).forEach(form=>{
     if(form.id === "loginForm" || form.id === "writeForm") return;
     const err = document.createElement("div");
     err.className = "form-err";

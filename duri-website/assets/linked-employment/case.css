@@ -1,0 +1,67 @@
+.relief-case {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: start;
+  margin-top: 32px;
+}
+.relief-case dl { margin: 0; }
+.relief-assumptions dl { margin: 18px 0; }
+.relief-assumptions dl > div,
+.relief-figures > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  padding-block: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.relief-case dd {
+  margin: 0 0 0 auto;
+  color: var(--ink);
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+.relief-case p { margin-top: 18px; color: var(--body); }
+.relief-assumptions .guide-link { margin-top: 8px; }
+.relief-calculation {
+  min-width: 0;
+  padding: clamp(16px, 3vw, 34px);
+  border-radius: 20px;
+  background: var(--md-sys-color-surface);
+  border: 1px solid var(--line);
+}
+.relief-selector { margin: 0; padding: 0; border: 0; min-inline-size: 0; }
+.relief-selector[hidden] { display: none; }
+.relief-selector legend { margin-bottom: 8px; padding: 0; font-weight: 750; }
+.relief-options { display: flex; flex-wrap: wrap; gap: 8px; }
+.relief-options label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  color: var(--ink);
+  cursor: pointer;
+}
+.relief-options input { margin: 0; width: 18px; height: 18px; accent-color: var(--brand-deep); }
+.relief-options label:has(:checked) {
+  background: var(--wash);
+  border-color: var(--brand-deep);
+  font-weight: 750;
+}
+.relief-options label:focus-within { outline: 3px solid var(--brand-deep); outline-offset: 2px; }
+.relief-total {
+  padding-block: 20px;
+  border-bottom: 2px solid var(--brand-deep);
+  color: var(--brand-deep);
+}
+.relief-total > span { font-weight: 700; }
+.relief-total strong { display: block; margin-top: 4px; font-size: clamp(28px, 3vw, 42px); line-height: 1.2; font-variant-numeric: tabular-nums; }
+.relief-figures small { display: block; margin-top: 4px; color: var(--muted); font-size: 14px; }
+@media (max-width: 800px) {
+  .relief-case { grid-template-columns: 1fr; }
+}

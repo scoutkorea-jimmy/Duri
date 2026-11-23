@@ -83,7 +83,24 @@
     const slice = list.slice(start, start + PER_PAGE);
 
     if(slice.length === 0){
-      boardEl.innerHTML = `<div class="board-empty">등록된 게시물이 없습니다.</div>`;
+      const empty = document.createElement("div");
+      empty.className = "board-empty";
+      if(state.q.trim()){
+        empty.textContent = "검색한 제목과 일치하는 게시물이 없습니다. ";
+        const clear = document.createElement("button");
+        clear.type = "button";
+        clear.className = "clear-search";
+        clear.textContent = "검색어 지우기";
+        clear.addEventListener("click", ()=>{
+          state.q = searchEl.value = "";
+          searchEl.focus();
+          render();
+        });
+        empty.appendChild(clear);
+      }else{
+        empty.textContent = state.tab === "전체" ? "등록된 게시물이 없습니다." : `‘${state.tab}’에 등록된 게시물이 없습니다.`;
+      }
+      boardEl.replaceChildren(empty);
     } else {
       boardEl.innerHTML = slice.map(p=>{
         const no = p.pinned
@@ -205,6 +222,7 @@
     D.closeModal(writeModal);
     state.tab = "전체"; state.q = ""; state.page = 1;
     if(searchEl) searchEl.value = "";
+    if(location.hash.startsWith("#tab-")) history.replaceState(history.state, "", "#tab-all");
     syncTabs();
     render();
   });
@@ -216,12 +234,24 @@
   }
 
   /* ---------- tabs ---------- */
+  function readTabFromHash(){
+    const selected = document.getElementById(location.hash.slice(1));
+    if(selected && tabsEl.contains(selected) && selected.matches(".tab")){
+      state.tab = selected.textContent.trim();
+    }else{
+      state.tab = "전체";
+    }
+    state.page = 1;
+    syncTabs();
+    render();
+  }
   function syncTabs(){
     tabsEl.querySelectorAll(".tab").forEach(t=>{
       const on = t.textContent.trim() === state.tab;
       t.classList.toggle("active", on);
       t.setAttribute("role", "radio");
       t.setAttribute("aria-checked", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
       if(!t.getAttribute("type")) t.type = "button";
     });
   }
@@ -257,6 +287,7 @@
   tabsEl.addEventListener("click", e=>{
     const t = e.target.closest(".tab"); if(!t) return;
     state.tab = t.textContent.trim(); state.page = 1;
+    if(t.id) history.replaceState(history.state, "", "#" + t.id);
     syncTabs(); render();
   });
   if(searchEl){
@@ -269,7 +300,7 @@
 
   /* ---------- init ---------- */
   syncWriteBtn();
-  syncTabs();
-  render();
+  window.addEventListener("hashchange", readTabFromHash);
+  readTabFromHash();
   if(window.__revealRescan) window.__revealRescan();
 })();

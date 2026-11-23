@@ -182,3 +182,7 @@ node tools/verify-a11y.mjs      # 접근성 23건
 `node tools/verify-feedback.mjs`: 조합 공지·게시판·시설 저장 분리, 달력 월 이동·윤년, 조합 실습 링크 제외·팩스, 1440/360/320px 및 콘솔 오류 검사. 스크린샷은 work/gpt-feedback-20261019에 저장합니다.
 
 `node tools/verify-copy.mjs`: 시설/조합 연혁 일치, 4개 예시 양식 비전송·입력 보존·기관별 전화·POST 없음, 22페이지 설명·반응형 검증. 화면 증거는 `work/gpt-copy-final-20261019/`.
+
+### 모바일 메뉴와 게시판 분류
+
+로컬 서버를 5599 포트에서 실행한 뒤 `node tools/verify-mobile-navigation.mjs`로 확인한다. 좁은 화면에서 양쪽 메뉴의 마지막 링크까지 스크롤되는지, 언론보도 링크로 진입해도 모든 분류가 고정 헤더 아래에 보이고 새소식을 누를 수 있는지 검사한다.

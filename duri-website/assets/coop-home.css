@@ -1,0 +1,11 @@
+/* Keep the cooperative introduction and its history link together. */
+#about { padding-bottom: clamp(24px, 4vw, 48px); }
+.coop-history-shortcut { padding-bottom: clamp(52px, 7vw, 100px); }
+#services .service-panel { min-height: 0; }
+#services .service-panel > p { margin-bottom: 22px; }
+.service-call {
+  align-self: flex-start;
+  margin-top: auto;
+  min-height: 44px;
+}
+.coop-secondary-link { margin-top: 10px; min-height: 44px; }

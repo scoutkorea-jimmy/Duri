@@ -51,10 +51,14 @@
 
 /* ============ products ============ */
 .prod-card{position:relative;display:flex;flex-direction:column}
-.prod-card .media{min-height:230px;border-radius:0}
+.prod-photo{display:grid;place-items:center;height:230px;padding:18px;background:#fff;border-bottom:1px solid var(--line)}
+.prod-photo img{max-width:100%;width:auto;height:100%;max-height:194px;object-fit:contain}
+.internship-cover{display:flex;flex-direction:column;justify-content:center;min-height:230px;padding:30px;background:var(--md-sys-color-surface-container-high);color:var(--brand-deep)}
+.prod-card .internship-cover h3{font-size:clamp(26px,2.3vw,34px);line-height:1.2;letter-spacing:-.045em;margin:0 0 12px}
+.internship-audience{font-size:15px;font-weight:600;text-wrap:balance}
 .prod-card .pc-body{padding:30px;display:flex;flex-direction:column;flex:1}
-.prod-card .badge{align-self:flex-start;margin-bottom:14px}
-.prod-card h3{font-size:22px;margin-bottom:10px}
+.prod-card h3,.prod-card .pc-head{font-size:22px;margin-bottom:10px}
+.prod-card .pc-head{color:var(--ink);font-weight:800;line-height:1.4}
 .prod-card p{color:var(--body);margin-bottom:auto}
 .prod-card .link{margin-top:22px}
 
@@ -63,6 +67,7 @@
 .prog-list{display:flex;flex-direction:column;gap:14px}
 .prog-item{display:flex;gap:20px;padding:24px;border-radius:var(--radius);background:#fff;border:1px solid var(--line);transition:.25s var(--ease)}
 .prog-item:hover{border-color:var(--brand);box-shadow:var(--shadow)}
+.prog-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
 .prog-item h3{font-size:18px;margin-bottom:6px}
 .prog-item p{font-size:15px;color:var(--muted);line-height:1.6}
 
@@ -71,6 +76,9 @@
 
 /* ============ 반응형 — 이 페이지에 분기가 전혀 없어 모바일에서
    2열 그리드가 접히지 않고 가로 스크롤이 생기던 문제(2026-08-17 수정) ============ */
+@media (min-width:1081px){
+  .prod-card{min-height:555px}
+}
 @media (max-width:1080px){
   .news-grid{grid-template-columns:repeat(2,1fr)}
   .prog-wrap{gap:40px}
@@ -85,6 +93,10 @@
 }
 @media (max-width:700px){
   .news-grid{grid-template-columns:1fr}
+  .news-card .media{min-height:120px}
+  .internship-cover{min-height:180px}
+  .prod-photo{height:180px}
+  .prod-photo img{max-height:144px}
   .hero-meta{gap:18px;flex-wrap:wrap}
   .hero-bg .b1,.hero-bg .b2,.hero-bg .b3{display:none}
 }
@@ -129,6 +141,16 @@
     </div>
   </div>
 </section>
+<aside class="employment-band" id="employment" aria-labelledby="employment-title">
+  <div class="container">
+    <div>
+      <h2 id="employment-title">연계고용을 검토하는 기업이라면</h2>
+      <p>제품과 임가공 견적, 도급계약 절차와 부담금 감면 예시를 한곳에서 확인하세요.</p>
+    </div>
+    <a class="link" href="linked-employment.html"><span>연계고용·견적 안내</span><span aria-hidden="true">→</span></a>
+  </div>
+</aside>
+
 
 <!-- ===================== NEWS ===================== -->
 <section class="section section--paper" data-screen-label="소식 안내">
@@ -138,7 +160,7 @@
       <h2 class="h2">함께 일하고 살아가는<br>두리손잡고의 이야기</h2>
     </div>
     <div class="news-grid">
-      <a class="card news-card reveal" href="notice.html">
+      <a class="card news-card reveal" href="notice.html#tab-news">
         <div class="media media-3"><span class="media-tag">새소식</span></div>
         <div class="nc-body">
           <div class="tag">두리손잡고 새소식</div>
@@ -154,7 +176,7 @@
           <span class="link">갤러리 보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path class="arrow" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </div>
       </a>
-      <a class="card news-card reveal" data-delay=".16s" href="notice.html">
+      <a class="card news-card reveal" data-delay=".16s" href="notice.html#tab-press">
         <div class="media media-4"><span class="media-tag">언론보도</span></div>
         <div class="nc-body">
           <div class="tag">언론 속 두리손잡고</div>
@@ -174,35 +196,42 @@
         <span class="eyebrow">DURI PRODUCTS</span>
         <h2 class="h2" style="margin-top:14px">매일 쓰는 제품에<br>함께 일하는 가치를</h2>
       </div>
-      <a class="btn btn-outline" href="products.html">전체 제품 보기<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-outline" href="market.html">전체 제품 보기<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
     <div class="grid grid-4">
-      <a class="card prod-card reveal" href="products.html">
-        <div class="media"><span class="media-tag">점보롤 화장지</span></div>
+      <a class="card prod-card reveal" href="market.html#jumbo-300">
+        <div class="prod-photo"><img src="assets/products/jumbo-300.webp" loading="lazy" width="275" height="290" alt="두리 300m 점보롤 포장"></div>
         <div class="pc-body">
-          <span class="badge">중증장애인생산품</span>
-          <h3>두리손잡고 점보롤</h3>
-          <p>사업장과 공공시설의 일상에 필요한 대용량 화장지입니다. 구매가 근로자의 생산 활동을 이어 갑니다.</p>
-          <span class="link">더 알아보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path class="arrow" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <h3>점보롤 화장지</h3>
+          <p>300m 2겹과 500m 1겹 중에서 고를 수 있습니다. 한 상자에 16롤이 들어 있습니다.</p>
+          <span class="link">점보롤 규격 보기 <span aria-hidden="true">›</span></span>
         </div>
       </a>
-      <a class="card prod-card reveal" data-delay=".08s" href="products.html">
-        <div class="media media-2"><span class="media-tag">핸드타월</span></div>
+      <a class="card prod-card reveal" data-delay=".08s" href="market.html#handtowel-premium">
+        <div class="prod-photo"><img src="assets/products/handtowel-premium.webp" loading="lazy" width="275" height="290" alt="두리 핸드타월 고급지 포장"></div>
         <div class="pc-body">
-          <span class="badge">손 씻은 뒤 한 장</span>
-          <h3>두리손잡고 핸드타월</h3>
-          <p>손을 씻은 뒤 쓰는 종이타월도 가치 있게 선택하세요. 제품 종류와 납품 조건을 안내합니다.</p>
-          <span class="link">더 알아보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path class="arrow" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <h3>핸드타월</h3>
+          <p>고급지와 일반지가 있습니다. 100매씩 50속을 담아 한 상자에 총 5,000매입니다.</p>
+          <span class="link">핸드타월 규격 보기 <span aria-hidden="true">›</span></span>
         </div>
       </a>
-      <a class="card prod-card reveal" href="products.html"><div class="media media-3"><span class="media-tag">복사용지</span></div><div class="pc-body"><h3>두리손잡고 복사용지</h3><p>매일 쓰는 사무용지에 함께 일하는 가치를 더하세요. 규격과 수량은 전화로 상담할 수 있습니다.</p><span class="link">더 알아보기 ›</span></div></a>
+      <a class="card prod-card reveal" href="market.html#copy-a4-80">
+        <div class="prod-photo"><img src="assets/products/copy-a4-80.webp" loading="lazy" width="900" height="733" alt="순수 A4 80g 복사용지 포장"></div>
+        <div class="pc-body">
+          <h3>순수 A4 복사용지</h3>
+          <p>사무실에서 인쇄와 복사에 쓰는 A4 용지입니다. 평량은 80g/㎡와 85g/㎡ 두 종류입니다.</p>
+          <span class="link">복사용지 규격 보기 <span aria-hidden="true">›</span></span>
+        </div>
+      </a>
       <a class="card prod-card reveal" data-delay=".16s" href="internship.html">
-        <div class="media media-3"><span class="media-tag">실습 프로그램</span></div>
+        <div class="internship-cover">
+          <h3>사회복지<br>현장실습</h3>
+          <span class="internship-audience">사회복지·직업재활 관련 전공생 대상</span>
+        </div>
         <div class="pc-body">
-          <span class="badge badge--amber">현장실습 안내</span>
-          <h3>사회복지 실습생 프로그램</h3>
-          <p>직업재활 현장을 경험하며 배움을 실천으로 연결하세요. 모집 여부와 참여 조건은 먼저 문의해 주세요.</p>
-          <span class="link">신청하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path class="arrow" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <strong class="pc-head">주요 활동</strong>
+          <p>분야별 실습과 유관기관 방문에 참여하고 지도자에게 피드백을 받습니다. 모집 여부와 일정은 전화로 확인해 주세요.</p>
+          <span class="link">실습 조건 확인 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path class="arrow" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </div>
       </a>
     </div>
@@ -217,7 +246,10 @@
         <span class="eyebrow">PROGRAMS</span>
         <h2 class="h2" style="margin-top:14px">일터에서 쌓는 경험,<br>일상으로 이어지는 배움</h2>
         <p class="lead" style="margin-top:20px;color:var(--muted)">건강한 사회생활을 준비하고, 직무 능력을 키우며, 지역사회 안에서 자립을 향해 한 걸음씩 나아갑니다.</p>
-        <a class="btn btn-primary" style="margin-top:28px" href="business.html">사업안내 및 비전<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="prog-actions">
+          <a class="btn btn-primary" href="business.html">사업안내 및 비전</a>
+          <a class="btn btn-outline" href="tel:031-878-3366">시설 이용 상담 <span class="nb">031-878-3366</span></a>
+        </div>
       </div>
       <div class="prog-list">
         <div class="prog-item reveal"><div class="num-badge">01</div><div><h3>문제해결훈련</h3><p>인권교육, 일상생활훈련, 대인관계 및 안전교육, 예방교육, 성교육 등을 통해 건강한 사회생활을 준비합니다.</p></div></div>

@@ -1,0 +1,26 @@
+.inquiry-layout {
+  display: grid;
+  grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr);
+  align-items: start;
+  gap: clamp(32px, 6vw, 96px);
+}
+.inquiry-intro p { margin-top: 16px; }
+.inquiry-address { margin-top: 28px; font-style: normal; }
+.inquiry-address a { display: flex; width: fit-content; align-items: center; gap: .35em; min-height: 44px; color: var(--brand-deep); text-decoration: underline; text-underline-offset: .2em; overflow-wrap: anywhere; }
+.inquiry-form { display: grid; gap: 22px; padding: clamp(16px, 3vw, 36px); border: 1px solid var(--line); border-radius: var(--radius-lg); background: #fff; color: var(--ink); }
+.inquiry-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.inquiry-form label, .inquiry-relief legend { display: block; font-weight: 700; margin-bottom: 6px; }
+.inquiry-form input, .inquiry-form select, .inquiry-form textarea {
+  display: block; width: 100%; min-height: 48px; border: 1px solid var(--muted); border-radius: 8px; background: #fff; padding: 9px 12px; color: var(--ink); font: inherit;
+}
+.inquiry-form textarea { resize: vertical; }
+.inquiry-form :is(input, select, textarea):focus-visible { outline: 3px solid var(--brand-deep); outline-offset: 2px; }
+.inquiry-form .btn { justify-self: start; }
+.inquiry-form .inquiry-hint, .inquiry-relief p { color: var(--muted); font-size: .94rem; }
+.inquiry-hint + textarea, .inquiry-relief .inquiry-fields { margin-top: 10px; }
+.inquiry-relief { min-width: 0; margin: 0; border: 1px solid var(--line); border-radius: 10px; padding: 15px; }
+.inquiry-cap { border-left: 3px solid var(--brand-deep); margin-top: 16px; padding: 14px; background: var(--brand-tint); }
+.inquiry-cap output { display: block; margin: 4px 0; font-size: 1.45rem; color: var(--brand-deep); font-weight: 750; overflow-wrap: anywhere; }
+.inquiry-form[hidden], .inquiry-form [hidden] { display: none; }
+@media (max-width: 900px) { .inquiry-layout { grid-template-columns: 1fr; } }
+@media (max-width: 580px) { .inquiry-fields { grid-template-columns: 1fr; } }
